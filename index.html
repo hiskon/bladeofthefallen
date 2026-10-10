@@ -79,7 +79,7 @@ button:active{transform:translateY(1px);box-shadow:0 1px 0 #08080b}
 #frame.touch-enabled #quickShop{display:none!important}
 #frame.touch-enabled{overflow:hidden;border-color:#7a644e}
 #frame.touch-enabled canvas{touch-action:none;user-select:none;-webkit-user-select:none}
-#analogZone{position:absolute;left:clamp(12px,2.5vw,30px);bottom:clamp(12px,3vh,25px);width:clamp(105px,17vw,156px);height:clamp(105px,17vw,156px);display:flex;align-items:center;justify-content:center;pointer-events:none}
+#analogZone{position:absolute;left:clamp(12px,2.5vw,30px);bottom:clamp(12px,3vh,25px);width:clamp(86px,13vw,122px);height:clamp(86px,13vw,122px);display:flex;align-items:center;justify-content:center;pointer-events:none}
 #joystickBase{position:absolute;left:0;bottom:0;width:100%;height:100%;border-radius:50%;border:1px solid #d9c6a34f;background:radial-gradient(circle at 50% 50%,#aaa2a31a 0 35%,#0b0d1485 36% 69%,#d1b88718 70% 71%,#05060b30 72%);box-shadow:inset 0 0 22px #0008,0 4px 20px #0004;pointer-events:auto;touch-action:none}
 #joystickRing{position:absolute;inset:17%;border-radius:50%;border:1px dashed #e6d6bb42;pointer-events:none}
 #joystickStick{position:absolute;left:50%;top:50%;width:37%;height:37%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid #e0c18a9c;background:radial-gradient(circle at 35% 28%,#c5b69c88,#4b414bdb 55%,#17161eeF 100%);box-shadow:inset 0 2px 5px #ffffff28,0 4px 11px #0009;pointer-events:none;transition:background .08s}
@@ -100,8 +100,8 @@ body.touch-landscape main{height:100dvh;min-height:0;width:100vw;padding:0;justi
 body.touch-landscape #frame{width:min(100vw,177.7778dvh);max-width:none;margin:auto;border:0;box-shadow:0 0 0 1px #40362e,0 0 45px #000;flex:0 0 auto}
 body.touch-landscape #footer{display:none}
 @media (orientation:portrait) and (max-width:950px), (orientation:portrait) and (pointer:coarse){body.touch-landscape #frame{display:none}body.touch-landscape #rotatePrompt{display:flex}}
-@media (orientation:landscape) and (max-height:520px){body.touch-landscape main{align-items:center}#analogZone{width:106px;height:106px;left:13px;bottom:12px}.analog-caption{font-size:8px;bottom:-15px}#gesturePad{width:195px;min-height:96px;right:13px;bottom:12px;padding:8px 10px;gap:4px}.gesture-help{font-size:8px;line-height:1.45}#touchModeHint{display:none}}
-@media (min-width:700px) and (orientation:landscape){#analogZone{width:145px;height:145px}#gesturePad{width:270px;min-height:130px}}
+@media (orientation:landscape) and (max-height:520px){body.touch-landscape main{align-items:center}#analogZone{width:88px;height:88px;left:13px;bottom:12px}.analog-caption{font-size:8px;bottom:-15px}#gesturePad{width:195px;min-height:96px;right:13px;bottom:12px;padding:8px 10px;gap:4px}.gesture-help{font-size:8px;line-height:1.45}#touchModeHint{display:none}}
+@media (min-width:700px) and (orientation:landscape){#analogZone{width:112px;height:112px}#gesturePad{width:270px;min-height:130px}}
 
 
 /* FRIEND-DRAWN ICON CONTROLS: use the player's supplied artwork as real mobile buttons */
@@ -175,7 +175,7 @@ body.touch-landscape #footer{display:none}
 </div>
 </div>
 <div id="rotatePrompt" role="status" aria-live="polite"><div class="rotate-glyph">↻</div><h2>YATAY OYNA</h2><p>Bu macera yatay ekran için tasarlandı.</p><p class="small">Cihazını yan çevir. Destekleniyorsa ekran otomatik yatay moda geçer.</p></div>
-<div id="footer"><span>BLADE OF THE FALLEN · RPG EDITION</span><span id="footerControls"><kbd>A</kbd><kbd>D</kbd> Hareket · <kbd>W</kbd>/<kbd>Space</kbd> Zıpla · <kbd>J</kbd> Hızlı Kes · <kbd>K</kbd> Ağır Kes · <kbd>L</kbd> Savuştur · <kbd>Shift</kbd> Kaçın · <kbd>E</kbd> Etkileşim · <kbd>B</kbd> Dükkân</span></div>
+<div id="footer"><span>BLADE OF THE FALLEN · RPG EDITION</span><span id="footerControls"><kbd>A</kbd><kbd>D</kbd> Hareket · <kbd>W</kbd>/<kbd>Space</kbd> Zıpla · <kbd>J</kbd> Hızlı Kes · <kbd>H</kbd> Ağır Kes · <kbd>K</kbd> Yetenek · <kbd>L</kbd> Savuştur · <kbd>Shift</kbd> Kaçın · <kbd>E</kbd> Etkileşim · <kbd>B</kbd> Dükkân</span></div>
 </main>
 <script>
 "use strict";
@@ -202,7 +202,7 @@ function syncPlayControls(){
   if(quickShopButton) quickShopButton.style.display = playingVisible && !touchModeEnabled ? "block" : "none";
   if(footerControls) footerControls.innerHTML = touchModeEnabled
     ? "ANALOG: HAREKET · YUKARI ZIPLA · ÇİZİMLİ TUŞLAR: SAVAŞ / DÜKKÂN / GÖREV / ÇANTA"
-    : "<kbd>A</kbd><kbd>D</kbd> Hareket · <kbd>W</kbd>/<kbd>Space</kbd> Zıpla · <kbd>J</kbd> Hızlı Kes · <kbd>K</kbd> Ağır Kes · <kbd>L</kbd> Savuştur · <kbd>Shift</kbd> Kaçın · <kbd>E</kbd> Etkileşim · <kbd>B</kbd> Dükkân · <kbd>I</kbd> Çanta · <kbd>Q</kbd> Görev · <kbd>M</kbd> Harita · <kbd>X</kbd> Gölge";
+    : "<kbd>A</kbd><kbd>D</kbd> Hareket · <kbd>W</kbd>/<kbd>Space</kbd> Zıpla · <kbd>J</kbd> Hızlı Kes · <kbd>H</kbd> Ağır Kes · <kbd>K</kbd> Yetenek · <kbd>L</kbd> Savuştur · <kbd>Shift</kbd> Kaçın · <kbd>E</kbd> Etkileşim · <kbd>B</kbd> Dükkân · <kbd>I</kbd> Çanta · <kbd>Q</kbd> Görev · <kbd>M</kbd> Harita · <kbd>O</kbd> Tarikat · <kbd>V</kbd> Kartal Gözü · <kbd>C</kbd> Kostüm · <kbd>N</kbd> Koleksiyon";
 }
 function setTouchMode(enabled){
   touchModeEnabled = Boolean(enabled);
@@ -271,18 +271,18 @@ function enemyHurt(e,dmg,knock=100){if(!e||!e.alive)return;e.hp=Math.max(0,e.hp-
 function bossHurt(dmg){if(!boss||!boss.alive)return;boss.hp=Math.max(0,boss.hp-dmg);boss.flash=.14;spawnParticles(boss.x+boss.w/2,boss.y+45,"#d6b57b",12,150);sound(115,.1);if(boss.phase===1&&boss.hp<=boss.maxHp*.5){boss.phase=2;boss.state="phaseChange";boss.timer=1.3;boss.attack=null;boss.vx=0;bannerText("İKİNCİ AŞAMA: TAHTIN ÖFKESİ",2.2);spawnParticles(boss.x+boss.w/2,boss.y+50,"#c33d53",35,230);shake=10;}if(boss.hp<=0){boss.hp=0;boss.alive=false;boss.state="dead";boss.attack=null;spawnParticles(boss.x+boss.w/2,boss.y+50,"#e9c47b",65,300);victory();}}
 function updatePlayer(dt){
   const p=player;p.anim+=dt*8;p.invuln=Math.max(0,p.invuln-dt);p.stun=Math.max(0,p.stun-dt);p.dodgeCd=Math.max(0,p.dodgeCd-dt);p.parryCd=Math.max(0,p.parryCd-dt);p.comboTimer=Math.max(0,p.comboTimer-dt);if(p.parry>0)p.parry=Math.max(0,p.parry-dt);if(p.dodge>0)p.dodge=Math.max(0,p.dodge-dt);
-  if(p.stun>0){p.vx*=Math.pow(.04,dt);}else if(p.dodge>0){p.vx=p.face*490;}else{const left=keys.has("a"),right=keys.has("d");if(!p.attack){if(left!==right){p.face=left?-1:1;p.vx=p.face*230;if(p.grounded)p.state="run";}else{p.vx*=Math.pow(.0008,dt);if(p.grounded)p.state="idle";}}else p.vx*=Math.pow(.03,dt);}
+  if(p.stun>0){p.vx*=Math.pow(.04,dt);}else if(p.dodge>0){p.vx=p.face*490;}else{const left=keys.has("a"),right=keys.has("d");if(!p.attack){if(left!==right){p.face=left?-1:1;p.vx=p.face*230*(keys.has('control') && window.BladeRPG?.state?.advanced?.skillRanks?.fastRun ? 1+Math.min(2,window.BladeRPG.state.advanced.skillRanks.fastRun)*.2 : 1);if(p.grounded)p.state="run";}else{p.vx*=Math.pow(.0008,dt);if(p.grounded)p.state="idle";}}else p.vx*=Math.pow(.03,dt);}
   physics(p,dt);if(p.grounded&&p.state==="jump")p.state="idle";
   if(p.attack){const a=p.attack;a.timer-=dt;if(a.phase==="windup"&&a.timer<=0){a.phase="active";a.timer=a.active;spawnParticles(p.x+p.w/2+p.face*25,p.y+25,"#d7d0bd",5,90);}else if(a.phase==="active"){const box=attackBox(p,a.kind==="light"?63:82,a.kind==="light"?42:56);for(const e of enemies){if(e.alive&&!a.hit.has(e)&&rects(box,e)){a.hit.add(e);enemyHurt(e,a.kind==="light"?22:39,a.kind==="light"?110:180);}}if(boss&&boss.alive&&bossUnlocked&&!a.hit.has(boss)&&(rects(box,boss)||Math.abs((boss.x+boss.w/2)-(p.x+p.w/2)) < (a.kind==="light"?92:112) && Math.abs((boss.y+boss.h*.55)-(p.y+p.h*.55))<78 && p.face===((boss.x+boss.w/2)>(p.x+p.w/2)?1:-1))){a.hit.add(boss);bossHurt(a.kind==="light"?14:28);spawnParticles(boss.x+boss.w/2,boss.y+48,a.kind==="heavy"?"#ffb85b":"#d9ecff",18,a.kind==="heavy"?240:150);shake=Math.max(shake,a.kind==="heavy"?8:3);}if(a.timer<=0){a.phase="recovery";a.timer=a.recovery;}}else if(a.phase==="recovery"&&a.timer<=0){p.attack=null;p.state=p.grounded?"idle":"jump";p.comboTimer=.65;if(p.queuedAttack){const next=p.queuedAttack;p.queuedAttack=null;p.combo=(p.combo||0)+1;startAttack(next);}}}
   if(p.hp<=0&&mode==="playing")defeat();
 }
 function enemyAttack(e){e.state="windup";e.timer=e.type==="elite"?.72:.48;e.attack={phase:"windup",timer:e.timer,hit:false};e.vx=0;}
 function updateEnemies(dt){
-  for(const e of enemies){if(!e.alive)continue;e.anim+=dt*6;e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,e.stun-dt);e.attackCd=Math.max(0,e.attackCd-dt);e.timer-=dt;if(e.stun>0){e.state="stunned";e.vx*=Math.pow(.01,dt);physics(e,dt);continue;}const dx=(player.x+player.w/2)-(e.x+e.w/2),dist=Math.abs(dx);if(dist<360)e.face=dx<0?-1:1;
+  for(const e of enemies){if(!e.alive)continue;e.anim+=dt*6;e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,e.stun-dt);e.attackCd=Math.max(0,e.attackCd-dt);e.timer-=dt;if(e.stun>0){e.state="stunned";e.vx*=Math.pow(.01,dt);physics(e,dt);continue;}const dx=(player.x+player.w/2)-(e.x+e.w/2),dist=Math.abs(dx);if(dist<360 && !player.hidden)e.face=dx<0?-1:1;
     if(e.attack){const a=e.attack;a.timer-=dt;if(a.phase==="windup"&&a.timer<=0){a.phase="active";a.timer=e.type==="elite"?.19:.15;spawnParticles(e.x+e.w/2+e.face*25,e.y+25,"#b76c55",4,70);}else if(a.phase==="active"){if(!a.hit){const box=attackBox(e,e.type==="elite"?73:57,e.type==="elite"?52:38);if(rects(box,player)){a.hit=true;hurtPlayer(e.type==="elite"?17:10,e.x+e.w/2);}}if(a.timer<=0){a.phase="recovery";a.timer=e.type==="elite"?.72:.48;}}else if(a.phase==="recovery"&&a.timer<=0){e.attack=null;e.state="approach";e.attackCd=e.type==="elite"?1.5:1.1;}physics(e,dt);continue;}
-    if(dist<430){if(dist>e.range){e.state="approach";e.vx=e.face*e.speed;}else if(e.attackCd<=0){enemyAttack(e);}else{e.state="guard";e.vx=0;}}else{e.state="patrol";if(e.x<e.home-70)e.patrolDir=1;if(e.x>e.home+70)e.patrolDir=-1;e.face=e.patrolDir;e.vx=e.patrolDir*e.speed*.35;}physics(e,dt);
+    if(dist<430 && !player.hidden){if(dist>e.range){e.state="approach";e.vx=e.face*e.speed;}else if(e.attackCd<=0){enemyAttack(e);}else{e.state="guard";e.vx=0;}}else{e.state="patrol";if(e.x<e.home-70)e.patrolDir=1;if(e.x>e.home+70)e.patrolDir=-1;e.face=e.patrolDir;e.vx=e.patrolDir*e.speed*.35;}physics(e,dt);
   }
-  if(!bossUnlocked && enemies.every(e=>!e.alive)){
+  if(!bossUnlocked && enemies.every(e=>!e.alive || e.excludeForBoss)){
     bossUnlocked=true;
     const regionalBoss=Boolean(window.BladeRPG&&window.BladeRPG.regions&&window.BladeRPG.regions[window.BladeRPG.currentZone]&&window.BladeRPG.regions[window.BladeRPG.currentZone].boss);
     if(boss && regionalBoss && window.BladeRPG && typeof window.BladeRPG.startBossCinematic === "function") window.BladeRPG.startBossCinematic();
@@ -467,13 +467,13 @@ function drawFighter(e,isPlayer=false){
 }
 function drawBoss(){const b=boss;if(!b||!b.alive)return;const x=b.x-camera.x,y=b.y;if(x<-180||x>W+180)return;ctx.save();if(b.flash>0)ctx.globalAlpha=.55+Math.sin(b.flash*70)*.45;ctx.fillStyle="#030308";ctx.globalAlpha*=.8;ctx.beginPath();ctx.ellipse(x+b.w/2,GROUND+3,65,11,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=b.flash>0?.6:1;ctx.fillStyle=b.phase===2?"#a6384b":"#71604d";ctx.beginPath();ctx.moveTo(x+8,y+24);ctx.lineTo(x+2,y-5);ctx.lineTo(x+22,y+9);ctx.lineTo(x+35,y-14);ctx.lineTo(x+49,y+9);ctx.lineTo(x+69,y-5);ctx.lineTo(x+64,y+24);ctx.closePath();ctx.fill();ctx.fillStyle=b.phase===2?"#551b2b":"#282733";ctx.beginPath();ctx.moveTo(x+15,y+23);ctx.lineTo(x-13,y+52);ctx.lineTo(x+3,y+103);ctx.lineTo(x+67,y+103);ctx.lineTo(x+83,y+52);ctx.lineTo(x+55,y+23);ctx.closePath();ctx.fill();ctx.fillStyle=b.phase===2?"#772d3b":"#55505a";ctx.beginPath();ctx.moveTo(x+18,y+23);ctx.lineTo(x+54,y+23);ctx.lineTo(x+64,y+87);ctx.lineTo(x+10,y+87);ctx.closePath();ctx.fill();ctx.strokeStyle="#b59b78";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+35,y+30);ctx.lineTo(x+35,y+83);ctx.stroke();ctx.fillStyle=b.phase===2?"#ff344f":"#d5a94d";ctx.fillRect(x+17,y+29,12,5);ctx.fillRect(x+42,y+29,12,5);ctx.save();ctx.translate(x+b.w/2,y+68);let ang=b.face===1?-.45:Math.PI+.45;if(b.attack&&b.attack.phase==="windup")ang=b.face===1?-1.45:Math.PI+1.45;if(b.attack&&b.attack.phase==="active"){const total=Math.max(.01,b.attack.kind==="slam"?.28:b.attack.kind==="charge"?.42:.22);const t=clamp(1-b.attack.timer/total,0,1);ang=b.face===1?(-1.45+t*2.35):(Math.PI+1.45-t*2.35);}ctx.rotate(ang);ctx.fillStyle="#8e6946";ctx.fillRect(0,-5,29,10);ctx.fillStyle="#b9bdc3";ctx.fillRect(27,-6,75,12);ctx.fillStyle="#f1dfb8";ctx.fillRect(35,-2,59,3);ctx.restore();ctx.restore();}
 function drawParticles(){for(const p of particles){ctx.globalAlpha=clamp(p.life/p.maxLife,0,1);ctx.fillStyle=p.color;ctx.fillRect(p.x-camera.x,p.y,p.size,p.size);}ctx.globalAlpha=1;}
-function drawHUD(){if(!player)return;ctx.fillStyle="#090b12d9";ctx.fillRect(18,16,255,83);ctx.strokeStyle="#6f5a44";ctx.strokeRect(18,16,255,83);ctx.fillStyle="#e1d3bd";ctx.font="bold 15px Georgia";ctx.fillText("SON SAVAŞÇI",30,38);drawHealthBar(30,48,220,14,player.hp,player.maxHp,"#a83d4c");ctx.fillStyle="#d4c8b6";ctx.font="12px Arial";ctx.fillText(`CAN ${Math.ceil(player.hp)} / ${player.maxHp}`,30,81);ctx.fillStyle="#8e898d";ctx.fillText(`KAÇINMA ${player.dodgeCd<=0?"HAZIR":"DOLUYOR"} · SAVUŞTURMA ${player.parryCd<=0?"HAZIR":"DOLUYOR"}`,30,91);if(bossUnlocked&&boss&&boss.alive){const bw=440,bx=(W-bw)/2;ctx.fillStyle="#090910dd";ctx.fillRect(bx-12,17,bw+24,50);ctx.fillStyle="#e0c59c";ctx.textAlign="center";ctx.font="bold 16px Georgia";ctx.fillText("İÇİ BOŞ KRAL",W/2,34);drawHealthBar(bx,43,bw,12,boss.hp,boss.maxHp,boss.phase===2?"#df304c":"#9b3542");ctx.font="11px Arial";ctx.fillStyle="#d9c9b6";ctx.fillText(boss.phase===2?"AŞAMA II · TAHTIN ÖFKESİ":"AŞAMA I · UNUTULMUŞ TAHT",W/2,65);ctx.textAlign="left";}ctx.fillStyle="#c0b5a6";ctx.font="12px Arial";const alive=enemies.filter(e=>e.alive).length;ctx.fillText(bossUnlocked?"BOSS ARENASI":`KALAN DÜŞMAN: ${alive}`,W-210,29);if(player.attack&&player.attack.phase==="active"){ctx.fillStyle="#f1d5a0";ctx.font="bold 14px Georgia";ctx.fillText(player.attack.kind==="heavy"?"AĞIR DARBE!":"KESİCİ DARBE!",W-180,55);}if(bannerTimer>0){ctx.globalAlpha=Math.min(1,bannerTimer*2);ctx.fillStyle="#08090dbb";ctx.fillRect(W/2-245,H*.22,490,43);ctx.strokeStyle="#a08055";ctx.strokeRect(W/2-245,H*.22,490,43);ctx.fillStyle="#e5d2b2";ctx.font="bold 18px Georgia";ctx.textAlign="center";ctx.fillText(banner,W/2,H*.22+27);ctx.textAlign="left";ctx.globalAlpha=1;}ctx.fillStyle="#d0c6b5a8";ctx.font="12px Arial";ctx.fillText("J HIZLI · K AĞIR · L SAVUŞTUR · SHIFT KAÇIN",W/2-145,H-14);}
+function drawHUD(){if(!player)return;ctx.fillStyle="#090b12d9";ctx.fillRect(18,16,255,83);ctx.strokeStyle="#6f5a44";ctx.strokeRect(18,16,255,83);ctx.fillStyle="#e1d3bd";ctx.font="bold 15px Georgia";ctx.fillText("SON SAVAŞÇI",30,38);drawHealthBar(30,48,220,14,player.hp,player.maxHp,"#a83d4c");ctx.fillStyle="#d4c8b6";ctx.font="12px Arial";ctx.fillText(`CAN ${Math.ceil(player.hp)} / ${player.maxHp}`,30,81);ctx.fillStyle="#8e898d";ctx.fillText(`KAÇINMA ${player.dodgeCd<=0?"HAZIR":"DOLUYOR"} · SAVUŞTURMA ${player.parryCd<=0?"HAZIR":"DOLUYOR"}`,30,91);if(bossUnlocked&&boss&&boss.alive){const bw=440,bx=(W-bw)/2;ctx.fillStyle="#090910dd";ctx.fillRect(bx-12,17,bw+24,50);ctx.fillStyle="#e0c59c";ctx.textAlign="center";ctx.font="bold 16px Georgia";ctx.fillText("İÇİ BOŞ KRAL",W/2,34);drawHealthBar(bx,43,bw,12,boss.hp,boss.maxHp,boss.phase===2?"#df304c":"#9b3542");ctx.font="11px Arial";ctx.fillStyle="#d9c9b6";ctx.fillText(boss.phase===2?"AŞAMA II · TAHTIN ÖFKESİ":"AŞAMA I · UNUTULMUŞ TAHT",W/2,65);ctx.textAlign="left";}ctx.fillStyle="#c0b5a6";ctx.font="12px Arial";const alive=enemies.filter(e=>e.alive).length;ctx.fillText(bossUnlocked?"BOSS ARENASI":`KALAN DÜŞMAN: ${alive}`,W-210,29);if(player.attack&&player.attack.phase==="active"){ctx.fillStyle="#f1d5a0";ctx.font="bold 14px Georgia";ctx.fillText(player.attack.kind==="heavy"?"AĞIR DARBE!":"KESİCİ DARBE!",W-180,55);}if(bannerTimer>0){ctx.globalAlpha=Math.min(1,bannerTimer*2);ctx.fillStyle="#08090dbb";ctx.fillRect(W/2-245,H*.22,490,43);ctx.strokeStyle="#a08055";ctx.strokeRect(W/2-245,H*.22,490,43);ctx.fillStyle="#e5d2b2";ctx.font="bold 18px Georgia";ctx.textAlign="center";ctx.fillText(banner,W/2,H*.22+27);ctx.textAlign="left";ctx.globalAlpha=1;}ctx.fillStyle="#d0c6b5a8";ctx.font="12px Arial";ctx.fillText("J HIZLI · H AĞIR · K YETENEK · L SAVUŞTUR · SHIFT KAÇIN",W/2-145,H-14);}
 function render(){ctx.save();if(shake>0)ctx.translate(rand(-shake,shake),rand(-shake,shake));drawBackground();drawGround();drawPlatforms();if(player){for(const e of enemies)drawFighter(e,false);drawBoss();drawFighter(player,true);drawParticles();drawHUD();}if(damageFlash>0){ctx.fillStyle=`rgba(160,20,35,${damageFlash*1.8})`;ctx.fillRect(0,0,W,H);}ctx.restore();}
 function loop(timestamp){const dt=Math.min(.033,(timestamp-lastTime)/1000||0);lastTime=timestamp;if(mode==="playing")update(dt);else updateParticles(dt);render();requestAnimationFrame(loop);}
 function keyName(e){if(e.code==="Space")return "space";if(e.code==="ShiftLeft"||e.code==="ShiftRight")return "shift";if(e.code==="Escape")return "escape";if(e.code==="KeyJ")return "j";if(e.code==="KeyK")return "k";if(e.code==="KeyL")return "l";return e.key.toLowerCase();}
 function pauseGame(){if(mode!=="playing")return;mode="paused";showPanel("DURAKLATILDI","<p>Kılıcını indir. Bir nefes al.</p>",[{label:"DEVAM ET",action:()=>{mode="playing";hidePanel();}},{label:"YENİDEN BAŞLA",action:startGame},{label:soundOn?"SESLER: AÇIK":"SESLER: KAPALI",action:()=>{soundOn=!soundOn;pauseGame();}}]);}
-function startGame(){resetGame();mode="controls";const guide=touchModeEnabled?`<p>Hareket analoğunu sürükleyerek yürü. Analoğu yukarı çekerek zıpla.</p><p>Arkadaşının çizdiği görsel tuşlar: kılıç = hızlı saldırı, çapraz kılıçlar = ağır saldırı, kalkan = savuşturma, koşan figür = kaçınma, çanta = envanter.</p><p>Üstteki simgeler dükkân, görevler ve etkileşim içindir. Boş sağ oyun alanına dokunarak ek jestleri de kullanabilirsin.</p><p class="small">3 dokunuş harita, 5 atlas. Boss sırasında giriş sinematiği bitene dek bekle.</p>`:`<p><kbd>A</kbd> <kbd>D</kbd> hareket · <kbd>W</kbd> / <kbd>Space</kbd> zıpla</p><p><kbd>J</kbd> hızlı saldırı · <kbd>K</kbd> ağır saldırı · <kbd>L</kbd> savuşturma · <kbd>Shift</kbd> kaçınma</p><p><kbd>E</kbd> etkileşim · <kbd>I</kbd> envanter · <kbd>Q</kbd> görevler · <kbd>M</kbd> harita · <kbd>B</kbd> dükkân · <kbd>N</kbd> diyar atlası</p><p class="small">Savuşturmayı düşman darbesi gelmeden hemen önce kullan.</p>`;showPanel("SAVAŞÇI, HAZIRLAN",`<p>Krallık düştü. Beş yeni diyar seni bekliyor.</p>${guide}<p><kbd>Esc</kbd> duraklat</p>`,[{label:"KALEYE GİR",action:()=>{mode="playing";hidePanel();bannerText("İLERLE. GERİYE BAKMA.",2.5);}}]);}
-function mainMenu(){mode="menu";const buttons=[{label:"OYUNA BAŞLA",action:startGame},{label:"KONTROLLER",action:()=>showPanel("KONTROLLER","<p>A/D hareket · W/Space zıpla · J/K saldırı · L savuşturma · Shift kaçınma · E etkileşim · I envanter · Q görev · M harita · X gölge hamlesi</p>",[{label:"GERİ",action:mainMenu}])},{label:soundOn?"SESLERİ KAPAT":"SESLERİ AÇ",action:()=>{soundOn=!soundOn;mainMenu();}}];showPanel("BLADE OF THE FALLEN",`<p style="letter-spacing:3px;color:#9d8a76">KÜLLERİN İÇİNDEN BİR KILIÇ YÜKSELİR</p><p>Yıkılmış bir krallık. Unutulmuş bir taht. İçi boş bir hükümdar.</p>`,buttons);}
+function startGame(){resetGame();mode="controls";const guide=touchModeEnabled?`<p>Hareket analoğunu sürükleyerek yürü. Analoğu yukarı çekerek zıpla.</p><p>Arkadaşının çizdiği görsel tuşlar: kılıç = hızlı saldırı, çapraz kılıçlar = ağır saldırı, kalkan = savuşturma, koşan figür = kaçınma, çanta = envanter.</p><p>Üstteki simgeler dükkân, görevler ve etkileşim içindir. Boş sağ oyun alanına dokunarak ek jestleri de kullanabilirsin.</p><p class="small">3 dokunuş harita, 5 atlas. Boss sırasında giriş sinematiği bitene dek bekle.</p>`:`<p><kbd>A</kbd> <kbd>D</kbd> hareket · <kbd>W</kbd> / <kbd>Space</kbd> zıpla</p><p><kbd>J</kbd> hızlı saldırı · <kbd>H</kbd> ağır saldırı · <kbd>K</kbd> yetenek ağacı · <kbd>L</kbd> savuşturma · <kbd>Shift</kbd> kaçınma</p><p><kbd>E</kbd> etkileşim · <kbd>I</kbd> envanter · <kbd>Q</kbd> görevler · <kbd>M</kbd> harita · <kbd>B</kbd> dükkân · <kbd>N</kbd> diyar atlası</p><p class="small">Savuşturmayı düşman darbesi gelmeden hemen önce kullan.</p>`;showPanel("SAVAŞÇI, HAZIRLAN",`<p>Krallık düştü. Beş yeni diyar seni bekliyor.</p>${guide}<p><kbd>Esc</kbd> duraklat</p>`,[{label:"KALEYE GİR",action:()=>{mode="playing";hidePanel();bannerText("İLERLE. GERİYE BAKMA.",2.5);}}]);}
+function mainMenu(){mode="menu";const buttons=[{label:"OYUNA BAŞLA",action:startGame},{label:"KONTROLLER",action:()=>showPanel("KONTROLLER","<p>A/D hareket · W/Space zıpla · J hızlı · H ağır · K yetenek ağacı · L savuşturma · Shift kaçınma · E etkileşim · O tarikat · V kartal gözü · M harita · C kostüm · N koleksiyon</p>",[{label:"GERİ",action:mainMenu}])},{label:soundOn?"SESLERİ KAPAT":"SESLERİ AÇ",action:()=>{soundOn=!soundOn;mainMenu();}}];showPanel("BLADE OF THE FALLEN",`<p style="letter-spacing:3px;color:#9d8a76">KÜLLERİN İÇİNDEN BİR KILIÇ YÜKSELİR</p><p>Yıkılmış bir krallık. Unutulmuş bir taht. İçi boş bir hükümdar.</p>`,buttons);}
 function defeat(){mode="defeat";showPanel("DÜŞTÜN",`<p>İçi Boş Kral hâlâ tahtında.</p><p>Yenilen düşman: ${kills}</p>`,[{label:"YENİDEN DENE",action:startGame},{label:"ANA MENÜ",action:mainMenu}]);}
 function victory(){mode="victory";showPanel("KRAL DÜŞTÜ",`<p>İçi Boş Kral'ın tacı taş zemine çarptı.</p><p>Krallığın sessizliği ilk kez huzura benziyor.</p><p class="small">Düşman yenilgisi: ${kills+1}</p>`,[{label:"YENİDEN OYNA",action:startGame},{label:"ANA MENÜ",action:mainMenu}]);}
 window.addEventListener("keydown",e=>{const k=keyName(e);if(["space","shift","arrowup","arrowleft","arrowright"].includes(k))e.preventDefault();if(!keys.has(k))pressed.add(k);keys.add(k);if(k==="escape"){if(mode==="playing")pauseGame();else if(mode==="paused"){mode="playing";hidePanel();}return;}if(mode!=="playing")return;if(k==="j")startAttack("light");if(k==="k")startAttack("heavy");if(k==="l")startParry();if(k==="shift")startDodge();});
@@ -636,10 +636,10 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
       shrines: [{ id: "wall_altar", x: 620, ability: "wallJump", title: "Taşın Nabzı", text: "Avuçların soğuk taşa değdi. Duvar artık bir son değil, ayağını basabileceğin geçici bir dünya." }],
       doors: [
         { id: "crypts_to_castle", x: 0, y: 365, w: 52, h: 110, to: "dark_castle", toX: 1330, requires: "doubleJump", label: "Karanlık Kale", fromRight: true },
-        { id: "crypts_to_throne", x: 2220, y: 365, w: 70, h: 110, to: "throne_room", toX: 165, requires: "wallJump", label: "Taht Odası" }
+        { id: "crypts_to_throne", x: 2220, y: 365, w: 70, h: 110, to: "throne_room", toX: 165, label: "Taht Odası" }
       ],
       walls: [{ x: 1060, y: 360, w: 26, h: 110 }, { x: 1640, y: 360, w: 26, h: 110 }],
-      gates: [{ id: "crypt_wall_gate", x: 1930, y: 335, w: 28, h: 135, requires: "wallJump", label: "Duvar Mührü", kind: "gate" }]
+      gates: [{ id: "crypt_wall_gate", x: 1930, y: 335, w: 28, h: 135, requires: "wallJump", label: "Duvar Mührü · DUVAR SUNAĞINI BUL", kind: "gate" }]
     },
     throne_room: {
       name: "Taht Odası", width: 1700, spawnX: 95,
@@ -679,7 +679,7 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
     if (!state.regionProgress[zoneId]) state.regionProgress[zoneId] = makeRegionProgress();
     return state.regionProgress[zoneId];
   }
-  function hasAbility(id) { return Boolean(state.abilities[id]); }
+  function hasAbility(id) { return Boolean(state.abilities[id]) || Boolean(state.advanced && state.advanced.skillRanks && state.advanced.skillRanks[id] > 0 && id === 'doubleJump'); }
   function owned(slot, id) { return state.inventory[slot].includes(id); }
   function currentItem(slot) {
     const id = state.equipment[slot];
@@ -769,7 +769,7 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
       if (Number.isFinite(bp.bossHp)) boss.hp = clamp(bp.bossHp, 1, boss.maxHp);
       boss.phase = bp.bossPhase || 1;
     }
-    bossUnlocked = !boss || enemies.every(e => !e.alive);
+    bossUnlocked = !boss || enemies.every(e => !e.alive || e.excludeForBoss);
     bossNotice = false;
     if (player) {
       player.x = clamp(Number(spawnX ?? current.spawnX), 0, WORLD - player.w);
@@ -780,6 +780,7 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
     }
     camera = { x: player ? clamp(player.x + player.w / 2 - W / 2, 0, Math.max(0, WORLD - W)) : 0 };
     if (!options.quiet) bannerText(current.name.toLocaleUpperCase("tr-TR"), 2.3);
+    if (window.BladeRPG && typeof window.BladeRPG.onZoneLoaded === "function") window.BladeRPG.onZoneLoaded(zoneId);
     return true;
   }
 
@@ -1312,7 +1313,7 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
   }
   function updateWorld() {
     if (mode !== "playing" || !player) return;
-    if (boss && boss.alive && enemies.every(e => !e.alive) && !bossUnlocked) {
+    if (boss && boss.alive && enemies.every(e => !e.alive || e.excludeForBoss) && !bossUnlocked) {
       bossUnlocked = true; boss.state = "intro"; boss.timer = 0.85;
       bannerText("MÜHÜR KIRILDI · İÇİ BOŞ KRAL UYANIYOR", 3.2); shake = Math.max(shake, 7);
     }
@@ -1416,11 +1417,11 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
     const buttons = [{ label: "YENİ OYUNA BAŞLA", action: startGame }];
     if (hasSave()) buttons.push({ label: "KAYITLI OYUNA DEVAM ET", action: continueGame });
     buttons.push(
-      { label: "KONTROLLER", action: () => showPanel("KONTROLLER", `<p><kbd>A</kbd> / <kbd>D</kbd> Hareket</p><p><kbd>W</kbd> / <kbd>Space</kbd> Zıplama ve açılmışsa Çift Zıplama</p><p><kbd>J</kbd> Hızlı saldırı · <kbd>K</kbd> Ağır saldırı</p><p><kbd>L</kbd> Savuşturma · <kbd>Shift</kbd> Kaçınma · <kbd>X</kbd> Gölge Kaçınması</p><p><kbd>E</kbd> Etkileşim · <kbd>I</kbd> Envanter · <kbd>Q</kbd> Görevler · <kbd>M</kbd> Harita · <kbd>Esc</kbd> Duraklat</p>`, [{ label: "GERİ", action: openMainMenu }]) },
+      { label: "KONTROLLER", action: () => showPanel("KONTROLLER", `<p><kbd>A</kbd> / <kbd>D</kbd> Hareket</p><p><kbd>W</kbd> / <kbd>Space</kbd> Zıplama ve açılmışsa Çift Zıplama</p><p><kbd>J</kbd> Hızlı saldırı · <kbd>H</kbd> Ağır saldırı · <kbd>K</kbd> Yetenek ağacı</p><p><kbd>L</kbd> Savuşturma · <kbd>Shift</kbd> Kaçınma · <kbd>F</kbd> Gizli suikast · <kbd>V</kbd> Kartal Gözü</p><p><kbd>E</kbd> Etkileşim · <kbd>I</kbd> Envanter · <kbd>Q</kbd> Görevler · <kbd>O</kbd> Tarikat · <kbd>M</kbd> Harita · <kbd>C</kbd> Kostümler · <kbd>N</kbd> Koleksiyon</p>`, [{ label: "GERİ", action: openMainMenu }]) },
       { label: `TELEFON / TABLET MODU: ${touchModeEnabled ? "AÇIK" : "KAPALI"}`, action: () => { setTouchMode(!touchModeEnabled); openMainMenu(); } },
       { label: soundOn ? "SESLERİ KAPAT" : "SESLERİ AÇ", action: () => { soundOn = !soundOn; openMainMenu(); } }
     );
-    showPanel("BLADE OF THE FALLEN", `<p style="letter-spacing:3px;color:#9d8a76">KÜLLERİN İÇİNDEN BİR KILIÇ YÜKSELİR</p><p>Yıkılmış bir krallık. Unutulmuş bir taht. İçi boş bir hükümdar.</p><p class="small">9 bölge · 5 yeni diyar · özgün düşmanlar · dinlenme noktaları · Kül ekonomisi · yetenek kilitleri</p><p class="small">Telefon/tablet modunda yatay oyna. Sol analog hareket eder ve yukarı çekince zıplatır; arkadaşının çizdiği ikonlar savaş ve menü tuşları olarak çalışır.</p>`, buttons);
+    showPanel("BLADE OF THE FALLEN", `<p style="letter-spacing:3px;color:#9d8a76">KÜLLERİN İÇİNDEN BİR KILIÇ YÜKSELİR</p><p>Yıkılmış bir krallık. Unutulmuş bir taht. İçi boş bir hükümdar.</p><p class="small">9 bölge · 5 yeni diyar · AÇIK DÜNYA MODU · sonsuz üretilen kaleler · özgün düşmanlar · dinlenme noktaları</p><p class="small">Telefon/tablet modunda yatay oyna. Sol analog hareket eder ve yukarı çekince zıplatır; arkadaşının çizdiği ikonlar savaş ve menü tuşları olarak çalışır.</p>`, buttons);
   }
 
   /* Replace the original combat hooks while preserving its drawing/physics core. */
@@ -1581,7 +1582,7 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
   /* Capture interaction/menu keys before the original listener, and handle all jump types here. */
   window.addEventListener("keydown", function (e) {
     const k = typeof keyName === "function" ? keyName(e) : e.key.toLowerCase();
-    const modalModes = ["dialogue", "merchant", "lore", "shrine", "rest", "levelup", "inventory", "journal", "map"];
+    const modalModes = ["dialogue", "merchant", "lore", "shrine", "rest", "levelup", "inventory", "journal", "map", "advanced", "bossReward"];
     if (k === "escape" && modalModes.includes(mode)) {
       e.preventDefault(); e.stopImmediatePropagation();
       closeModal(); return;
@@ -1590,13 +1591,13 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
     if (bossCinematicTimer > 0) { e.preventDefault(); e.stopImmediatePropagation(); return; }
     // Combat input is handled here (capture phase), not left to the older bubble listener.
     // e.code is layout-independent, so J/K/L work on both Turkish and US keyboard layouts.
-    const combatKey = e.code === "KeyJ" ? "j" : e.code === "KeyK" ? "k" : e.code === "KeyL" ? "l" :
+    const combatKey = e.code === "KeyJ" ? "j" : e.code === "KeyH" ? "h" : e.code === "KeyL" ? "l" :
       (e.code === "ShiftLeft" || e.code === "ShiftRight") ? "shift" : k;
-    if (["j", "k", "l", "shift"].includes(combatKey)) {
+    if (["j", "h", "l", "shift"].includes(combatKey)) {
       e.preventDefault(); e.stopImmediatePropagation();
       if (e.repeat) return;
       if (combatKey === "j") startAttack("light");
-      else if (combatKey === "k") startAttack("heavy");
+      else if (combatKey === "h") startAttack("heavy");
       else if (combatKey === "l") startParry();
       else startDodge();
       return;
@@ -1616,14 +1617,22 @@ window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListe
       }
       return;
     }
-    if (["e", "i", "q", "m", "x", "b"].includes(k)) {
+    if (["e", "i", "q", "m", "x", "b", "k", "o", "v", "g", "c", "t", "f", "n"].includes(k)) {
       e.preventDefault(); e.stopImmediatePropagation();
-      if (k === "e") interact();
-      if (k === "i") openInventory();
-      if (k === "q") openQuestLog();
-      if (k === "m") openMap();
+      if (k === "e") window.BladeRPG.interact();
+      if (k === "i") window.BladeRPG.openInventory();
+      if (k === "q") window.BladeRPG.openQuestLog();
+      if (k === "m") window.BladeRPG.openMap();
       if (k === "x") shadowDash();
-      if (k === "b") openAnyShop();
+      if (k === "b") window.BladeRPG.openShop();
+      if (k === "k") window.BladeRPG.openSkillTree();
+      if (k === "o") window.BladeRPG.openCultHunt();
+      if (k === "v") window.BladeRPG.toggleVision();
+      if (k === "g") window.BladeRPG.smokeBomb();
+      if (k === "c") window.BladeRPG.openOutfitMenu();
+      if (k === "t") window.BladeRPG.openFastTravel();
+      if (k === "f") window.BladeRPG.assassinate();
+      if (k === "n") window.BladeRPG.openCollectionLog();
     }
   }, true);
 
@@ -1795,7 +1804,7 @@ function performTouchAction(action) {
   else if (action === "heavy") startAttack("heavy");
   else if (action === "parry") startParry();
   else if (action === "dodge") startDodge();
-  else if (action === "interact") interact();
+  else if (action === "interact") window.BladeRPG.interact();
   else if (action === "inventory") window.BladeRPG.openInventory();
   else if (action === "journal") window.BladeRPG.openQuestLog();
   else if (action === "map") window.BladeRPG.openMap();
@@ -2299,6 +2308,834 @@ render = function(){
   // Start each biome at its own checkpoint and keep newly discovered regions in the save.
   const originalLoadZone=window.BladeRPG.loadZone;
   window.BladeRPG.loadZone=function(id,x,options){const result=originalLoadZone(id,x,options);if(result){const st=window.BladeRPG.state;if(st&&!st.regionProgress[id])st.regionProgress[id]={defeated:[],bossDefeated:false,bossHp:null,bossPhase:1};}return result;};
+})();
+
+/* === DEVASA UPDATE: EAGLE'S SHADOW / SINGLE-FILE EXPANSION === */
+(function(){
+  'use strict';
+  const game = window.BladeRPG;
+  if(!game) return;
+  const $ = s => document.querySelector(s);
+  const clampA = (v,a,b) => Math.max(a,Math.min(b,v));
+  const regionDefs = game.regions;
+  const zoneIds = Object.keys(regionDefs);
+  const zoneName = id => regionDefs[id]?.name || id;
+  const xpNeed = level => 100 + Math.max(0,level-1)*65;
+  const SKILLS = {
+    chainAssassination:{name:'Zincirleme Suikast',branch:'SUİKAST',cost:1,max:2,desc:'Bir gizli öldürmeden sonra yakındaki düşmanlara akıcı zincir suikast yap. Her rütbe bir ek hedef.'},
+    smokeBomb:{name:'Duman Bombası',branch:'SUİKAST',cost:1,max:1,desc:'G ile duman çıkar; yakın düşmanlar sersemler ve sen gizlenirsin.'},
+    longStealth:{name:'Gölge Süresi',branch:'SUİKAST',cost:1,max:3,desc:'Çalı ve gölgelerden ayrıldıktan sonra gizlilik daha uzun sürer.'},
+    heavyCombo:{name:'Ağır Saldırı Kombo',branch:'SAVAŞ',cost:1,max:2,desc:'Ağır kombolar daha sert vurur ve darbede daha fazla sendeletir.'},
+    parryWindow:{name:'Kusursuz Savuşturma',branch:'SAVAŞ',cost:1,max:3,desc:'Savuşturma penceresini genişletir ve karşı saldırı etkisini artırır.'},
+    criticalStrike:{name:'Kritik Vuruş',branch:'SAVAŞ',cost:1,max:3,desc:'Kritik vuruş şansını her rütbede artırır.'},
+    climbSpeed:{name:'Duvar Tırmanışı',branch:'HAREKET',cost:1,max:3,desc:'Duvar kenarında yukarı basılı tutarak tırman; rütbe tırmanma hızını artırır.'},
+    doubleJump:{name:'Çift Zıplama',branch:'HAREKET',cost:2,max:1,desc:'Havadayken bir kez daha zıpla. Rüzgâr Sunağı ile de açılabilir.'},
+    fastRun:{name:'Hızlı Koşu',branch:'HAREKET',cost:1,max:2,desc:'Ctrl basılıyken daha hızlı koşarsın; dayanıklılık tüketir.'},
+    fallDamage:{name:'Yumuşak İniş',branch:'HAYATTA KALMA',cost:1,max:2,desc:'Yüksek düşüşlerden gelen hasarı azaltır; son rütbe düşüşleri çok daha güvenli kılar.'},
+    fieldMedicine:{name:'Savaşçı Direnci',branch:'HAYATTA KALMA',cost:1,max:2,desc:'Dinlenme noktalarında ek can ve daha hızlı dayanıklılık toparlanması.'},
+    eagleVision:{name:'Kartal Gözü',branch:'HAYATTA KALMA',cost:1,max:1,desc:'V ile düşmanları, ipuçlarını ve toplanabilirleri vurgula.'}
+  };
+  const BOSSES = {
+    throne_room:{name:'İçi Boş Kral',title:'KIRIK TAHTIN HÜKÜMDARI',hp:340,color:'#a93a4b',glow:'#ff5366',weapon:'#d9c39b',reward:350,special:'TAÇ YARIĞI',theme:'king'},
+    polar_reach:{name:'Buzul Hükümdarı',title:'KUZEYİN SON NEFESİ',hp:420,color:'#5b9fb7',glow:'#b8f5ff',weapon:'#bdefff',reward:300,special:'BUZUL ÇÖKÜŞÜ',theme:'polar'},
+    japan_province:{name:'Oni Shogun',title:'SAKURA GÖLGESİ',hp:450,color:'#a84464',glow:'#ff7199',weapon:'#ffbfd0',reward:320,special:'ONİ ÇEMBERİ',theme:'japan'},
+    ottoman_empire:{name:'Hilal Muhafızı',title:'HİLALİN KILIÇTARI',hp:460,color:'#9d7538',glow:'#ffe1a1',weapon:'#f6d38c',reward:330,special:'HİLAL DALGASI',theme:'ottoman'},
+    desert_expanse:{name:'Kumların Firavunu',title:'KAYIP GÜNEŞ',hp:480,color:'#b76c3d',glow:'#ffd27a',weapon:'#fff0ac',reward:340,special:'KUM FIRTINASI',theme:'desert'},
+    england_kingdom:{name:'Kızıl Kral',title:'SİSLİ TAÇ TOPRAKLARI',hp:500,color:'#6f3947',glow:'#ff526f',weapon:'#e7e9eb',reward:360,special:'KIZIL YARGI',theme:'england'}
+  };
+  const OUTFITS = {
+    default:{name:'Kül Yolcusu',color:'#8a837f',trim:'#c9bca8',desc:'Başlangıç pelerini. Dengeli görünüm.',unlock:'Başlangıç',bonus:'Dengeli'},
+    assassin:{name:'Klasik Suikastçı',color:'#ded4bd',trim:'#9f242c',desc:'Açık kapüşon, koyu kuşak ve kızıl detaylar.',unlock:'Başlangıç',bonus:'+%3 kritik'},
+    samurai:{name:'Sakura Ronini',color:'#86384e',trim:'#f1b6c5',desc:'Japon diyarının katmanlı zırhı.',unlock:'5 koleksiyon eşyası',bonus:'+%5 ağır saldırı'},
+    ottoman:{name:'Hilal Sipahisi',color:'#9b773e',trim:'#f0d8a0',desc:'Altın işlemeli kaftan ve hilal işareti.',unlock:'2 senkronizasyon kulesi',bonus:'Hasar azaltma'},
+    desert:{name:'Kayıp Güneş Gezgini',color:'#b57a45',trim:'#f5d7a0',desc:'Kum rengi sargılar ve uzun başlık.',unlock:'10 koleksiyon eşyası',bonus:'Daha iyi dayanıklılık'},
+    highland:{name:'Sisli Taç Şövalyesi',color:'#42534e',trim:'#c7d1c2',desc:'İngiliz diyarına ait koyu pelerin ve broş.',unlock:'6 diyar keşfet',bonus:'+8 maksimum can'},
+    ghost:{name:'Düşmüşlerin Hayaleti',color:'#30263f',trim:'#b8a1e4',desc:'Mor gölge izleri taşıyan efsanevi kostüm.',unlock:'20 koleksiyon veya 5 boss',bonus:'+%7 kritik'}
+  };
+  const COLLECTIBLES = [
+    ['c01','dark_castle',.31,'scroll','Antik Parşömen'],['c02','dark_castle',.73,'chest','Altın Kutu'],
+    ['c03','ash_valley',.24,'feather','Özel Tüy'],['c04','ash_valley',.62,'scroll','Antik Parşömen'],['c05','forgotten_crypts',.38,'chest','Altın Kutu'],
+    ['c06','throne_room',.18,'feather','Özel Tüy'],['c07','polar_reach',.22,'scroll','Antik Parşömen'],['c08','polar_reach',.71,'chest','Altın Kutu'],
+    ['c09','japan_province',.17,'feather','Özel Tüy'],['c10','japan_province',.49,'scroll','Antik Parşömen'],['c11','japan_province',.81,'chest','Altın Kutu'],
+    ['c12','ottoman_empire',.26,'scroll','Antik Parşömen'],['c13','ottoman_empire',.74,'feather','Özel Tüy'],
+    ['c14','desert_expanse',.18,'chest','Altın Kutu'],['c15','desert_expanse',.57,'scroll','Antik Parşömen'],['c16','desert_expanse',.82,'feather','Özel Tüy'],
+    ['c17','england_kingdom',.19,'scroll','Antik Parşömen'],['c18','england_kingdom',.51,'chest','Altın Kutu'],['c19','england_kingdom',.79,'feather','Özel Tüy'],['c20','throne_room',.82,'chest','Altın Kutu']
+  ].map(([id,zone,frac,type,name])=>({id,zone,x:Math.floor((regionDefs[zone]?.width||2600)*frac),type,name,xp:type==='chest'?55:35,ashes:type==='chest'?50:24}));
+  const CULT = [
+    {id:'s01',rank:'ALT ÜYE',name:'Kül Muhasebecisi',zone:'dark_castle',x:.58,hp:95,guards:1,clue:1,skill:'Kısa mesafe seri saldırı'},
+    {id:'s02',rank:'ALT ÜYE',name:'Mahzen Celladı',zone:'forgotten_crypts',x:.48,hp:110,guards:2,clue:2,skill:'Dar alan ağır vuruşu'},
+    {id:'s03',rank:'ALT ÜYE',name:'Kuzey İz Sürücüsü',zone:'polar_reach',x:.35,hp:115,guards:1,clue:3,skill:'Buz alanı yavaşlatması'},
+    {id:'s04',rank:'ALT ÜYE',name:'Sakura Haberci',zone:'japan_province',x:.29,hp:105,guards:2,clue:4,skill:'Hızlı çift kesiş'},
+    {id:'s05',rank:'ALT ÜYE',name:'Gece Nöbetçisi',zone:'japan_province',x:.68,hp:120,guards:2,clue:5,skill:'Kaçınma sonrası karşı saldırı'},
+    {id:'s06',rank:'ALT ÜYE',name:'Darphane Gölgesi',zone:'ottoman_empire',x:.34,hp:118,guards:1,clue:6,skill:'Kısa menzilli alan darbesi'},
+    {id:'s07',rank:'ALT ÜYE',name:'Kum Gözcüsü',zone:'desert_expanse',x:.33,hp:125,guards:2,clue:7,skill:'Kum patlaması'},
+    {id:'s08',rank:'ALT ÜYE',name:'Mezar Anahtarcısı',zone:'desert_expanse',x:.68,hp:130,guards:2,clue:8,skill:'Yere vuran şok dalgası'},
+    {id:'s09',rank:'ALT ÜYE',name:'Sisli Okçu',zone:'england_kingdom',x:.35,hp:135,guards:2,clue:9,skill:'Uzak menzilli ok salvosu'},
+    {id:'s10',rank:'ALT ÜYE',name:'Kızıl Tahsildar',zone:'england_kingdom',x:.69,hp:145,guards:3,clue:10,skill:'Üç vuruşluk kombo'},
+    {id:'l01',rank:'BÖLGE LİDERİ',name:'Karla Taçlanan',zone:'polar_reach',x:.78,hp:245,guards:3,clue:11,skill:'Buzul çemberi'},
+    {id:'l02',rank:'BÖLGE LİDERİ',name:'Kara Kabuto',zone:'japan_province',x:.86,hp:260,guards:3,clue:12,skill:'Oni gölge sıçrayışı'},
+    {id:'l03',rank:'BÖLGE LİDERİ',name:'Hilal Başveziri',zone:'ottoman_empire',x:.79,hp:270,guards:3,clue:13,skill:'Hilal biçimli alan saldırısı'},
+    {id:'l04',rank:'BÖLGE LİDERİ',name:'Kumların Vekili',zone:'desert_expanse',x:.86,hp:285,guards:3,clue:14,skill:'Kum fırtınası ve sıçrama'},
+    {id:'master',rank:'ANA LİDER',name:'Külün Mimarı',zone:'throne_room',x:.73,hp:390,guards:4,clue:15,skill:'İki aşamalı karanlık ritüel'}
+  ].map(t=>({...t,x:Math.floor((regionDefs[t.zone]?.width||3000)*t.x)}));
+  const towers = {};
+  zoneIds.forEach((id,i)=>{const r=regionDefs[id];towers[id]={id:'tower_'+id,zone:id,x:Math.floor(r.width*(id==='throne_room'?.20:(.42+((i%3)*.06)))),topY:205,name:`${r.name} Gözetleme Kulesi`,index:i};});
+  const branchStyles = {
+    'SUİKAST':{c:'#d26d76',sub:'Fısıltı, gizlenme ve sessiz infaz'},
+    'SAVAŞ':{c:'#e5af62',sub:'Çelik, kritik vuruş ve savuşturma'},
+    'HAREKET':{c:'#83cbbd',sub:'Parkur, hız ve düşüş kontrolü'},
+    'HAYATTA KALMA':{c:'#a99ae2',sub:'Kartal Gözü, direnç ve saha bilgisi'}
+  };
+  let visionPulse=0, advancedTime=0, advancedLastSave=0, lastZone='', outfitHpPlayer=null, outfitHpBonus=0;
+  let previousDrawPlatforms=null, previousDrawHUD=null, previousRender=null, previousUpdate=null, previousUpdatePlayer=null, previousUpdateEnemies=null, previousUpdateBoss=null, previousEnemyHurt=null, previousBossHurt=null, previousVictory=null, previousReset=null;
+  function baseAdvanced(){return {version:2,xp:0,skillPoints:1,skillRanks:{},clueCount:0,clueSources:[],revealedCult:[],cultKilled:[],collected:[],syncedTowers:[],fogLiftedZones:[],revealedLocations:[],bossesDefeated:[],outfitsOwned:['default','assassin'],outfit:'default',smokeTimer:0,visionTimer:0,stealthTimer:0,hidden:false,ziplineActive:false,ziplineZone:null,collectClueCounter:0,questClueGranted:false,totalKills:0,levelUps:0,fallStartY:0,fallStartVy:0,showMapTips:true};}
+  function ensureAdvanced(reset=false){
+    const st=game.state;if(!st)return null;
+    if(reset||!st.advanced)st.advanced=baseAdvanced();
+    const a=st.advanced,b=baseAdvanced();
+    for(const k of Object.keys(b))if(a[k]===undefined)a[k]=b[k];
+    // Keep the same nested object/array identities between calls. Replacing skillRanks
+    // every read breaks mutations such as learning a skill while other code calls adv().
+    if(!a.skillRanks||typeof a.skillRanks!=='object'||Array.isArray(a.skillRanks))a.skillRanks={};
+    for(const id of ['default','assassin'])if(!a.outfitsOwned.includes(id))a.outfitsOwned.push(id);
+    for(const key of ['collected','syncedTowers','revealedCult','cultKilled','fogLiftedZones','revealedLocations','bossesDefeated','outfitsOwned','clueSources']){
+      if(!Array.isArray(a[key]))a[key]=[];
+      else if(new Set(a[key]).size!==a[key].length){const unique=[...new Set(a[key])];a[key].splice(0,a[key].length,...unique);}
+    }
+    if(player){
+      player.level=Math.max(1,Number(player.level)||1);a.xp=Math.max(0,Number(a.xp)||0);
+      if(outfitHpPlayer!==player){outfitHpPlayer=player;outfitHpBonus=0;}
+      const desiredHpBonus=a.outfit==='highland'?8:0;
+      if(desiredHpBonus!==outfitHpBonus){const delta=desiredHpBonus-outfitHpBonus;player.maxHp=Math.max(1,(Number(player.maxHp)||100)+delta);const hpNow=Number.isFinite(Number(player.hp))?Number(player.hp):player.maxHp;player.hp=clampA(hpNow+delta,0,player.maxHp);outfitHpBonus=desiredHpBonus;}
+    }
+    return a;
+  }
+  function adv(){return ensureAdvanced(false);}
+  function rank(id){return Math.max(0,Number(adv()?.skillRanks?.[id])||0);}
+  function hasSkill(id){return rank(id)>0;}
+  function saveSafe(){try{game.saveGame();}catch(e){console.warn('İlerleme kaydedilemedi',e);}}
+  function awardXP(amount,source='Keşif'){
+    if(!player)return;const a=adv();a.xp+=amount;let lv=0;
+    while(a.xp>=xpNeed(player.level)){a.xp-=xpNeed(player.level);player.level++;a.skillPoints++;a.levelUps++;player.hp=Math.min(player.maxHp,player.hp+8);lv++;}
+    bannerText(lv?`SEVİYE ${player.level} · +${lv} YETENEK PUANI`:`+${amount} XP · ${source}`,lv?2.5:1.2);
+    if(lv){spawnParticles(player.x+player.w/2,player.y+player.h/2,'#e8c777',26,210);sound(540,.16,'triangle',.045);}
+    updateUnlocks();saveSafe();
+  }
+  function addClue(source,sourceId=''){
+    const a=adv();if(sourceId&&a.clueSources.includes(sourceId))return false;
+    if(sourceId)a.clueSources.push(sourceId);a.clueCount++;
+    const next=CULT.find(t=>t.clue<=a.clueCount&&!a.revealedCult.includes(t.id)&&!a.cultKilled.includes(t.id));
+    if(next){a.revealedCult.push(next.id);bannerText(`İPUCU ÇÖZÜLDÜ · ${next.name} ORTAYA ÇIKTI`,2.8);if(next.zone===game.currentZone&&typeof onZoneLoaded==='function')onZoneLoaded(game.currentZone);}
+    else bannerText(`TARİKAT İPUCU TOPLANDI · ${a.clueCount}`,1.4);
+    if(a.clueCount>=3&&!a.revealedLocations.includes('merchant_network'))a.revealedLocations.push('merchant_network');
+    updateUnlocks();saveSafe();return true;
+  }
+  function updateUnlocks(){
+    const a=adv(),owned=a.outfitsOwned;
+    const count=a.collected.length,towersN=a.syncedTowers.length,visited=(game.state.visitedZones||[]).length,bossN=a.bossesDefeated.length;
+    const tests=[['samurai',count>=5],['ottoman',towersN>=2],['desert',count>=10],['highland',visited>=6],['ghost',count>=20||bossN>=5||a.cultKilled.includes('master')]];
+    for(const [id,ok]of tests)if(ok&&!owned.includes(id)){owned.push(id);bannerText(`KOSTÜM AÇILDI · ${OUTFITS[id].name}`,2.6);spawnParticles(player?.x+17||W*.5,player?.y+25||100,'#e4c477',24,180);}
+  }
+  function buySkill(id){const s=SKILLS[id],a=adv();if(!s)return;if(rank(id)>=s.max){bannerText('YETENEK EN YÜKSEK RÜTBEDE',1.3);return;}if(a.skillPoints<s.cost){bannerText('YETENEK PUANI YETERSİZ',1.5);return;}a.skillPoints-=s.cost;a.skillRanks[id]=rank(id)+1;if(id==='doubleJump')game.state.abilities.doubleJump=true;if(id==='eagleVision')a.visionTimer=0;bannerText(`${s.name.toLocaleUpperCase('tr-TR')} · RÜTBE ${rank(id)}`,2);sound(480,.12,'triangle',.035);saveSafe();openSkillTree();}
+  function cardButton(label,action,disabled=false){return {label,action,disabled};}
+  function showAdvancedPanel(title,body,buttons=[]){mode='advanced';showPanel(title,body,buttons);syncPlayControls();}
+  function closeAdvPanel(){mode='playing';hidePanel();syncPlayControls();}
+  function openSkillTree(){if(!['playing','advanced'].includes(mode))return;const a=adv(),branches=['SUİKAST','SAVAŞ','HAREKET','HAYATTA KALMA'];let body=`<div class="adv-topline"><span>SEVİYE ${player.level}</span><span>${Math.floor(a.xp)} / ${xpNeed(player.level)} XP</span><b>YETENEK PUANI: ${a.skillPoints}</b></div><div class="adv-xp"><i style="width:${100*a.xp/xpNeed(player.level)}%"></i></div><div class="adv-skill-grid">`;
+    for(const branch of branches){body+=`<section class="adv-branch" style="--branch:${branchStyles[branch].c}"><header><b>${branch}</b><small>${branchStyles[branch].sub}</small></header><div class="adv-nodes">`;
+      for(const [id,s]of Object.entries(SKILLS).filter(([id,s])=>s.branch===branch)){const r=rank(id),done=r>=s.max;body+=`<article class="adv-node ${done?'owned':''}"><div class="adv-node-head"><strong>${s.name}</strong><span>${r}/${s.max}</span></div><p>${s.desc}</p><div class="adv-node-foot"><small>${done?'AÇIK':`Bedel: ${s.cost} SP`}</small><button ${done||a.skillPoints<s.cost?'disabled':''} data-buy-skill="${id}">${done?'TAMAM':`ÖĞREN · ${s.cost} SP`}</button></div></article>`;}
+      body+='</div></section>';}
+    body+='</div><p class="small">XP; düşmanları yenerek, boss avlayarak ve gizli koleksiyonları bularak kazanılır. Her seviye bir yetenek puanı verir.</p>';
+    showAdvancedPanel('YETENEK AĞACI',body,[cardButton('KOSTÜMLER',openOutfitMenu),cardButton('TARİKAT AVI',openCultHunt),cardButton('KAPAT',closeAdvPanel)]);
+    panel.querySelectorAll('[data-buy-skill]').forEach(btn=>btn.addEventListener('click',()=>buySkill(btn.dataset.buySkill)));
+  }
+  function openOutfitMenu(){if(!['playing','advanced'].includes(mode))return;const a=adv();let body=`<p>Görünümünü seç. Her kostüm ayrı bir siluet rengi ve küçük bir oyun bonusu verir.</p><div class="adv-outfit-grid">`;
+    for(const [id,o] of Object.entries(OUTFITS)){const has=a.outfitsOwned.includes(id),selected=a.outfit===id;body+=`<article class="adv-outfit ${selected?'selected':''} ${has?'':'locked'}"><div class="outfit-preview" style="--cloth:${o.color};--trim:${o.trim}"><i></i><b></b><em></em></div><strong>${o.name}</strong><small>${has?o.bonus:`KİLİTLİ · ${o.unlock}`}</small><p>${o.desc}</p><button data-outfit="${id}" ${!has||selected?'disabled':''}>${selected?'KUŞANILDI':has?'KUŞAN':'KİLİTLİ'}</button></article>`;}
+    body+='</div>';
+    showAdvancedPanel('ZIRH VE KOSTÜM ARŞİVİ',body,[cardButton('YETENEK AĞACI',openSkillTree),cardButton('KAPAT',closeAdvPanel)]);
+    panel.querySelectorAll('[data-outfit]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.outfit;if(!adv().outfitsOwned.includes(id))return;adv().outfit=id;ensureAdvanced(false);bannerText(`${OUTFITS[id].name.toLocaleUpperCase('tr-TR')} KUŞANILDI`,1.8);saveSafe();openOutfitMenu();}));
+  }
+  function targetRevealed(t){const a=adv();return a.revealedCult.includes(t.id)||a.cultKilled.includes(t.id);}
+  function openCultHunt(){if(!['playing','advanced'].includes(mode))return;const a=adv();const tiers=[['ALT ÜYELER',CULT.filter(t=>t.rank==='ALT ÜYE')],['BÖLGE LİDERLERİ',CULT.filter(t=>t.rank==='BÖLGE LİDERİ')],['ANA LİDER',CULT.filter(t=>t.rank==='ANA LİDER')]];let body=`<div class="adv-cult-hero"><span>ÖRGÜT AVININ DOSYASI</span><b>${a.cultKilled.length} / 15 HEDEF</b><p>İpuçları, örgütün alt halkalarından başlayarak yukarı doğru kimlikleri açığa çıkarır.</p><div class="adv-xp"><i style="width:${100*a.cultKilled.length/15}%"></i></div></div><div class="adv-pyramid">`;
+    for(const [tier,arr]of tiers){body+=`<section><h3>${tier}</h3><div class="adv-target-row ${tier==='ANA LİDER'?'master-row':''}">`;
+      for(const t of arr){const revealed=targetRevealed(t),killed=a.cultKilled.includes(t.id),zone=zoneName(t.zone);body+=`<article class="adv-target ${killed?'dead':revealed?'revealed':'unknown'}"><div class="target-sigil">${killed?'✓':revealed?'✦':'?'}</div><b>${revealed?t.name:'KİMLİK GİZLİ'}</b><small>${killed?'ETKİSİZ HALE GETİRİLDİ':revealed?`${zone} · ${Math.round(t.x/Math.max(1,regionDefs[t.zone].width)*100)}% bölge ilerisi`:`İpucu ${t.clue} gerekli`}</small><p>${revealed?`Koruma: ${t.guards} · ${t.skill}`:'Örgüt kayıtları mühürlü.'}</p><button data-target="${t.id}" ${!revealed||killed?'disabled':''}>${killed?'TAMAMLANDI':revealed?'HARİTADA İŞARETLE':'GİZLİ'}</button></article>`;}
+      body+='</div></section>';}
+    body+='</div><p class="small">İpuçları: yazıtları oku, tüccarlarla konuş, kuleleri eşzamanla, koleksiyon bul ve görevler tamamla.</p>';
+    showAdvancedPanel('TARİKAT AVI',body,[cardButton('AÇIK DÜNYA HARİTASI',openAdvancedMap),cardButton('YETENEK AĞACI',openSkillTree),cardButton('KAPAT',closeAdvPanel)]);
+    panel.querySelectorAll('[data-target]').forEach(btn=>btn.addEventListener('click',()=>{const t=CULT.find(x=>x.id===btn.dataset.target);if(!t||!targetRevealed(t))return;game.loadZone(t.zone,clampA(t.x-280,0,regionDefs[t.zone].width-40));mode='playing';hidePanel();bannerText(`HEDEF İŞARETLENDİ · ${t.name}`,2.2);saveSafe();}));
+  }
+  function openAdvancedMap(){if(!['playing','advanced'].includes(mode))return;const a=adv(),visited=game.state.visitedZones||[];const nodePositions={dark_castle:[65,46],ash_valley:[29,72],forgotten_crypts:[34,26],throne_room:[12,48],polar_reach:[52,10],japan_province:[72,27],ottoman_empire:[77,53],desert_expanse:[55,82],england_kingdom:[91,35]};let svg=`<svg viewBox="0 0 520 320" class="adv-map-svg" role="img" aria-label="Açık dünya haritası"><defs><linearGradient id="mapsea" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#152d3a"/><stop offset="1" stop-color="#081219"/></linearGradient><pattern id="gridmap" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#ffffff08" stroke-width=".6"/></pattern></defs><rect width="520" height="320" rx="8" fill="url(#mapsea)"/><rect width="520" height="320" rx="8" fill="url(#gridmap)"/>`;
+    const links=[['throne_room','dark_castle'],['dark_castle','ash_valley'],['dark_castle','forgotten_crypts'],['ash_valley','polar_reach'],['polar_reach','japan_province'],['japan_province','ottoman_empire'],['ottoman_empire','desert_expanse'],['desert_expanse','england_kingdom'],['england_kingdom','throne_room']];
+    for(const [a1,b1]of links){const A=nodePositions[a1],B=nodePositions[b1];svg+=`<path d="M${A[0]*5.2} ${A[1]*3.2} Q${(A[0]+B[0])*2.6+Math.sin(A[0])*13} ${(A[1]+B[1])*1.6-13} ${B[0]*5.2} ${B[1]*3.2}" fill="none" stroke="#8f9b9260" stroke-width="2" stroke-dasharray="4 5"/>`;}
+    for(const id of zoneIds){const [px,py]=nodePositions[id]||[50,50],seen=visited.includes(id),lift=a.fogLiftedZones.includes(id);svg+=`<g transform="translate(${px*5.2},${py*3.2})"><circle r="${lift?14:seen?11:9}" fill="${lift?'#d9b36a':seen?'#5f998f':'#202b32'}" stroke="${lift?'#ffe8ac':seen?'#a6d8c6':'#71808a'}" stroke-width="${lift?2:1}"/>${lift?'<circle r="19" fill="none" stroke="#e0bb6a60"/>':''}<text y="4" text-anchor="middle" font-size="${seen?10:9}" font-family="Arial" fill="${seen?'#fff0cb':'#a3afb3'}">${seen?['⌂','◆','◇','♛','❄','✿','☾','☼','♜'][zoneIds.indexOf(id)]:'?'}</text><text y="${lift?26:22}" text-anchor="middle" font-size="8" fill="${seen?'#e5d9c1':'#809099'}">${seen?zoneName(id):'BİLİNMEYEN DİYAR'}</text></g>`;}
+    svg+='</svg>';
+    const cards=zoneIds.map(id=>{const r=regionDefs[id],seen=visited.includes(id),lift=a.fogLiftedZones.includes(id),t=towers[id],sync=a.syncedTowers.includes(t.id),found=COLLECTIBLES.filter(c=>c.zone===id&&a.collected.includes(c.id)).length;const canTravel=sync&&seen;return `<article class="adv-region-card ${seen?'seen':'fogged'}"><div><b>${seen?r.name:'Sis İçindeki Diyar'}</b><small>${seen?`${found}/${COLLECTIBLES.filter(c=>c.zone===id).length} koleksiyon · ${sync?'Kule eşzamanlı':'Kule keşfedilmedi'}`:'Senkronizasyon kulesi bulunduktan sonra ayrıntılar açılır.'}</small></div><button data-travel="${id}" ${!canTravel?'disabled':''}>${id===game.currentZone?'BURADASIN':canTravel?'HIZLI SEYAHAT':'SİSLİ'}</button></article>`;}).join('');
+    showAdvancedPanel('AÇIK DÜNYA HARİTASI',`<div class="adv-worldmap-wrap">${svg}<div class="adv-map-legend"><span>● Senkronize</span><span>● Keşfedildi</span><span>● Sisle örtülü</span></div></div><div class="adv-region-list">${cards}</div><p class="small">Senkronizasyon kulelerini etkinleştir; bölgesel sis kalkar ve gizli konumlar haritaya eklenir.</p>`,[cardButton('TARİKAT AVI',openCultHunt),cardButton('HIZLI SEYAHAT',openFastTravel),cardButton('KAPAT',closeAdvPanel)]);
+    panel.querySelectorAll('[data-travel]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.travel,t=towers[id];if(!t||!adv().syncedTowers.includes(t.id)||!(game.state.visitedZones||[]).includes(id))return;game.loadZone(id,Math.max(80,t.x-150));mode='playing';hidePanel();bannerText(`HIZLI SEYAHAT · ${zoneName(id)}`,2);saveSafe();}));
+  }
+  function openFastTravel(){if(!['playing','advanced'].includes(mode))return;const a=adv();const available=zoneIds.filter(id=>(game.state.visitedZones||[]).includes(id)&&a.syncedTowers.includes(towers[id].id));let body='<p>Yalnızca eşzamanladığın kulelere seyahat edebilirsin.</p><div class="adv-fast-list">';
+    if(!available.length)body+='<p>Henüz etkinleştirilmiş kule yok. İlk kuleye tırman ve tepesinde E tuşuna bas.</p>';
+    for(const id of available)body+=`<button data-fast="${id}">✧ ${zoneName(id)} <small>· Kule ${towers[id].index+1}</small></button>`;
+    body+='</div>';showAdvancedPanel('KULELER ARASI HIZLI SEYAHAT',body,[cardButton('HARİTA',openAdvancedMap),cardButton('KAPAT',closeAdvPanel)]);
+    panel.querySelectorAll('[data-fast]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.fast,t=towers[id];game.loadZone(id,Math.max(70,t.x-145));mode='playing';hidePanel();bannerText(`SENKRONİZASYON · ${zoneName(id)}`,2);saveSafe();}));
+  }
+  function openCollectionLog(){if(!['playing','advanced'].includes(mode))return;const a=adv();const types=['scroll','chest','feather'];let body=`<p>${a.collected.length} / ${COLLECTIBLES.length} yadigâr bulundu. Her buluntu XP ve Kül verir; bazı eşikler özel kostümler açar.</p><div class="adv-collect-summary">`;
+    for(const type of types){const all=COLLECTIBLES.filter(c=>c.type===type),got=all.filter(c=>a.collected.includes(c.id)).length;body+=`<article><b>${type==='scroll'?'▤ ANTİK PARŞÖMEN':type==='chest'?'▣ ALTIN KUTU':'✦ ÖZEL TÜY'}</b><strong>${got}/${all.length}</strong><div class="adv-xp"><i style="width:${100*got/Math.max(1,all.length)}%"></i></div></article>`;}
+    body+='</div><p class="small">Kule senkronizasyonu ve Kartal Gözü, gizli köşelerdeki buluntuları fark etmene yardımcı olur.</p>';showAdvancedPanel('KOLEKSİYON ARŞİVİ',body,[cardButton('HARİTA',openAdvancedMap),cardButton('KAPAT',closeAdvPanel)]);
+  }
+  function openAbilitiesMenu(){openSkillTree();}
+  function toggleVision(){if(mode!=='playing')return;if(!hasSkill('eagleVision')){bannerText('KARTAL GÖZÜ İÇİN YETENEK AĞACINI AÇ · K',1.6);return;}const a=adv();a.visionTimer=a.visionTimer>0?0:4.5;visionPulse=0;bannerText(a.visionTimer>0?'KARTAL GÖZÜ · HEDEFLER VURGULANDI':'KARTAL GÖZÜ KAPANDI',1.25);sound(370,.08,'sine',.025);}
+  function smokeBomb(){if(mode!=='playing'||!player)return;if(!hasSkill('smokeBomb')){bannerText('DUMAN BOMBASI İÇİN YETENEK AĞACINI AÇ · K',1.6);return;}if(player.stamina<20){bannerText('DAYANIKLILIK YETERSİZ',1.1);return;}player.stamina-=20;player.staminaRegenDelay=.8;adv().smokeTimer=3.2;adv().stealthTimer=Math.max(adv().stealthTimer,3.2);adv().hidden=true;player.hidden=true;spawnParticles(player.x+player.w/2,player.y+player.h*.5,'#b9c6cf',44,250);for(const e of enemies)if(e.alive&&Math.hypot((e.x+e.w/2)-(player.x+player.w/2),(e.y+e.h/2)-(player.y+player.h/2))<205)e.stun=Math.max(e.stun,1.7);bannerText('DUMAN BOMBASI · GÖLGEYE KARIŞTIN',1.7);sound(100,.24,'triangle',.045);}
+  function isShadowX(x){const id=game.currentZone,r=regionDefs[id];if(!r)return false;const centers=[.15,.39,.64,.86].map(v=>r.width*v);return centers.some((c,i)=>Math.abs(x-c)<(i%2?62:48));}
+  function isCovered(){if(!player)return false;return player.grounded&&isShadowX(player.x+player.w/2);}
+  function isBehindTarget(e){if(!player||!e||!e.alive)return false;const dx=(player.x+player.w/2)-(e.x+e.w/2);const behind=(Math.sign(dx)!==Math.sign(e.face||1));const above=player.y+player.h<e.y+e.h*.38&&Math.abs(dx)<85;return (Math.abs(dx)<76&&behind&&Math.abs(player.y-e.y)<50)||above;}
+  function assassinate(target){if(mode!=='playing'||!target||!target.alive)return false;const a=adv(),hidden=a.hidden||isShadowX(player.x+player.w/2)||adv().smokeTimer>0;if(!(hidden||isBehindTarget(target))){bannerText('GİZLİ SUİKAST İÇİN ARKASINA GEÇ VEYA GÖLGELEN',1.8);return false;}
+    bannerText(target.isCultTarget?`HEDEF ETKİSİZ · ${target.cultName}`:'GİZLİ SUİKAST',1.25);spawnParticles(target.x+target.w/2,target.y+target.h*.45,'#d7bf80',20,160);
+    const oldAttack=player.attack;player.attack={kind:'heavy',specialMultiplier:100,phase:'active',hit:new Set(),timer:.1};enemyHurt(target,target.hp+999,0);player.attack=oldAttack;
+    if(hasSkill('chainAssassination')){let count=rank('chainAssassination'),hits=0;for(const e of enemies){if(hits>=count||!e.alive||e===target)continue;const d=Math.abs((e.x+e.w/2)-(target.x+target.w/2));if(d<125&&(a.hidden||isBehindTarget(e))){const saveAttack=player.attack;player.attack={kind:'heavy',specialMultiplier:100,phase:'active',hit:new Set(),timer:.1};enemyHurt(e,e.hp+999,0);player.attack=saveAttack;hits++;spawnParticles(e.x+e.w/2,e.y+20,'#e6c780',12,145);}}if(hits)bannerText(`ZİNCİRLEME SUİKAST · ${hits+1} HEDEF`,1.8);}
+    return true;
+  }
+  function collectItem(item){const a=adv();if(a.collected.includes(item.id))return false;a.collected.push(item.id);player.ashes+=item.ashes;awardXP(item.xp,item.name);spawnParticles(item.x,GROUND-24,item.type==='chest'?'#f1ce78':item.type==='feather'?'#dbd2ee':'#d8c18a',26,170);bannerText(`${item.name.toLocaleUpperCase('tr-TR')} · +${item.ashes} KÜL`,2.0);a.collectClueCounter++;
+    if(a.collectClueCounter>=3){a.collectClueCounter=0;addClue('koleksiyon arşivi',`collect-clue-${Math.floor(a.collected.length/3)}`);}
+    updateUnlocks();saveSafe();return true;}
+  function nearCollectible(max=75){if(!player)return null;const px=player.x+player.w/2;let best=null,dBest=max;for(const item of COLLECTIBLES){if(item.zone!==game.currentZone||adv().collected.includes(item.id))continue;const d=Math.abs(px-item.x);if(d<dBest&&Math.abs((player.y+player.h)-GROUND)<100){best=item;dBest=d;}}return best;}
+  function nearTower(max=75){if(!player)return null;const t=towers[game.currentZone];if(!t||Math.abs(player.x+player.w/2-t.x)>max)return null;return {...t,distance:Math.abs(player.x+player.w/2-t.x),synced:adv().syncedTowers.includes(t.id),onTop:Math.abs((player.y+player.h)-t.topY)<28};}
+  function syncTower(t){const a=adv();if(!t.onTop){bannerText('KULE TEPESİNE TIRMAN · ORADA E İLE SENKRONİZE OL',1.8);return false;}if(!a.syncedTowers.includes(t.id)){a.syncedTowers.push(t.id);a.fogLiftedZones.push(t.zone);a.revealedLocations.push(...COLLECTIBLES.filter(c=>c.zone===t.zone).map(c=>c.id));bannerText(`SENKRONİZASYON TAMAMLANDI · ${zoneName(t.zone)}`,2.7);spawnParticles(t.x,t.topY,'#e6ce84',45,240);addClue('kule senkronizasyonu',`tower-clue-${t.id}`);awardXP(90,'SENKRONİZASYON');}else{openFastTravel();return true;}saveSafe();return true;}
+  function nearZipline(){if(!player)return null;const r=regionDefs[game.currentZone];if(!r)return null;const x1=r.width*.28,x2=r.width*.43,y=260;const px=player.x+player.w/2;return px>x1-55&&px<x2+55&&Math.abs(player.y+player.h-y)<78?{x1,x2,y,zone:game.currentZone}:null;}
+  function nearHay(){if(!player)return null;const r=regionDefs[game.currentZone];if(!r)return null;const x=r.width*.83;return Math.abs(player.x+player.w/2-x)<68?{x,zone:game.currentZone}:null;}
+  function interactAdvanced(){if(mode!=='playing'||!player)return false;
+    const item=nearCollectible(72);if(item){collectItem(item);return true;}
+    const tower=nearTower(80);if(tower){if(tower.synced&&tower.onTop){openFastTravel();return true;}return syncTower(tower);}
+    const zip=nearZipline();if(zip){const a=adv();if(a.ziplineActive){a.ziplineActive=false;a.ziplineZone=null;player.vy=-245;bannerText('İP HATTINDAN AYRILDIN',1);return true;}a.ziplineActive=true;a.ziplineZone=zip.zone;player.y=zip.y-player.h;player.vy=0;bannerText('İP HATTI · A / D İLE KAY',1.4);return true;}
+    const cultTarget=enemies.filter(e=>e.alive&&e.isCultTarget).sort((a,b)=>Math.abs(a.x-player.x)-Math.abs(b.x-player.x))[0];if(cultTarget&&Math.abs(cultTarget.x-player.x)<78&&(adv().hidden||isBehindTarget(cultTarget))){return assassinate(cultTarget);}
+    const enemy=enemies.filter(e=>e.alive&&!e.isCultTarget).sort((a,b)=>Math.abs(a.x-player.x)-Math.abs(b.x-player.x))[0];if(enemy&&Math.abs(enemy.x-player.x)<72&&(adv().hidden||isBehindTarget(enemy)))return assassinate(enemy);
+    return false;
+  }
+  function onInteract(){const near=game.nearestInteractable?game.nearestInteractable(140):null;const advancedDone=interactAdvanced();if(advancedDone)return true;const result=previousInteract();if(near&&(near.kind==='lore'||near.kind==='npc'||near.kind==='shrine'))addClue(near.kind==='lore'?'yazıt':'karakter',`${game.currentZone}:${near.kind}:${near.id||near.name}`);if(game.state.flags?.lostWatchDone&&!adv().questClueGranted){adv().questClueGranted=true;addClue('tamamlanan yan görev','quest-lost-watch');}return result;}
+  function addMobileRail(){if(!touchControls||$('#advancedTouchRail'))return;const rail=document.createElement('div');rail.id='advancedTouchRail';rail.setAttribute('aria-label','Gelişmiş mobil yetenek kontrolleri');rail.innerHTML=`<button data-adv-action="skills" title="Yetenek ağacı">✦<small>YETENEK</small></button><button data-adv-action="cult" title="Tarikat avı">⌖<small>TARİKAT</small></button><button data-adv-action="vision" title="Kartal gözü">◉<small>KARTAL</small></button><button data-adv-action="smoke" title="Duman bombası">◌<small>DUMAN</small></button><button data-adv-action="outfits" title="Kostümler">♟<small>KOSTÜM</small></button><button data-adv-action="world" title="Dünya modu">♧<small>DÜNYA</small></button>`;gameFrame.appendChild(rail);rail.querySelectorAll('button').forEach(b=>{const fn=()=>{if(mode!=='playing')return;const a=b.dataset.advAction;if(a==='skills')openSkillTree();if(a==='cult')openCultHunt();if(a==='vision')toggleVision();if(a==='smoke')smokeBomb();if(a==='outfits')openOutfitMenu();if(a==='world')openWorldModeMenu();};b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();fn();});b.addEventListener('pointerdown',e=>{e.stopPropagation();});});}
+  function injectStyles(){if($('#advancedStyle'))return;const s=document.createElement('style');s.id='advancedStyle';s.textContent=`
+  #advancedTouchRail{display:none;position:absolute;z-index:4;top:7px;left:50%;transform:translateX(-50%);align-items:center;gap:4px;padding:4px;background:#080b12c9;border:1px solid #9b7a4b;border-radius:10px;box-shadow:0 5px 22px #0008;backdrop-filter:blur(6px);pointer-events:auto;touch-action:manipulation;white-space:nowrap}
+  #frame.touch-enabled #advancedTouchRail{display:flex}#advancedTouchRail button{margin:0;min-width:47px;padding:5px 7px;border-radius:7px;background:linear-gradient(#2a2b37,#11131b);border:1px solid #72624f;color:#e6d3af;font:700 15px Arial,sans-serif;line-height:1.05;box-shadow:none;display:flex;flex-direction:column;align-items:center;gap:3px;touch-action:manipulation}#advancedTouchRail small{font:700 7px Arial,sans-serif;letter-spacing:.45px}
+  .adv-topline{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:#0b111a;border:1px solid #6a563f;padding:9px;color:#e6d6b8;font:11px Arial,sans-serif}.adv-topline b{color:#e9c575}.adv-xp{height:6px;background:#29272b;border:1px solid #5b4a38;border-radius:99px;overflow:hidden;margin:5px 0 12px}.adv-xp i{display:block;height:100%;background:linear-gradient(90deg,#7eafab,#e1bf78);box-shadow:0 0 12px #c6a35a88}
+  .adv-skill-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;text-align:left}.adv-branch{border:1px solid color-mix(in srgb,var(--branch) 55%,#38313a);background:linear-gradient(145deg,#181a23,#0b0e16);padding:9px;min-width:0}.adv-branch header{border-bottom:1px solid color-mix(in srgb,var(--branch) 48%,transparent);padding:2px 1px 8px;margin-bottom:7px;display:flex;flex-direction:column;gap:4px}.adv-branch header b{font:800 11px Arial,sans-serif;letter-spacing:1px;color:var(--branch)}.adv-branch header small{font:10px Arial,sans-serif;color:#98969e}.adv-nodes{display:grid;gap:7px}.adv-node{border:1px solid #45414a;border-radius:5px;padding:8px;background:#0d0f17}.adv-node.owned{border-color:#607d6a;background:#101c1a}.adv-node-head{display:flex;justify-content:space-between;gap:5px;font:700 12px Georgia,serif;color:#e6d8c0}.adv-node-head span{font:10px Arial,sans-serif;color:var(--branch)}.adv-node p{font:10px/1.4 Arial,sans-serif;color:#aaa6ae;margin:6px 0}.adv-node-foot{display:flex;align-items:center;justify-content:space-between;gap:5px}.adv-node-foot small{color:#e4c88e;font:9px Arial,sans-serif}.adv-node-foot button{font:700 9px Arial,sans-serif;margin:0;padding:5px 7px}.adv-node-foot button:disabled{opacity:.36;cursor:default;transform:none}
+  .adv-outfit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:left}.adv-outfit{padding:9px;border:1px solid #635442;background:#11131c;border-radius:6px;display:flex;flex-direction:column;gap:6px;min-width:0}.adv-outfit.selected{border-color:#e7cb8e;box-shadow:inset 0 0 16px #dbb76b18}.adv-outfit.locked{opacity:.65}.adv-outfit strong{font:700 12px Georgia,serif;color:#e4d6bc}.adv-outfit small{font:9px Arial,sans-serif;color:#e0bd7e}.adv-outfit p{font:10px/1.4 Arial,sans-serif;margin:0;color:#9b9ba4}.adv-outfit button{padding:6px 7px;margin:0;font:700 9px Arial,sans-serif}.outfit-preview{height:72px;position:relative;background:radial-gradient(ellipse,#34303b,#0c0d13);border:1px solid #4c4140;overflow:hidden}.outfit-preview:before{content:'';position:absolute;width:23px;height:23px;left:calc(50% - 11px);top:8px;background:var(--cloth);border:2px solid var(--trim);border-radius:50% 50% 43% 43%}.outfit-preview:after{content:'';position:absolute;left:calc(50% - 19px);top:29px;width:38px;height:40px;background:var(--cloth);clip-path:polygon(20% 0,80% 0,100% 100%,0 100%);border-top:3px solid var(--trim)}.outfit-preview i{position:absolute;z-index:1;left:calc(50% - 3px);top:14px;width:9px;height:4px;background:var(--trim);border-radius:4px}.outfit-preview b{position:absolute;z-index:2;left:calc(50% - 9px);top:22px;width:18px;height:5px;background:var(--trim)}.outfit-preview em{position:absolute;z-index:2;left:calc(50% + 15px);top:34px;width:2px;height:26px;background:#b9bdc3;transform:rotate(-18deg)}
+  .adv-cult-hero{border:1px solid #795254;background:radial-gradient(ellipse at top,#31212b,#11111a);padding:12px;margin-bottom:12px}.adv-cult-hero span{font:700 10px Arial,sans-serif;color:#c77a83;letter-spacing:2px}.adv-cult-hero>b{float:right;font:700 12px Arial,sans-serif;color:#eed1a0}.adv-cult-hero p{font:11px Arial,sans-serif;color:#b7aeb6}.adv-pyramid{display:grid;gap:12px}.adv-pyramid h3{text-align:center;color:#d2ad77;font:700 11px Arial,sans-serif;letter-spacing:2px}.adv-target-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.adv-target-row.master-row{grid-template-columns:minmax(180px,260px);justify-content:center}.adv-target{border:1px solid #51494e;background:linear-gradient(160deg,#1d1c25,#0a0c12);padding:7px;min-width:0;display:flex;flex-direction:column;gap:5px;align-items:center;text-align:center}.adv-target.unknown{opacity:.6;filter:saturate(.3)}.adv-target.dead{border-color:#4b7059;background:#101a17}.target-sigil{width:30px;height:30px;border:1px solid #94764e;border-radius:50%;display:grid;place-items:center;color:#e6c17b;font:700 14px Georgia,serif;background:#211a21}.adv-target b{font:700 10px Georgia,serif;color:#e1d4bf}.adv-target small{font:9px Arial,sans-serif;color:#c89c75;line-height:1.3}.adv-target p{margin:0;color:#99959e;font:9px/1.35 Arial,sans-serif}.adv-target button{margin:2px 0 0;padding:5px 6px;font:700 8px Arial,sans-serif}.adv-target button:disabled{opacity:.35}
+  .adv-worldmap-wrap{border:1px solid #62513b;padding:7px;background:#0b1117}.adv-map-svg{width:100%;max-height:320px;display:block}.adv-map-legend{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:6px;color:#9d9ca5;font:9px Arial,sans-serif}.adv-map-legend span:first-child{color:#e0c078}.adv-map-legend span:nth-child(2){color:#9acdbd}.adv-map-legend span:last-child{color:#697b86}.adv-region-list{max-height:29vh;overflow:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:9px}.adv-region-card{border:1px solid #403b3f;padding:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;background:#11131b;min-width:0}.adv-region-card.fogged{opacity:.55}.adv-region-card b{font:700 11px Georgia,serif;color:#e2d2b7;display:block}.adv-region-card small{display:block;font:9px Arial,sans-serif;color:#9696a0;margin-top:4px}.adv-region-card button{font:700 8px Arial,sans-serif;padding:5px 6px;margin:0;flex-shrink:0}.adv-region-card button:disabled{opacity:.4}.adv-fast-list{display:grid;gap:7px}.adv-fast-list button{display:flex;justify-content:space-between;align-items:center;text-align:left}.adv-fast-list button small{color:#b5a080}.adv-collect-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.adv-collect-summary article{padding:9px;border:1px solid #53443a;background:#11131b}.adv-collect-summary b{display:block;font:700 10px Arial,sans-serif;color:#d7be8d}.adv-collect-summary strong{font:16px Georgia,serif;color:#f0dfc0}.adv-collect-summary .adv-xp{margin-bottom:0}
+  @media(max-width:700px){#advancedTouchRail{gap:2px;top:4px;padding:3px}#advancedTouchRail button{min-width:40px;padding:4px 5px;font-size:13px}#advancedTouchRail small{font-size:6px}.adv-skill-grid{grid-template-columns:1fr}.adv-outfit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.adv-target-row{grid-template-columns:repeat(2,minmax(0,1fr))}.adv-target-row.master-row{grid-template-columns:minmax(160px,1fr)}.adv-region-list{grid-template-columns:1fr;max-height:24vh}.adv-map-svg{max-height:220px}.adv-collect-summary{grid-template-columns:1fr}.adv-node-head{font-size:11px}}
+  `;document.head.appendChild(s);}
+  function onZoneLoaded(id){const a=adv(),r=regionDefs[id];if(!r)return;lastZone=id;a.ziplineActive=false;a.ziplineZone=null;
+    // Add sturdy, climbable synchronization scaffolds after every zone load.
+    const t=towers[id];if(t){const steps=[{x:t.x-36,y:380,w:78,h:16,_towerStep:t.id+'_a'},{x:t.x+5,y:292,w:78,h:16,_towerStep:t.id+'_b'},{x:t.x-30,y:t.topY,w:86,h:16,_towerStep:t.id+'_c'}];for(const step of steps)if(!platforms.some(p=>p._towerStep===step._towerStep))platforms.push(step);}
+    if(r.boss){const def=BOSSES[id]||{name:'Bölge Muhafızı',title:r.name,hp:350,color:'#9b7446',glow:'#f0d18d',weapon:'#ddd0b2',reward:250,special:'ALAN DARBESİ',theme:'king'};r.boss.name=def.name;r.boss.title=def.title;r.boss.hp=def.hp;r.boss.theme=def.theme;}
+    if(boss&&boss.alive&&BOSSES[id]){const def=BOSSES[id],progress=a.bossesDefeated.includes(id);boss.kind=id;boss.name=def.name;boss.title=def.title;boss.theme=def.theme;boss.themeColor=def.color;boss.glowColor=def.glow;boss.weaponColor=def.weapon;boss.specialName=def.special;boss.reward=def.reward;boss.damageScale=id==='throne_room'?1:1.07;boss.maxHp=def.hp;const saved=game.state.regionProgress?.[id]?.bossHp;boss.hp=progress?0:(Number.isFinite(saved)?clampA(saved,1,def.hp):def.hp);boss.specialCooldown=4.3+Math.random()*1.8;boss.specialState='idle';boss.specialTimer=0;}
+    const zoneTargets=CULT.filter(c=>c.zone===id&&a.revealedCult.includes(c.id)&&!a.cultKilled.includes(c.id));
+    for(const target of zoneTargets){if(enemies.some(e=>e.cultTargetId===target.id))continue;
+      for(let n=0;n<target.guards;n++){const gx=clampA(target.x+(n%2?1:-1)*(68+Math.floor(n/2)*22),80,r.width-70);const g=makeEnemy(gx,'soldier');g.id=`cult_guard_${target.id}_${n}`;g.home=gx;g.excludeForBoss=true;g.isCultGuard=true;g.ashReward=15;enemies.push(g);}
+      const e=makeEnemy(target.x,'elite');e.id=`cult_${target.id}`;e.home=e.x;e.type='elite';e.w=46;e.h=74;e.hp=target.hp;e.maxHp=target.hp;e.speed=62;e.range=76;e.ashReward=target.rank==='ANA LİDER'?180:target.rank==='BÖLGE LİDERİ'?100:60;e.excludeForBoss=true;e.isCultTarget=true;e.cultTargetId=target.id;e.cultName=target.name;e.cultRank=target.rank;e.cultSpecial=target.skill;e.cultGuardCount=target.guards;e.cultCooldown=3+Math.random()*2;e.cultTelegraph=0;enemies.push(e);
+    }
+  }
+  function hiddenSetup(){if(!player)return;const a=adv();const covered=isCovered();if(covered)a.stealthTimer=Math.max(a.stealthTimer,1.0+rank('longStealth')*.8);else a.stealthTimer=Math.max(0,a.stealthTimer-(window.__bladeFrameDt||1/60));a.hidden=covered||a.stealthTimer>0||a.smokeTimer>0;player.hidden=a.hidden;}
+  function updateCultBosses(dt){for(const e of enemies){if(!e.alive||!e.isCultTarget)continue;e.cultCooldown-=dt;if(e.cultTelegraph>0){e.cultTelegraph-=dt;if(e.cultTelegraph<=0){const d=Math.hypot((e.x+e.w/2)-(player.x+player.w/2),(e.y+e.h/2)-(player.y+player.h/2));if(d<(e.cultRank==='ANA LİDER'?200:145)&&player.dodge<=0&&player.invuln<=0){hurtPlayer(e.cultRank==='ANA LİDER'?25:17,e.x+e.w/2);spawnParticles(player.x+player.w/2,player.y+player.h/2,'#c95265',16,180);}e.cultCooldown=e.cultRank==='ANA LİDER'?3.0:3.8;}}
+      else if(e.cultCooldown<=0&&Math.abs((e.x+e.w/2)-(player.x+player.w/2))<250){e.cultTelegraph=.78;bannerText(`${e.cultName.toLocaleUpperCase('tr-TR')} · ${e.cultSpecial.toLocaleUpperCase('tr-TR')}`,1.0);spawnParticles(e.x+e.w/2,e.y+e.h,'#ca5869',9,85);}
+    }}
+  function updateBossAoE(dt){if(!boss||!boss.alive||!bossUnlocked||mode!=='playing'||game.bossCinematicActive)return;const b=boss;if(!b.specialState)b.specialState='idle';b.specialCooldown=(b.specialCooldown??5)-dt;
+    if(b.specialState==='warning'){b.specialTimer-=dt;if(b.specialTimer<=0){b.specialState='active';b.specialTimer=.24;spawnParticles(b.x+b.w/2,GROUND-14,b.glowColor||'#ff5366',30,210);shake=Math.max(shake,7);sound(95,.18,'triangle',.04);}}
+    else if(b.specialState==='active'){b.specialTimer-=dt;if(!b.specialHit){const r=b.kind==='throne_room'?165:185;const d=Math.abs((player.x+player.w/2)-(b.x+b.w/2));if(d<r&&player.dodge<=0&&player.invuln<=0){hurtPlayer(b.phase===2?30:22,b.x+b.w/2);b.specialHit=true;}else b.specialHit=true;}if(b.specialTimer<=0){b.specialState='idle';b.specialCooldown=b.phase===2?4.3:6.2;}}
+    else if(b.specialCooldown<=0&&!b.attack&&b.state!=='phaseChange'&&b.state!=='intro'){b.specialState='warning';b.specialTimer=.92;b.specialHit=false;bannerText(b.specialName||'ALAN SALDIRISI',1.2);}
+  }
+  function drawAdvancedStage(){if(!player||!game.currentZone)return;const id=game.currentZone,r=regionDefs[id];if(!r)return;const cam=camera.x||0,a=adv(),t=towers[id];
+    // Shadow/bush cover zones: accessible cover is also a stealth mechanic.
+    [.15,.39,.64,.86].forEach((f,i)=>{const x=r.width*f-cam;if(x<-90||x>W+90)return;const dark=['#264e3d','#2b473b','#3e4b37','#24443b'][i];ctx.save();ctx.globalAlpha=.8;ctx.fillStyle='#060b0a';ctx.beginPath();ctx.ellipse(x,GROUND-1,53,13,0,0,Math.PI*2);ctx.fill();for(let j=0;j<5;j++){const bx=x-42+j*20,by=GROUND-5-(j%2)*3;ctx.fillStyle=dark;ctx.beginPath();ctx.ellipse(bx,by,19,13+(j%3)*2,-.28+(j%3)*.2,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#7c9a72';ctx.globalAlpha=.42;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(bx,by+2);ctx.lineTo(bx+4,by-9);ctx.stroke();ctx.globalAlpha=.8;}ctx.restore();});
+    // Synchronization tower with stepped climb route and a glowing beacon.
+    if(t){const x=t.x-cam;if(x>-130&&x<W+130){ctx.save();ctx.fillStyle='#0a0c13a6';ctx.beginPath();ctx.ellipse(x,GROUND+2,50,9,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#33343c';ctx.fillRect(x-18,GROUND-240,36,240);ctx.fillStyle='#67605b';ctx.fillRect(x-26,GROUND-240,52,7);ctx.fillStyle='#8d7654';ctx.fillRect(x-12,GROUND-236,4,230);ctx.fillRect(x+9,GROUND-236,4,230);for(let yy=GROUND-215;yy>GROUND-230;yy-=1){}for(let k=0;k<6;k++){ctx.strokeStyle='#5e5650';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-15,GROUND-215+k*32);ctx.lineTo(x+15,GROUND-190+k*32);ctx.stroke();}const synced=a.syncedTowers.includes(t.id),pulse=.55+.35*Math.sin(gameTime*3+t.index);ctx.globalAlpha=pulse;ctx.fillStyle=synced?'#e8cf89':'#8ec4bc';ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=20;ctx.beginPath();ctx.arc(x,GROUND-248,7,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.globalAlpha=1;ctx.fillStyle='#ead5a7';ctx.font='bold 9px Arial';ctx.textAlign='center';ctx.fillText(synced?'SENKRONİZE':'SENKRONİZASYON',x,GROUND-263);ctx.textAlign='left';ctx.restore();}}
+    // Zipline and landing hay bale are small parkour set pieces in every realm.
+    const zx1=r.width*.28-cam,zx2=r.width*.43-cam,zy=260;if(zx2>-40&&zx1<W+40){ctx.save();ctx.strokeStyle='#817b72';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(zx1,zy);ctx.lineTo(zx2,zy);ctx.stroke();ctx.strokeStyle='#c6b38d';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(zx1,zy-2);ctx.lineTo(zx2,zy-2);ctx.stroke();ctx.restore();}
+    const hx=r.width*.83-cam;if(hx>-60&&hx<W+60){ctx.save();ctx.fillStyle='#72502d';ctx.beginPath();ctx.ellipse(hx,GROUND-12,30,14,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#d4ad69';ctx.lineWidth=2;for(let i=-2;i<=2;i++){ctx.beginPath();ctx.ellipse(hx+i*9,GROUND-12,7,12,0,0,Math.PI*2);ctx.stroke();}ctx.restore();}
+    for(const c of COLLECTIBLES){if(c.zone!==id||a.collected.includes(c.id))continue;const x=c.x-cam;if(x<-30||x>W+30)continue;const distance=Math.abs((player.x+player.w/2)-c.x),seen=distance<235||a.visionTimer>0||a.fogLiftedZones.includes(id);ctx.save();ctx.globalAlpha=seen?.95:.18;const col=c.type==='chest'?'#f2c85f':c.type==='feather'?'#c7c5f4':'#d6b278';ctx.shadowColor=col;ctx.shadowBlur=seen?15:0;ctx.fillStyle=col;if(c.type==='chest'){ctx.fillRect(x-9,GROUND-31,18,14);ctx.fillRect(x-10,GROUND-34,20,5);ctx.fillStyle='#3e2a15';ctx.fillRect(x-2,GROUND-29,4,5);}else if(c.type==='feather'){ctx.beginPath();ctx.moveTo(x,GROUND-40);ctx.quadraticCurveTo(x+15,GROUND-28,x,GROUND-18);ctx.quadraticCurveTo(x-9,GROUND-25,x,GROUND-40);ctx.fill();ctx.strokeStyle='#fff0bd';ctx.beginPath();ctx.moveTo(x,GROUND-39);ctx.lineTo(x,GROUND-17);ctx.stroke();}else{ctx.fillRect(x-8,GROUND-34,16,12);ctx.strokeStyle='#fff0c2';ctx.strokeRect(x-8,GROUND-34,16,12);ctx.fillRect(x-10,GROUND-35,20,3);}ctx.globalAlpha=.85;ctx.fillStyle='#e6d4aa';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText(seen?c.name:'?',x,GROUND-45);ctx.textAlign='left';ctx.restore();}
+    // Enemy cone vision. Green = unaware; red = player currently seen.
+    for(const e of enemies){if(!e.alive)continue;const ex=e.x+e.w/2-cam,ey=e.y+e.h*.48;if(ex<-80||ex>W+80)continue;const dx=player.x+player.w/2-(e.x+e.w/2),dy=player.y+player.h*.5-(e.y+e.h*.48),dist=Math.hypot(dx,dy),aware=!a.hidden&&dist<300&&dx*(e.face||1)>0&&Math.abs(dy)<155;const face=e.face||1,ang=face===1?0:Math.PI;ctx.save();ctx.globalAlpha=.17;ctx.fillStyle=aware?'#ff424b':'#47df94';ctx.beginPath();ctx.moveTo(ex,ey);ctx.arc(ex,ey,300,ang-.58,ang+.58);ctx.closePath();ctx.fill();ctx.globalAlpha=aware?.8:.42;ctx.strokeStyle=aware?'#ff626b':'#63e5a1';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex+Math.cos(ang-.58)*300,ey+Math.sin(ang-.58)*300);ctx.moveTo(ex,ey);ctx.lineTo(ex+Math.cos(ang+.58)*300,ey+Math.sin(ang+.58)*300);ctx.stroke();ctx.restore();}
+    // Cult targets carry a distinctive heraldic mark and their own mini-boss telegraph.
+    for(const e of enemies){if(!e.alive||!e.isCultTarget)continue;const x=e.x+e.w/2-cam,y=e.y-14;if(x<-80||x>W+80)continue;ctx.save();ctx.fillStyle='#160d15d9';ctx.fillRect(x-75,y-19,150,16);ctx.strokeStyle='#b95468';ctx.strokeRect(x-75,y-19,150,16);ctx.fillStyle='#f0c1a1';ctx.font='bold 9px Arial';ctx.textAlign='center';ctx.fillText(e.cultName,x,y-7);ctx.textAlign='left';if(e.cultTelegraph>0){ctx.globalAlpha=.25+.18*Math.sin(gameTime*20);ctx.fillStyle='#ff3555';ctx.beginPath();ctx.arc(x,GROUND-5,e.cultRank==='ANA LİDER'?100:72,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.strokeStyle='#ff667b';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,GROUND-5,e.cultRank==='ANA LİDER'?100:72,0,Math.PI*2);ctx.stroke();}ctx.restore();}
+  }
+  function drawVisionAndPlayer(){if(!player)return;const a=adv(),px=player.x-camera.x+player.w/2,py=player.y+player.h/2;ctx.save();
+    if(a.visionTimer>0){const alpha=.07+.025*Math.sin(gameTime*8);ctx.fillStyle=`rgba(39,115,192,${alpha})`;ctx.fillRect(0,0,W,H);ctx.strokeStyle='#60c4f3';ctx.lineWidth=1.5;for(const e of enemies){if(!e.alive)continue;ctx.strokeStyle=e.isCultTarget?'#ffd36b':'#f15a63';ctx.shadowColor=ctx.strokeStyle;ctx.shadowBlur=12;ctx.strokeRect(e.x-camera.x-4,e.y-4,e.w+8,e.h+8);if(e.isCultTarget){ctx.fillStyle='#ffd36b';ctx.font='bold 10px Arial';ctx.fillText('HEDEF',e.x-camera.x-8,e.y-9);}}for(const c of COLLECTIBLES){if(c.zone!==game.currentZone||a.collected.includes(c.id))continue;ctx.strokeStyle='#ffd36b';ctx.shadowColor='#ffd36b';ctx.beginPath();ctx.arc(c.x-camera.x,GROUND-27,12+Math.sin(gameTime*6)*2,0,Math.PI*2);ctx.stroke();}for(const t of Object.values(towers)){if(t.zone!==game.currentZone)continue;ctx.strokeStyle='#ffd36b';ctx.beginPath();ctx.arc(t.x-camera.x,GROUND-248,16+Math.sin(gameTime*7)*3,0,Math.PI*2);ctx.stroke();}ctx.shadowBlur=0;}
+    // Smoke bomb cloud, dissipating into layered ash motes.
+    if(a.smokeTimer>0){const rr=65+(3.2-a.smokeTimer)*32;for(let i=0;i<7;i++){const ox=Math.sin(gameTime*1.8+i*2.2)*rr*.58,oy=Math.cos(gameTime*1.4+i*1.6)*25;ctx.globalAlpha=.12+.04*Math.sin(gameTime*3+i);ctx.fillStyle=i%2?'#b9c6cc':'#8e9aa5';ctx.beginPath();ctx.ellipse(px+ox,py+oy,rr*(.42+(i%3)*.12),rr*.35,gameTime*.2+i,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;}
+    // Outfit silhouette layers on the player keep the equipment visually readable.
+    const o=OUTFITS[a.outfit]||OUTFITS.default;ctx.translate(px,player.y+player.h*.42);ctx.globalAlpha=player.invuln>0?.55:.92;ctx.fillStyle=o.color;ctx.strokeStyle=o.trim;ctx.lineWidth=2;
+    if(a.outfit==='assassin'||a.outfit==='ghost'){ctx.beginPath();ctx.moveTo(-10,-8);ctx.lineTo(-21,19);ctx.lineTo(-11,34);ctx.lineTo(8,32);ctx.lineTo(14,4);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-9,-21);ctx.lineTo(0,-31);ctx.lineTo(10,-19);ctx.lineTo(7,-5);ctx.lineTo(-7,-5);ctx.closePath();ctx.fill();ctx.stroke();}
+    else if(a.outfit==='samurai'){ctx.beginPath();ctx.moveTo(-13,-18);ctx.lineTo(13,-18);ctx.lineTo(17,4);ctx.lineTo(7,11);ctx.lineTo(-16,3);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-13,-20);ctx.lineTo(-18,-27);ctx.lineTo(-5,-25);ctx.lineTo(0,-30);ctx.lineTo(6,-25);ctx.lineTo(17,-27);ctx.lineTo(12,-19);ctx.closePath();ctx.fill();ctx.stroke();}
+    else if(a.outfit==='ottoman'){ctx.beginPath();ctx.moveTo(-12,-19);ctx.lineTo(12,-19);ctx.lineTo(19,30);ctx.lineTo(-19,30);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#f7d88b';ctx.beginPath();ctx.arc(0,0,5,0,Math.PI*2);ctx.fill();}
+    else if(a.outfit==='desert'){ctx.beginPath();ctx.moveTo(-14,-16);ctx.lineTo(14,-16);ctx.lineTo(18,25);ctx.lineTo(-18,25);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-11,-24);ctx.quadraticCurveTo(0,-38,12,-24);ctx.lineTo(8,-11);ctx.lineTo(-8,-11);ctx.closePath();ctx.fill();ctx.stroke();}
+    else if(a.outfit==='highland'){ctx.beginPath();ctx.moveTo(-13,-16);ctx.lineTo(12,-16);ctx.lineTo(17,29);ctx.lineTo(-18,29);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle=o.trim;ctx.fillRect(-12,-5,24,4);}
+    else{ctx.beginPath();ctx.moveTo(-12,-17);ctx.lineTo(12,-17);ctx.lineTo(15,28);ctx.lineTo(-15,28);ctx.closePath();ctx.fill();ctx.stroke();}
+    ctx.restore();
+    // Floating interaction guidance prioritizes assassination, collectibles and tower synchronization.
+    const cx=player.x+player.w/2,nearItem=nearCollectible(90),nearT=nearTower(90),target=enemies.filter(e=>e.alive).find(e=>Math.abs(e.x+e.w/2-cx)<80&&(a.hidden||isBehindTarget(e)));
+    let prompt='';if(target)prompt='F / E · GİZLİ SUİKAST';else if(nearItem)prompt=`E · ${nearItem.name.toLocaleUpperCase('tr-TR')}`;else if(nearT)prompt=nearT.onTop?(nearT.synced?'E · HIZLI SEYAHAT':'E · SENKRONİZE OL'):'↑ KULE TEPESİNE TIRMAN';else if(nearZipline())prompt='E · İP HATTINA TUTUN';else if(nearHay())prompt='HAY BALYASI · DÜŞÜŞÜ YUMUŞATIR';
+    if(prompt&&mode==='playing'&&!game.bossCinematicActive){ctx.save();ctx.fillStyle='#080b12e8';ctx.fillRect(W/2-133,H-86,266,27);ctx.strokeStyle=target?'#dca9a0':'#c7a36d';ctx.strokeRect(W/2-133,H-86,266,27);ctx.fillStyle='#eadabc';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText(prompt,W/2,H-68);ctx.restore();}
+  }
+  function drawAdvancedHUD(){if(mode!=='playing'||!player||game.bossCinematicActive)return;const a=adv();ctx.save();ctx.fillStyle='#090c13d9';ctx.fillRect(W-226,74,206,29);ctx.strokeStyle='#776146';ctx.strokeRect(W-226,74,206,29);ctx.fillStyle='#cbbd9f';ctx.font='bold 10px Arial';ctx.textAlign='left';ctx.fillText(`SEV ${player.level} · ${Math.floor(a.xp)}/${xpNeed(player.level)} XP`,W-217,85);ctx.fillStyle='#28242a';ctx.fillRect(W-217,91,188,5);ctx.fillStyle='#d5b875';ctx.fillRect(W-217,91,188*clampA(a.xp/xpNeed(player.level),0,1),5);ctx.fillStyle=a.hidden?'#85e0a9':'#bcb2a7';ctx.font='9px Arial';ctx.fillText(a.hidden?'GİZLİ · GÖRÜŞ DIŞI':`SP ${a.skillPoints} · KÜL ${player.ashes}`,W-217,100);
+    if(boss&&boss.alive&&bossUnlocked&&boss.name){ctx.fillStyle='#080a10';ctx.fillRect(W/2-240,10,480,27);ctx.fillStyle=boss.glowColor||'#e0c59c';ctx.textAlign='center';ctx.font='bold 14px Georgia';ctx.fillText(boss.name.toLocaleUpperCase('tr-TR'),W/2,28);ctx.textAlign='left';}
+    if(a.visionTimer>0){ctx.fillStyle='#83d5fa';ctx.font='bold 10px Arial';ctx.fillText(`KARTAL GÖZÜ ${a.visionTimer.toFixed(1)}s`,18,139);}if(a.smokeTimer>0){ctx.fillStyle='#cbd1db';ctx.font='bold 10px Arial';ctx.fillText(`DUMAN ${a.smokeTimer.toFixed(1)}s`,18,153);}if(a.hidden){ctx.fillStyle='#73d9a7';ctx.font='bold 10px Arial';ctx.fillText('GÖLGELERDE SAKLISIN',18,167);}ctx.restore();}
+  function preAdvancedUpdate(dt){const a=adv();advancedTime+=dt;a.visionTimer=Math.max(0,a.visionTimer-dt);a.smokeTimer=Math.max(0,a.smokeTimer-dt);hiddenSetup();if(a.ziplineActive){const zipX=regionDefs[game.currentZone].width*.28,zipEnd=regionDefs[game.currentZone].width*.43;const dir=keys.has('a')?-1:keys.has('d')?1:0;player.x+=dir*250*dt;player.x=clampA(player.x,zipX,zipEnd);player.vy=0;player.attack=null;player.y=260-player.h;if((keys.has('a')&&player.x<=zipX)||(keys.has('d')&&player.x>=zipEnd)){a.ziplineActive=false;a.ziplineZone=null;player.vy=-180;}}
+    if(Math.floor(advancedTime)%9===0&&advancedTime-advancedLastSave>8){advancedLastSave=advancedTime;saveSafe();}}
+  function postPlayerUpdate(dt,oldY,oldVy,oldGrounded){if(!player)return;const a=adv();if(a.ziplineActive){const r=regionDefs[game.currentZone];player.y=260-player.h;player.vy=0;player.grounded=false;player.state='climb';}
+    if(player.wallSide&&((keys.has('w')||keys.has('arrowup')))&&!player.grounded&&hasSkill('climbSpeed')){player.vy=-85-rank('climbSpeed')*48;player.y-= (65+rank('climbSpeed')*48)*dt;player.y=Math.max(55,player.y);player.state='climb';spawnParticles(player.x+player.w/2,player.y+player.h-4,'#9cb6ab',1,20);}
+    if(hasSkill('fastRun')&&keys.has('control')&&player.grounded&&!player.attack&&player.stamina>0){player.vx*=1.18+rank('fastRun')*.08;player.stamina=Math.max(0,player.stamina-(8+rank('fastRun')*5)*dt);}
+    if(!oldGrounded&&player.grounded&&oldVy>620){const bale=nearHay();const reduction=rank('fallDamage')*.28;let dmg=Math.max(0,Math.floor((oldVy-560)/18));dmg=Math.floor(dmg*(1-reduction));if(bale){dmg=0;player.vy=-155;spawnParticles(bale.x,GROUND-18,'#cda15e',15,120);bannerText('HAY BALYASI · YUMUŞAK İNİŞ',1.1);}if(dmg>0){bannerText(`DÜŞÜŞ HASARI · -${dmg} CAN`,1.2);hurtPlayer(dmg,player.x+player.w/2);}}
+  }
+  function unlockSkillDbl(){const a=adv();return hasSkill('doubleJump')||Boolean(game.state.abilities?.doubleJump);}
+  function bossFlavorUpdate(dt){updateBossAoE(dt);updateCultBosses(dt);}
+  function drawBossFlavor(){if(!boss||!boss.alive||!boss.kind)return;const x=boss.x-camera.x,y=boss.y;ctx.save();const color=boss.glowColor||'#edc980';ctx.strokeStyle=color;ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=14;ctx.lineWidth=2;
+    if(boss.theme==='polar'){ctx.beginPath();ctx.moveTo(x+10,y+10);ctx.lineTo(x-7,y-14);ctx.lineTo(x+21,y-3);ctx.lineTo(x+34,y-23);ctx.lineTo(x+50,y-4);ctx.lineTo(x+75,y-17);ctx.lineTo(x+62,y+12);ctx.stroke();ctx.fillRect(x+9,y+32,5,3);ctx.fillRect(x+48,y+32,5,3);}
+    else if(boss.theme==='japan'){ctx.beginPath();ctx.ellipse(x+35,y+8,44,7,0,Math.PI,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(x+4,y+5);ctx.lineTo(x+19,y-13);ctx.lineTo(x+24,y+7);ctx.moveTo(x+66,y+5);ctx.lineTo(x+51,y-13);ctx.lineTo(x+46,y+7);ctx.stroke();ctx.fillRect(x+22,y+27,27,3);}
+    else if(boss.theme==='ottoman'){ctx.beginPath();ctx.arc(x+35,y-5,19,Math.PI*.1,Math.PI*.9);ctx.stroke();ctx.beginPath();ctx.arc(x+41,y-7,12,Math.PI*.3,Math.PI*1.4);ctx.stroke();ctx.fillRect(x+31,y-19,3,20);}
+    else if(boss.theme==='desert'){ctx.beginPath();ctx.moveTo(x+8,y+15);ctx.lineTo(x+2,y-13);ctx.lineTo(x+24,y+1);ctx.lineTo(x+35,y-22);ctx.lineTo(x+49,y+1);ctx.lineTo(x+70,y-13);ctx.lineTo(x+62,y+15);ctx.closePath();ctx.stroke();ctx.beginPath();ctx.arc(x+35,y+49,13,0,Math.PI*2);ctx.stroke();}
+    else if(boss.theme==='england'){ctx.beginPath();ctx.moveTo(x+5,y+5);ctx.lineTo(x+12,y-17);ctx.lineTo(x+27,y-3);ctx.lineTo(x+35,y-25);ctx.lineTo(x+43,y-3);ctx.lineTo(x+58,y-17);ctx.lineTo(x+65,y+5);ctx.closePath();ctx.stroke();ctx.fillRect(x+18,y+30,34,3);}
+    else{ctx.beginPath();ctx.moveTo(x+35,y-21);ctx.lineTo(x+42,y-9);ctx.lineTo(x+58,y-9);ctx.lineTo(x+46,y+1);ctx.lineTo(x+51,y+15);ctx.lineTo(x+35,y+6);ctx.lineTo(x+19,y+15);ctx.lineTo(x+24,y+1);ctx.lineTo(x+12,y-9);ctx.lineTo(x+28,y-9);ctx.closePath();ctx.stroke();}
+    if(boss.specialState==='warning'||boss.specialState==='active'){ctx.globalAlpha=boss.specialState==='warning'?.22+.14*Math.sin(gameTime*18):.4;ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(boss.x+boss.w/2-camera.x,GROUND-4,boss.kind==='throne_room'?165:185,18,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.strokeStyle=color;ctx.setLineDash([6,4]);ctx.beginPath();ctx.ellipse(boss.x+boss.w/2-camera.x,GROUND-4,boss.kind==='throne_room'?165:185,18,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}
+    ctx.restore();}
+  function collectBossReward(){const id=game.currentZone,a=adv();if(id!=='throne_room'&&!a.bossesDefeated.includes(id)){a.bossesDefeated.push(id);if(boss)player.ashes+=boss.reward||250;awardXP(180+Math.floor((boss?.maxHp||300)*.25),'EFSANEVİ BOSS');a.revealedLocations.push(`boss_${id}`);if(a.bossesDefeated.length>=3)addClue('efsanevi boss avı',`boss-clue-${id}`);updateUnlocks();saveSafe();}}
+  function addAdvancedActions(){const rail=$('#advancedTouchRail');if(rail)rail.style.display=touchModeEnabled&&mode==='playing'?'flex':'none';}
+  // Public hooks are used by keyboard, mobile controls and the original region transition code.
+  const previousInteract=game.interact;
+  game.interact=onInteract;
+  game.openSkillTree=openSkillTree;game.openCultHunt=openCultHunt;game.openAdvancedMap=openAdvancedMap;game.openMap=openAdvancedMap;game.closeAdvancedPanel=closeAdvPanel;game.openFastTravel=openFastTravel;game.openOutfitMenu=openOutfitMenu;game.openCollectionLog=openCollectionLog;game.toggleVision=toggleVision;game.smokeBomb=smokeBomb;game.assassinate=()=>{const e=enemies.find(x=>x.alive&&Math.abs(x.x-player.x)<90);return e?assassinate(e):false;};
+  game.onZoneLoaded=onZoneLoaded;game.awardXP=awardXP;game.addClue=addClue;game.syncTower=syncTower;game.getAdvancedState=adv;game.skillDefinitions=SKILLS;game.bossDefinitions=BOSSES;game.closeAdvancedPanel=closeAdvPanel;
+  const oldHasAbility=game.hasAbility;game.hasAbility=id=>oldHasAbility(id)|| (id==='doubleJump'&&hasSkill('doubleJump'));
+  // Save/load migration: older saves keep their original fields and gain the expansion safely.
+  const oldSave=game.saveGame;game.saveGame=function(){ensureAdvanced(false);const result=oldSave();if(player){outfitHpPlayer=player;outfitHpBonus=0;ensureAdvanced(false);}return result;};
+  const oldContinue=game.continueGame;game.continueGame=function(){const r=oldContinue();ensureAdvanced(false);return r;};
+  const oldApiLoad=game.loadZone;game.loadZone=function(id,x,options){return oldApiLoad(id,x,options);};
+  // XP rewards and target persistence are layered around the existing combat code.
+  previousEnemyHurt=enemyHurt;
+  enemyHurt=function(e,dmg,knock){
+    if(!e||!e.alive)return;
+    const was=e.alive, outfit=adv().outfit;
+    const criticalChance=(hasSkill('criticalStrike')?.08+rank('criticalStrike')*.07:0)+(outfit==='assassin'?.03:outfit==='ghost'?.07:0);
+    const activeAttack=player?.attack&&(player.attack.kind==='light'||player.attack.kind==='heavy');
+    const crit=Boolean(activeAttack&&criticalChance>0&&Math.random()<criticalChance);
+    // The legacy combat layer already calculates weapon/chain multipliers through attackDamage().
+    // Temporarily double only that multiplier for criticals, so damage is not counted twice.
+    const oldMultiplier=activeAttack?(player.attack.specialMultiplier||1):1;
+    if(crit){player.attack.specialMultiplier=oldMultiplier*2;bannerText('KRİTİK VURUŞ!',.9);spawnParticles(e.x+e.w/2,e.y+20,'#fff0a0',12,170);shake=Math.max(shake,5);}
+    previousEnemyHurt(e,dmg,knock);
+    if(crit&&player?.attack)player.attack.specialMultiplier=oldMultiplier;
+    if(was&&!e.alive){
+      adv().totalKills++;awardXP(e.isCultTarget?55:e.type==='elite'?48:28,e.isCultTarget?'TARİKAT HEDEFİ':'DÜŞMAN');
+      if(e.isCultTarget){const a=adv();if(!a.cultKilled.includes(e.cultTargetId))a.cultKilled.push(e.cultTargetId);a.revealedCult=a.revealedCult.filter(id=>id!==e.cultTargetId);bannerText(`TARİKAT HEDEFİ DÜŞTÜ · ${e.cultName}`,2.3);addClue('hedef belgesi',`target-proof-${e.cultTargetId}`);if(e.cultTargetId==='master'){a.outfitsOwned.push('ghost');a.cultComplete=true;bannerText('ÖRGÜT DAĞILDI · HAYALET KOSTÜMÜ KAZANILDI',3);}saveSafe();}
+      if(game.state.flags?.lostWatchDone&&!adv().questClueGranted){adv().questClueGranted=true;addClue('tamamlanan yan görev','quest-lost-watch');}
+      if(adv().totalKills%5===0)addClue('saha raporu',`kill-report-${adv().totalKills}`);
+    }
+  };
+
+  previousBossHurt=bossHurt;
+  bossHurt=function(dmg){
+    if(!boss||!boss.alive)return;
+    const id=game.currentZone,wasMain=Boolean(game.state.flags?.bossDefeated),ashesBefore=player?.ashes||0,ownedVoid=Boolean(game.state.inventory?.weapons?.includes('voidreaver'));
+    const outfit=adv().outfit,activeAttack=player?.attack&&(player.attack.kind==='light'||player.attack.kind==='heavy');
+    const criticalChance=(hasSkill('criticalStrike')?.08+rank('criticalStrike')*.06:0)+(outfit==='assassin'?.03:outfit==='ghost'?.07:0);
+    const crit=Boolean(activeAttack&&criticalChance>0&&Math.random()<criticalChance);
+    const oldMultiplier=activeAttack?(player.attack.specialMultiplier||1):1;
+    if(crit){player.attack.specialMultiplier=oldMultiplier*2;bannerText('KRİTİK VURUŞ!',.9);}
+    previousBossHurt(dmg);
+    if(crit&&player?.attack)player.attack.specialMultiplier=oldMultiplier;
+    if(boss&&!boss.alive&&id!=='throne_room'){
+      game.state.flags.bossDefeated=wasMain;const rp=game.state.regionProgress?.[id];if(rp){rp.bossDefeated=true;rp.bossHp=0;}
+      if(!ownedVoid&&game.state.inventory?.weapons){game.state.inventory.weapons=game.state.inventory.weapons.filter(x=>x!=='voidreaver');if(game.state.equipment.weapon==='voidreaver')game.state.equipment.weapon='wornSword';}
+      collectBossReward();if(player)player.ashes=ashesBefore+(boss.reward||250);saveSafe();
+    }
+  };
+
+  // Regional bosses receive their own victory flow; the Hollow King retains the original finale.
+  previousVictory=victory;victory=function(){if(boss&&boss.kind&&boss.kind!=='throne_room'){mode='bossReward';showPanel(`${boss.name.toLocaleUpperCase('tr-TR')} DÜŞTÜ`,`<p>${boss.title} mührü kırıldı. Bölgenin sisi bir parça daha dağıldı.</p><p>Ödül: <strong>${boss.reward||250} Kül</strong> · Tecrübe ve tarikat ipucu.</p><p class="small">Bu diyarda artık hızlı seyahat ve koleksiyon arayışına devam edebilirsin.</p>`,[{label:'YOLCULUĞA DEVAM ET',action:()=>{mode='playing';hidePanel();bannerText('BÖLGE TEMİZLENDİ',1.8);}},{label:'AÇIK DÜNYA HARİTASI',action:openAdvancedMap},{label:'TARİKAT AVI',action:openCultHunt}]);}else previousVictory();};
+  previousReset=resetGame;resetGame=function(){previousReset();ensureAdvanced(true);onZoneLoaded(game.currentZone||'dark_castle');};
+  // Learnable movement/combat skills affect the existing mechanics rather than a separate demo.
+  previousUpdatePlayer=updatePlayer;updatePlayer=function(dt){const y0=player?.y||0,vy0=player?.vy||0,g0=Boolean(player?.grounded);window.__bladeFrameDt=dt;previousUpdatePlayer(dt);if(player&&adv().outfit==='desert'&&player.grounded&&!player.attack&&player.stamina<player.maxStamina)player.stamina=Math.min(player.maxStamina,player.stamina+7*dt);postPlayerUpdate(dt,y0,vy0,g0);};
+  const baseStart=startAttack;startAttack=function(kind){baseStart(kind);const a=player?.attack;if(!a)return;if(kind==='heavy'&&hasSkill('heavyCombo')){a.specialMultiplier=(a.specialMultiplier||1)*(1+rank('heavyCombo')*.15);a.specialColor='#f0b05c';}if(kind==='heavy'&&adv().outfit==='samurai'){a.specialMultiplier=(a.specialMultiplier||1)*1.05;a.specialColor='#e99bb8';}};
+  const baseHurtPlayer=hurtPlayer;hurtPlayer=function(dmg,fromX){if(adv().outfit==='ottoman')dmg=Math.ceil(dmg*.88);baseHurtPlayer(dmg,fromX);};
+  const baseParry=startParry;startParry=function(){baseParry();if(player&&player.parry>0&&hasSkill('parryWindow'))player.parry+=rank('parryWindow')*.065;};
+  // A skill unlock also opens the pre-existing double-jump gate.
+  const existingAbilities=game.state.abilities||{};if(hasSkill('doubleJump'))existingAbilities.doubleJump=true;
+  // Region definitions get their legendary boss only once, before the next natural load.
+  for(const [id,def]of Object.entries(BOSSES)){const r=regionDefs[id];if(!r)continue;if(!r.boss)r.boss={x:Math.max(180,r.width-170),name:def.name,title:def.title};else{r.boss.name=def.name;r.boss.title=def.title;}if(!game.state.regionProgress[id])game.state.regionProgress[id]={defeated:[],bossDefeated:false,bossHp:null,bossPhase:1};}
+  // The original source calls this hook from loadZone after enemies/platforms/camera are ready.
+  onZoneLoaded(game.currentZone||'dark_castle');
+  previousUpdateEnemies=updateEnemies;updateEnemies=function(dt){previousUpdateEnemies(dt);updateCultBosses(Math.min(dt,.033));};
+  previousUpdateBoss=updateBoss;updateBoss=function(dt){previousUpdateBoss(dt);updateBossAoE(dt);};
+  const oldBossDraw=drawBoss;drawBoss=function(){oldBossDraw();drawBossFlavor();};
+  previousDrawPlatforms=drawPlatforms;drawPlatforms=function(){previousDrawPlatforms();drawAdvancedStage();};
+  previousDrawHUD=drawHUD;drawHUD=function(){previousDrawHUD();drawAdvancedHUD();};
+  previousRender=render;render=function(){previousRender();if(mode==='playing'&&!game.bossCinematicActive){drawVisionAndPlayer();} };
+  previousUpdate=update;update=function(dt){if(mode==='playing'){preAdvancedUpdate(dt);}previousUpdate(dt);addMobileRail();addAdvancedActions();};
+  // Replace the original mobile/key binding conflict: K opens skill tree, H is heavy attack.
+  window.addEventListener('keydown',function(e){if(mode!=='playing')return;const code=e.code||'';if(code==='KeyK'){e.preventDefault();e.stopImmediatePropagation();openSkillTree();return;}if(code==='KeyH'){e.preventDefault();e.stopImmediatePropagation();startAttack('heavy');return;}if(code==='KeyO'){e.preventDefault();e.stopImmediatePropagation();openCultHunt();return;}if(code==='KeyV'){e.preventDefault();e.stopImmediatePropagation();toggleVision();return;}if(code==='KeyG'){e.preventDefault();e.stopImmediatePropagation();smokeBomb();return;}if(code==='KeyC'){e.preventDefault();e.stopImmediatePropagation();openOutfitMenu();return;}if(code==='KeyT'){e.preventDefault();e.stopImmediatePropagation();openFastTravel();return;}if(code==='KeyF'){e.preventDefault();e.stopImmediatePropagation();game.assassinate();return;}if(code==='KeyM'){e.preventDefault();e.stopImmediatePropagation();openAdvancedMap();return;}if(code==='KeyN'){e.preventDefault();e.stopImmediatePropagation();openCollectionLog();return;}if(code==='KeyP'){e.preventDefault();e.stopImmediatePropagation();openWorldModeMenu();return;}},true);
+  // Modern menu rail for mobile, keyboard and touch share the same actions.
+  injectStyles();addMobileRail();
+  const oldTouchMode=setTouchMode;setTouchMode=function(enabled){oldTouchMode(enabled);const r=$('#advancedTouchRail');if(r)r.style.display=enabled&&mode==='playing'?'flex':'none';};
+  // Route the original interaction icon through collectibles, towers, ziplines and assassination.
+  // Also add a small, non-blocking menu bar for mouse users while playing.
+  const toolbar=document.createElement('div');toolbar.id='advancedDesktopBar';toolbar.innerHTML='<button data-open="skills">✦ YETENEK [K]</button><button data-open="cult">⌖ TARİKAT [O]</button><button data-open="vision">◉ KARTAL [V]</button><button data-open="outfits">♟ KOSTÜM [C]</button><button data-open="collect">▤ KOLEKSİYON [N]</button>';gameFrame.appendChild(toolbar);
+  toolbar.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(mode!=='playing')return;const a=b.dataset.open;if(a==='skills')openSkillTree();if(a==='cult')openCultHunt();if(a==='vision')toggleVision();if(a==='outfits')openOutfitMenu();if(a==='collect')openCollectionLog();}));
+  if(!$('#advancedBarStyle')){const s=document.createElement('style');s.id='advancedBarStyle';s.textContent='#advancedDesktopBar{display:none;position:absolute;z-index:4;left:10px;top:106px;gap:4px;flex-wrap:wrap;max-width:350px}#advancedDesktopBar button{margin:0;padding:5px 7px;background:#0b1019dc;border:1px solid #786043;color:#e4d2b2;font:700 9px Arial,sans-serif;box-shadow:0 2px 8px #0007}#frame:not(.touch-enabled) #advancedDesktopBar{display:flex}#frame.touch-enabled #advancedDesktopBar{display:none}@media(max-width:700px){#advancedDesktopBar{max-width:250px}#advancedDesktopBar button{font-size:8px;padding:4px 5px}}';document.head.appendChild(s);}
+
+  // CLASSIC / OPEN WORLD MODE: infinite streamed terrain, generated keeps and compass-led cult hunts.
+  const OPEN_WORLD_KEY='blade_open_world_state_v1';
+  let openWorld = {enabled:false,seed:1937,chunk:0,castles:[],enemies:[],compassTarget:null,generatedChunks:[],lastSpawnChunk:999};
+  try { const saved=JSON.parse(localStorage.getItem(OPEN_WORLD_KEY)||'null'); if(saved&&typeof saved==='object') openWorld={...openWorld,...saved,enabled:false}; } catch(_) {}
+  const originalOpenSkill=game.openSkillTree;
+  function saveOpenWorld(){try{localStorage.setItem(OPEN_WORLD_KEY,JSON.stringify({...openWorld,enabled:false}));}catch(_){}}
+  function hashChunk(n){let x=(n*374761393+openWorld.seed*668265263)|0;x=Math.imul(x^(x>>>13),1274126177);return (x^(x>>>16))>>>0;}
+  function castleForChunk(n){const h=hashChunk(n),theme=['Kuzey Kalesi','Sakura Hisarı','Hilal Hisarı','Kum Kalesi','Sisli Kale'][h%5];return {id:'keep_'+n,chunk:n,x:n*1500+420+(h%260),w:260+(h%140),name:theme+' '+(Math.abs(n)+1),color:['#6f8999','#9e536b','#b99a65','#b77943','#66756b'][h%5],guardCount:3+(h%5),seed:h};}
+  function ensureChunks(){if(!openWorld.enabled||!player)return;const chunk=Math.floor(player.x/1500);openWorld.chunk=chunk;for(let n=chunk-2;n<=chunk+2;n++){if(!openWorld.generatedChunks.includes(n)){openWorld.generatedChunks.push(n);const c=castleForChunk(n);openWorld.castles.push(c);for(let i=0;i<c.guardCount;i++){const x=c.x+42+i*36;openWorld.enemies.push({id:c.id+'_guard_'+i,x,y:GROUND-56,w:31,h:56,hp:50+(c.seed%35),maxHp:50+(c.seed%35),alive:true,face:i%2?1:-1,vx:0,vy:0,anim:0,state:'patrol',timer:0,type:i===c.guardCount-1?'elite':'normal',patrolMin:c.x-70,patrolMax:c.x+c.w+80,openWorldGuard:true,castleId:c.id});}}}openWorld.castles=openWorld.castles.filter(c=>Math.abs(c.chunk-chunk)<5);openWorld.enemies=openWorld.enemies.filter(e=>Math.abs(Math.floor(e.x/1500)-chunk)<5&&e.alive);saveOpenWorld();}
+  function enterOpenWorld(){openWorld.enabled=true;openWorld.generatedChunks=[];openWorld.castles=[];openWorld.enemies=[];openWorld.chunk=0;openWorld.compassTarget=null;game.state.openWorldMode=true;game.state.classicMode=false;game.state.visitedZones=game.state.visitedZones||[];game.state.visitedZones.push(game.currentZone);ensureChunks();enemies.splice(0,enemies.length,...openWorld.enemies);mode='playing';hidePanel();bannerText('AÇIK DÜNYA · SINIRSIZ SINIRLAR',2.5);}
+  function exitOpenWorld(){openWorld.enabled=false;game.state.openWorldMode=false;game.state.classicMode=true;openWorld.enemies=[];enemies.splice(0,enemies.length,...(current?.enemies||[]));mode='playing';hidePanel();bannerText('KLASİK HİKÂYE MODU',2);saveOpenWorld();}
+  function openWorldModeMenu(){showAdvancedPanel('DÜNYA MODU',`<div class="adv-cult-hero"><span>İKİ AYRI YOLCULUK</span><p><b>Klasik Hikâye:</b> bölümler, görevler ve hikâye geçitleri. Normal düşmanlar yalnızca hikâye akışında karşılaşılır.</p><p><b>Açık Dünya:</b> sonsuz prosedürel arazi, tekrar üretilebilir kaleler, devriye gezen düşmanlar ve tarikat hedefleri. Haritadan hedef seçmek ışınlamaz, pusulaya işaretler.</p></div>`,[cardButton('AÇIK DÜNYAYA GİR',enterOpenWorld),cardButton('KLASİK HİKÂYEYE DÖN',exitOpenWorld),cardButton('KAPAT',closeAdvPanel)]);}
+  const oldOpenCultHunt=openCultHunt;
+  openCultHunt=function(){if(!openWorld.enabled){oldOpenCultHunt();return;}const a=adv();let body='<div class="adv-cult-hero"><span>AÇIK DÜNYA · TARİKAT</span><p>Hedefi seçtiğinde konumu pusulana işaretlenir. Haritada işaretlemek seni hedefin yanına ışınlamaz.</p></div><div class="adv-region-list">';for(const t of CULT){const revealed=a.revealedCult.includes(t.id)||a.cultKilled.includes(t.id);body+=`<div class="adv-region-card"><div><b>${revealed?t.name:'??? · KİMLİĞİ GİZLİ'}</b><small>${t.rank} · ${revealed?t.zoneName||zoneName(t.zone):'İpucu gerekli'}</small></div><button data-cult-mark="${t.id}" ${!revealed?'disabled':''}>${openWorld.compassTarget===t.id?'PUSULADA İŞARETLİ':'PUSULAYA İŞARETLE'}</button></div>`;}body+='</div>';showAdvancedPanel('AÇIK DÜNYA · TARİKAT AVI',body,[cardButton('DÜNYA MODU',openWorldModeMenu),cardButton('KAPAT',closeAdvPanel)]);document.querySelectorAll('[data-cult-mark]').forEach(b=>b.addEventListener('click',()=>{openWorld.compassTarget=b.dataset.cultMark;saveOpenWorld();closeAdvPanel();bannerText('PUSULA GÜNCELLENDİ · HEDEF YÖNÜ İŞARETLENDİ',2); }));};
+  const oldOpenAdvancedMap=openAdvancedMap;
+  openAdvancedMap=function(){if(!openWorld.enabled){oldOpenAdvancedMap();return;}const a=adv();let body=`<div class="adv-cult-hero"><span>SONSUZ SINIRLAR · BÖLGE ${openWorld.chunk>=0?'+':''}${openWorld.chunk}</span><p>Harita hareket ettikçe yeni arazi ve kaleler üretir. İşaret seçmek ışınlama yapmaz; hedef yalnızca pusulada görünür.</p></div><div class="adv-region-list">`;for(let n=openWorld.chunk-3;n<=openWorld.chunk+3;n++){const c=castleForChunk(n);body+=`<div class="adv-region-card"><div><b>${c.name}</b><small>${Math.abs(n-openWorld.chunk)*1500} m · ${c.guardCount} muhafız · ${n===openWorld.chunk?'MEVCUT BÖLGE':'KEŞFEDİLEBİLİR'}</small></div><button data-castle-mark="${n}">PUSULAYA İŞARETLE</button></div>`;}body+='</div>';showAdvancedPanel('AÇIK DÜNYA HARİTASI',body,[cardButton('TARİKAT AVI',openCultHunt),cardButton('DÜNYA MODU',openWorldModeMenu),cardButton('KAPAT',closeAdvPanel)]);document.querySelectorAll('[data-castle-mark]').forEach(b=>b.addEventListener('click',()=>{const c=castleForChunk(Number(b.dataset.castleMark));openWorld.compassTarget=c.id;saveOpenWorld();closeAdvPanel();bannerText('PUSULA · '+c.name.toLocaleUpperCase('tr-TR'),2);}));};
+  const oldUpdateWorldMode=update;
+  update=function(dt){if(openWorld.enabled&&mode==='playing'&&player){ensureChunks();enemies.splice(0,enemies.length,...openWorld.enemies);for(const e of openWorld.enemies){if(!e.alive)continue;e.anim=(e.anim||0)+dt*7;const dx=(player.x+player.w/2)-(e.x+e.w/2);if(Math.abs(dx)<330){e.face=dx>=0?1:-1;e.state='approach';e.vx=e.face*(e.type==='elite'?54:42);e.x+=e.vx*dt;if(Math.abs(dx)<54&&!e.attack){e.attack={phase:'windup',timer:.55,hit:false,kind:'light'};e.state='windup';}}else{e.vx=0;e.state='patrol';e.x+=Math.sin(gameTime*.5+e.seed%9)*8*dt;}if(e.attack){e.attack.timer-=dt;if(e.attack.timer<=0){if(!e.attack.hit&&Math.abs(dx)<66&&player.dodge<=0&&player.invuln<=0){hurtPlayer(e.type==='elite'?17:9,e.x+e.w/2);e.attack.hit=true;}e.attack=null;}}}if(openWorld.compassTarget){const target=openWorld.enemies.find(e=>e.id===openWorld.compassTarget)||openWorld.castles.find(c=>c.id===openWorld.compassTarget);if(target)openWorld._compassX=target.x;}}oldUpdateWorldMode(dt);};
+  const oldDrawBGOpen=drawBackground;
+  drawBackground=function(){oldDrawBGOpen();if(!openWorld.enabled)return;const cam=camera.x||0;for(const c of openWorld.castles){const x=c.x-cam;if(x<-420||x>W+420)continue;ctx.save();ctx.fillStyle='#06080bb8';ctx.beginPath();ctx.ellipse(x+c.w/2,GROUND+2,c.w*.62,10,0,0,Math.PI*2);ctx.fill();ctx.fillStyle=c.color;ctx.fillRect(x,GROUND-115,c.w,115);ctx.fillStyle='#26232b';for(let i=0;i<5;i++){const tx=x+i*c.w/4-7;ctx.fillRect(tx,GROUND-145,28,36);ctx.beginPath();ctx.moveTo(tx-5,GROUND-145);ctx.lineTo(tx+14,GROUND-173);ctx.lineTo(tx+33,GROUND-145);ctx.fill();}ctx.fillStyle='#c6aa7a';ctx.fillRect(x+c.w*.45,GROUND-47,c.w*.12,47);ctx.strokeStyle='#d4bc8a';ctx.lineWidth=2;ctx.strokeRect(x,GROUND-115,c.w,115);ctx.fillStyle='#e7d5b5';ctx.font='bold 10px Georgia';ctx.textAlign='center';ctx.fillText(c.name,x+c.w/2,GROUND-185);ctx.restore();}if(openWorld.compassTarget&&openWorld._compassX!=null){const dx=openWorld._compassX-(player?.x||0),dir=dx>=0?'▶':'◀';ctx.save();ctx.fillStyle='#080b12dc';ctx.fillRect(W/2-105,73,210,34);ctx.strokeStyle='#d5b675';ctx.strokeRect(W/2-105,73,210,34);ctx.fillStyle='#f0d18a';ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillText(`PUSULA ${dir} ${Math.round(Math.abs(dx))} m`,W/2,94);ctx.restore();}};
+  // In story mode ordinary guards must not become hostile merely from walking past; they remain inert until attacked.
+  const baseEnemyUpdate=updateEnemies;
+  updateEnemies=function(dt){if(openWorld.enabled){baseEnemyUpdate(dt);return;}for(const e of enemies){if(e.alive&&!e.isCultTarget){e.vx=0;if(e.state==='approach'||e.state==='windup')e.state='idle';e.attack=null;}}};
+  game.openWorldModeMenu=openWorldModeMenu;game.enterOpenWorld=enterOpenWorld;game.exitOpenWorld=exitOpenWorld;game.isOpenWorld=()=>openWorld.enabled;
+  // Add world-mode access to the existing top-level desktop rail.
+  const desktopBar=$('#advancedDesktopBar');if(desktopBar&&!desktopBar.querySelector('[data-open="world"]')){const b=document.createElement('button');b.dataset.open='world';b.textContent='♧ DÜNYA MODU';b.addEventListener('click',openWorldModeMenu);desktopBar.appendChild(b);}
+  // Small mobile analog footprint, matching the requested lighter control feel.
+  const analogStyle=document.createElement('style');analogStyle.textContent='#joystickBase{width:72px!important;height:72px!important}#joystickStick{width:29px!important;height:29px!important}#joystickRing{inset:8px!important}#analogZone{pointer-events:auto}';document.head.appendChild(analogStyle);
+
+    // === OPEN WORLD HOTFIX 2: living actors, enterable keeps, branching dialogue, compass ===
+  const OW2_WORLD_ZONE = 'procedural_outlands';
+  const ow2CoreUpdatePipeline = oldUpdateWorldMode;
+  const ow2CoreEnemyUpdate = baseEnemyUpdate;
+  const ow2VanillaBackground = oldDrawBGOpen;
+  const ow2PreviousFighterDraw = drawFighter;
+  const ow2PreviousRender = render;
+  const ow2OldInteract = game.interact;
+  const ow2OldNearest = game.nearestInteractable;
+  const ow2Themes = [
+    { id:'polar', palette:['#80afc1','#d5f5f9'], first:['Fırtına Kemireni','Buz Tahtı Celladı','Kırağı Başbuğu'], second:['Beyaz Boynuz','Kutup Yırtıcısı','Donmuş Dev'], title:'KUZEYİN KAYIP EFENDİSİ' },
+    { id:'japan', palette:['#9e405d','#ffb6ce'], first:['Kızıl Oni','Kırık Kabuto','Sakura Celladı'], second:['Gece Ronini','Boynuzlu Şogun','Kanlı Tengu'], title:'SAKURA GÖLGESİNİN EFENDİSİ' },
+    { id:'ottoman', palette:['#9d793c','#f6d894'], first:['Hilal Kıranı','Kara Sipahi','Altın Miğfer'], second:['Demir Yeniçeri','Köz Paşası','Kızıl Akıncı'], title:'HİLALİN SON MUHAFIZI' },
+    { id:'desert', palette:['#b76d3b','#ffd17a'], first:['Kum Kâhini','Güneş Yiyen','Mezar Firavunu'], second:['Obsidyen Çakal','Kızıl Akbaba','Kum Devi'], title:'KAYIP GÜNEŞİN EFENDİSİ' },
+    { id:'england', palette:['#70404d','#ff7184'], first:['Sisli Cellat','Kızıl Şövalye','Taç Kıranı'], second:['Kara Avcı','Kuzgun Şövalye','Son Dük'], title:'SİSLİ TAHTIN SON VARİSİ' }
+  ];
+  openWorld.inside = openWorld.inside || null;
+  openWorld.npcs = openWorld.npcs || [];
+  openWorld.cultSites = openWorld.cultSites || {};
+  openWorld._lastChunk = Number.isFinite(openWorld._lastChunk) ? openWorld._lastChunk : 999999;
+
+  function ow2RegionProgress(id) {
+    const st = game.state;
+    st.regionProgress = st.regionProgress || {};
+    if (!st.regionProgress[id]) st.regionProgress[id] = { defeated:[], bossDefeated:false, bossHp:null, bossPhase:1 };
+    if (!Array.isArray(st.regionProgress[id].defeated)) st.regionProgress[id].defeated = [];
+    return st.regionProgress[id];
+  }
+  saveOpenWorld = function(){
+    try {
+      const stored = {...openWorld, enabled:false};
+      localStorage.setItem(OPEN_WORLD_KEY, JSON.stringify(stored));
+    } catch (_) {}
+  };
+  castleForChunk = function(n){
+    const h=hashChunk(n), themeIndex=h%ow2Themes.length, theme=ow2Themes[themeIndex];
+    const noun=['Kale','Hisarı','Burcu','Tabyası','Kalesi'][Math.floor(h/11)%5];
+    return {id:'keep_'+n,chunk:n,x:n*1500+445+(h%76),w:298+(h%48),name:theme.id==='polar'?'Kuzey '+noun+' '+(Math.abs(n)+1):theme.id==='japan'?'Sakura '+noun+' '+(Math.abs(n)+1):theme.id==='ottoman'?'Hilal '+noun+' '+(Math.abs(n)+1):theme.id==='desert'?'Kum '+noun+' '+(Math.abs(n)+1):'Sisli '+noun+' '+(Math.abs(n)+1),color:theme.palette[0],glow:theme.palette[1],theme:theme.id,themeIndex,guardCount:4+(h%3),seed:h,doorX:0};
+  };
+  function ow2WorldRegion(){
+    let r=regionDefs[OW2_WORLD_ZONE];
+    if(!r){
+      r=regionDefs[OW2_WORLD_ZONE]={id:OW2_WORLD_ZONE,name:'Sonsuz Sınırlar',width:100000000,spawnX:105,platforms:[],enemies:[],boss:null,fires:[],npcs:[],lore:[],shrines:[],doors:[],walls:[],gates:[],keepInterior:false};
+    }
+    r.width=100000000;
+    r.platforms=r.platforms||[];r.enemies=r.enemies||[];r.fires=r.fires||[];r.npcs=r.npcs||[];r.lore=r.lore||[];r.shrines=r.shrines||[];r.doors=r.doors||[];r.walls=r.walls||[];r.gates=r.gates||[];
+    ow2RegionProgress(OW2_WORLD_ZONE);
+    return r;
+  }
+  function ow2WorldNPC(chunk, index){
+    const seed=hashChunk(chunk*31+index*97+17), home=chunk*1500+(index===0?305:920)+(seed%100);
+    const role=index===0?'scout':(index===1?'merchant':'pilgrim');
+    const names=role==='scout'?['Orman İzci','Kuzey Kılavuzu','Kara Habercisi','Sınır Gözcüsü','Eski Akıncı']:role==='merchant'?['Gezgin Tüccar','Kül Taciri','Yol Pazarcısı','Bakır Tüccar','Kayıp Kervancı']:['Sürgün Bilge','Sessiz Hacı','Yol Anlatıcısı','Seyyah Kâtip','Yitik Ozan'];
+    return {id:`ow_npc_${chunk}_${index}`,name:names[seed%names.length],x:home,homeX:home,patrolRange:role==='merchant'?16:38,direction:seed%2?1:-1,walkSpeed:role==='scout'?24:role==='merchant'?10:15,anim:seed%12,kind:role==='merchant'?'merchant':role==='scout'?'knight':'scholar',npcRole:role,lines:['Her kalenin başka bir efendisi, her yolun başka bir bedeli var.','Söylentiler kuzeyde başlayıp sislerin içinde son buluyor.','Tarikatın izini arıyorsan yalnızca kılıcına değil, insanların sözlerine de kulak ver.'],chunk};
+  }
+  function ow2BuildHouseData(chunk){
+    const b=chunk*1500;
+    return [
+      {x:b+100,w:112,h:57,type:'house',tone:'#665b51'},
+      {x:b+245,w:104,h:77,type:'watch',tone:'#565c63'},
+      {x:b+1045,w:142,h:64,type:'house',tone:'#64584c'},
+      {x:b+1225,w:96,h:50,type:'stall',tone:'#74604b'}
+    ];
+  }
+  function ow2KeepRegion(c){
+    const id='open_keep_'+(c.chunk<0?'m'+Math.abs(c.chunk):'p'+c.chunk);
+    const p=ow2RegionProgress(id);
+    if(regionDefs[id]) return {id,region:regionDefs[id],progress:p};
+    const theme=ow2Themes[c.themeIndex%ow2Themes.length];
+    const firstName=theme.first[c.seed%theme.first.length]+' · '+c.name;
+    const otherTheme=ow2Themes[(c.themeIndex+2+(c.seed%2))%ow2Themes.length];
+    const secondName=otherTheme.second[Math.floor(c.seed/7)%otherTheme.second.length]+' · '+c.name;
+    const hp1=430+(c.seed%170), hp2=510+((c.seed>>>5)%210), off=i=>((c.seed>>>(i*3%24))+i*11)%23;
+    const region={id,name:c.name+' · İÇ KALE',width:2500,spawnX:250,platforms:[
+      {x:295+off(0),y:372+off(1),w:145,h:16},{x:520+off(2),y:320+off(3),w:165,h:16},{x:795+off(4),y:365+off(5),w:150,h:16},
+      {x:1045+off(6),y:306+off(7),w:175,h:16},{x:1365+off(8),y:365+off(9),w:170,h:16},{x:1655+off(10),y:315+off(11),w:165,h:16},{x:1950+off(12),y:370+off(13),w:170,h:16}
+    ],enemies:[],boss:{x:1420,name:firstName,title:theme.title,hp:hp1,theme:theme.id},fires:[{id:id+'_grace',x:170,name:'İç Kale Lütfu'}],npcs:[{id:id+'_keeper',x:350,name:'Mahzen Bekçisi',kind:'scholar',npcRole:'keeper',lines:['İki taht sahibi var. İlki kapıyı, ikincisi çıkışı korur.','İlk muhafız düştüğünde taşların altındaki ikinci efendi uyanacak.','İstersen önce buranın eski hikâyesini, sonra kaleden çıkış yolunu konuşabiliriz.']}],lore:[{id:id+'_inscription',x:720,title:'KAZINMIŞ YEMİN',text:'İLK KILIÇ KAPIYI AÇAR. İKİNCİ KILIÇ, AÇILAN KAPININ BEDELİNİ HATIRLATIR.'}],shrines:[],doors:[],walls:[],gates:[],keepInterior:true,keepMeta:{castleId:c.id,chunk:c.chunk,seed:c.seed,theme:theme.id,firstName,secondName,firstHp:hp1,secondHp:hp2,secondId:id+'_boss_two',secondTheme:otherTheme.id,secondColor:otherTheme.palette[0],secondGlow:otherTheme.palette[1],secondWeapon:otherTheme.palette[1]}};
+    region.enemies=[
+      {id:id+'_guard_1',x:460,type:'soldier',ashes:24},{id:id+'_guard_2',x:700,type:'soldier',ashes:26},
+      {id:id+'_guard_3',x:940,type:'elite',ashes:42},{id:id+'_guard_4',x:1160,type:'soldier',ashes:28},
+      {id:region.keepMeta.secondId,x:2040,type:'elite',ashes:220,keepBossTwo:true}
+    ];
+    regionDefs[id]=region;
+    BOSSES[id]={name:firstName,title:theme.title,hp:hp1,color:theme.palette[0],glow:theme.palette[1],weapon:theme.palette[1],reward:180,special:'KALE ÇÖKÜŞÜ',theme:theme.id};
+    if(!p.defeated.includes(region.keepMeta.secondId)&&!p.bossDefeated) p.bossTwoPending=true;
+    return {id,region,progress:p};
+  }
+  function ow2NormalizeEnemy(e){
+    if(!e)return e;
+    const type=e.type==='elite'?'elite':'soldier';
+    const base=makeEnemy(Number(e.x)||100,type);
+    Object.assign(base,e);
+    base.w=Number.isFinite(base.w)?base.w:(type==='elite'?42:32);base.h=Number.isFinite(base.h)?base.h:(type==='elite'?70:52);
+    base.y=Number.isFinite(base.y)?base.y:GROUND-base.h;base.vx=Number.isFinite(base.vx)?base.vx:0;base.vy=Number.isFinite(base.vy)?base.vy:0;
+    base.hp=Number.isFinite(base.hp)?base.hp:(type==='elite'?100:48);base.maxHp=Number.isFinite(base.maxHp)?base.maxHp:base.hp;
+    base.speed=Number.isFinite(base.speed)?base.speed:(type==='elite'?55:78);base.range=Number.isFinite(base.range)?base.range:(type==='elite'?72:54);
+    base.home=Number.isFinite(base.home)?base.home:base.x;base.patrolDir=base.patrolDir||1;base.state=base.state||'patrol';base.attackCd=Number.isFinite(base.attackCd)?base.attackCd:.8;base.anim=base.anim||0;base.alive=base.alive!==false;
+    return base;
+  }
+  function ow2SpawnGuard(c,i){
+    const id=`${c.id}_guard_${i}`;const rp=ow2RegionProgress(OW2_WORLD_ZONE);
+    if(rp.defeated.includes(id)||openWorld.enemies.some(e=>e.id===id))return;
+    const x=c.x+48+i*((c.w-95)/Math.max(1,c.guardCount-1));const e=ow2NormalizeEnemy({id,x,y:GROUND-56,w:31,h:56,hp:52+(c.seed%40),maxHp:52+(c.seed%40),alive:true,type:i===c.guardCount-1?'elite':'soldier',speed:58+(c.seed%14),range:i===c.guardCount-1?72:54,face:i%2?1:-1,patrolDir:i%2?1:-1,home:x,patrolMin:c.x-70,patrolMax:c.x+c.w+75,openWorldGuard:true,castleId:c.id,ashReward:i===c.guardCount-1?60:22});
+    openWorld.enemies.push(e);
+  }
+  function ow2CultSite(t){
+    if(openWorld.cultSites[t.id])return openWorld.cultSites[t.id];
+    const i=CULT.findIndex(x=>x.id===t.id),seed=hashChunk(i*53+71),chunk=3+i*2+(seed%2),site={chunk,x:chunk*1500+350+(seed%720),id:t.id,name:t.name};
+    openWorld.cultSites[t.id]=site;return site;
+  }
+  function ow2SpawnCult(t,site){
+    const a=adv();if(!a.revealedCult.includes(t.id)||a.cultKilled.includes(t.id))return;
+    const nearbyChunk=Math.floor(player.x/1500);if(Math.abs(site.chunk-nearbyChunk)>2)return;
+    if(enemies.some(e=>e.cultTargetId===t.id)||openWorld.enemies.some(e=>e.cultTargetId===t.id))return;
+    const progress=ow2RegionProgress(OW2_WORLD_ZONE);
+    for(let i=0;i<t.guards;i++){
+      const id=`ow_cult_guard_${t.id}_${i}`;if(progress.defeated.includes(id))continue;
+      const gx=site.x+(i%2?1:-1)*(76+Math.floor(i/2)*26);const g=ow2NormalizeEnemy({id,x:gx,home:gx,y:GROUND-56,w:31,h:56,hp:72,maxHp:72,type:'soldier',speed:66,range:55,alive:true,isCultGuard:true,cultTargetId:t.id,excludeForBoss:true,ashReward:22,patrolDir:i%2?1:-1});openWorld.enemies.push(g);
+    }
+    const id='ow_cult_'+t.id;if(!progress.defeated.includes(id)){
+      const e=ow2NormalizeEnemy({id,x:site.x,home:site.x,y:GROUND-78,w:46,h:76,hp:t.hp,maxHp:t.hp,type:'elite',speed:63,range:82,alive:true,isCultTarget:true,cultTargetId:t.id,cultName:t.name,cultRank:t.rank,cultSpecial:t.skill,cultGuardCount:t.guards,cultCooldown:3,cultTelegraph:0,excludeForBoss:true,ashReward:t.rank==='ANA LİDER'?180:t.rank==='BÖLGE LİDERİ'?100:60});openWorld.enemies.push(e);
+    }
+  }
+  function ensureChunks(){
+    if(!openWorld.enabled||openWorld.inside||!player)return;
+    const r=ow2WorldRegion(),chunk=Math.max(0,Math.floor(player.x/1500));openWorld.chunk=chunk;
+    if(!Array.isArray(openWorld.generatedChunks))openWorld.generatedChunks=[];
+    const newChunk=chunk!==openWorld._lastChunk;
+    const active=[];
+    for(let n=chunk-2;n<=chunk+3;n++){
+      if(n<0)continue;
+      const c=castleForChunk(n);c.doorX=c.x+c.w/2;active.push(c);
+      if(!openWorld.generatedChunks.includes(n))openWorld.generatedChunks.push(n);
+      for(let i=0;i<c.guardCount;i++)ow2SpawnGuard(c,i);
+      if(!openWorld.npcs.some(x=>x.id===`ow_npc_${n}_0`))openWorld.npcs.push(ow2WorldNPC(n,0));
+      if(!openWorld.npcs.some(x=>x.id===`ow_npc_${n}_1`))openWorld.npcs.push(ow2WorldNPC(n,1));
+      for(const t of CULT){const site=ow2CultSite(t);if(site.chunk===n)ow2SpawnCult(t,site);}
+    }
+    const activeChunks=new Set(active.map(c=>c.chunk));
+    openWorld.castles=active;
+    openWorld.npcs=openWorld.npcs.filter(n=>activeChunks.has(n.chunk));
+    r.npcs.splice(0,r.npcs.length,...openWorld.npcs);
+    // Separate, non-overlapping house footprints and a narrow, interactable gate.
+    const walls=[];
+    // Only the narrow doorway blocks walking through a keep. Backdrop houses are visual set dressing,
+    // not solid walls spanning the entire side-scrolling lane.
+    for(const c of active){const door=c.doorX;walls.push({x:door-20,y:GROUND-112,w:40,h:112,_owGate:c.id});}
+    r.walls.splice(0,r.walls.length,...walls);
+    openWorld.enemies=openWorld.enemies.filter(e=>activeChunks.has(Math.max(0,Math.floor(e.x/1500)))||e.isCultTarget||e.isCultGuard);
+    // Resolve any newly revealed target in the currently streamed area.
+    for(const t of CULT){const site=ow2CultSite(t);if(Math.abs(site.chunk-chunk)<=2)ow2SpawnCult(t,site);}
+    openWorld._lastChunk=chunk;
+    if(newChunk)saveOpenWorld();
+  }
+  function ow2RegisterKeepFromSaved(){
+    if(!openWorld.inside||!openWorld.inside.castle)return;
+    const c=openWorld.inside.castle;const data=ow2KeepRegion(c);return data;
+  }
+  function ow2SetupKeepAfterLoad(data){
+    if(!data||!data.region||!openWorld.inside)return;
+    const r=data.region,meta=r.keepMeta||{},rp=ow2RegionProgress(data.id);const b2=enemies.find(e=>e.id===meta.secondId);
+    if(b2){
+      b2.isKeepBoss=true;b2.keepBossName=meta.secondName;b2.keepBossTitle='İKİNCİ EFENDİ';b2.keepBossTheme=meta.secondTheme;b2.keepBossColor=meta.secondColor;b2.keepBossGlow=meta.secondGlow;b2.w=66;b2.h=100;b2.maxHp=meta.secondHp;b2.hp=Number.isFinite(b2.hp)?Math.min(b2.hp,meta.secondHp):meta.secondHp;b2.home=2040;b2.speed=56;b2.range=95;b2.excludeForBoss=true;b2.ashReward=240;b2.specialCooldown=3.3;b2.specialState='idle';
+      if(rp.defeated.includes(meta.secondId)){b2.alive=false;openWorld.inside.boss2Defeated=true;}
+      else if(!rp.bossDefeated){b2.alive=false;openWorld.inside.boss2Defeated=false;openWorld.inside.boss2Spawned=false;}
+      else {b2.alive=true;openWorld.inside.boss2Defeated=false;openWorld.inside.boss2Spawned=true;b2.maxHp=meta.secondHp;b2.hp=Math.max(1,Math.min(meta.secondHp,Number.isFinite(rp.bossTwoHp)?rp.bossTwoHp:meta.secondHp));}
+    }
+    openWorld.inside.regionId=data.id;openWorld.inside.firstBossName=meta.firstName;openWorld.inside.secondBossName=meta.secondName;
+    game.state.checkpoint={zone:data.id,x:250};
+  }
+  function enterCastle(c){
+    if(!openWorld.enabled||openWorld.inside||!c||!player)return;
+    const data=ow2KeepRegion(c);
+    openWorld.inside={castleId:c.id,castle:c,regionId:data.id,returnX:player.x,returnY:player.y,boss2Spawned:false,boss2Defeated:false};
+    saveOpenWorld();
+    game.loadZone(data.id,250,{quiet:true});
+    ow2SetupKeepAfterLoad(data);
+    mode='playing';hidePanel();bannerText(`${c.name.toLocaleUpperCase('tr-TR')} · İÇ KALEYE GİRİLDİ`,2.2);saveOpenWorld();
+  }
+  function leaveCastle(){
+    if(!openWorld.enabled||!openWorld.inside)return;
+    const back=openWorld.inside.returnX||105;const name=openWorld.inside.castle?.name||'Kale';
+    openWorld.inside=null;ow2WorldRegion();
+    game.loadZone(OW2_WORLD_ZONE,back,{quiet:true});
+    player.x=back;player.y=GROUND-player.h;player.vx=0;player.vy=0;camera.x=Math.max(0,player.x+player.w/2-W/2);
+    ensureChunks();enemies.splice(0,enemies.length,...openWorld.enemies);mode='playing';hidePanel();bannerText(`${name.toLocaleUpperCase('tr-TR')} · DIŞ DÜNYAYA DÖNÜLDÜ`,2.0);saveOpenWorld();
+  }
+  function enterOpenWorld(){
+    openWorld.enabled=true;openWorld.inside=null;openWorld.compassTarget=null;openWorld._lastChunk=999999;
+    const startX=Math.max(105,Number(player?.x)||105);ow2WorldRegion();game.state.openWorldMode=true;game.state.classicMode=false;
+    game.loadZone(OW2_WORLD_ZONE,startX,{quiet:true});openWorld.generatedChunks=[];openWorld.castles=[];openWorld.enemies=[];openWorld.npcs=[];
+    ensureChunks();enemies.splice(0,enemies.length,...openWorld.enemies);mode='playing';hidePanel();bannerText('AÇIK DÜNYA · SINIRSIZ SINIRLAR',2.5);saveOpenWorld();
+  }
+  function exitOpenWorld(){
+    openWorld.enabled=false;openWorld.inside=null;game.state.openWorldMode=false;game.state.classicMode=true;
+    game.loadZone('dark_castle',105,{quiet:true});mode='playing';hidePanel();bannerText('KLASİK HİKÂYE MODU',2);saveOpenWorld();
+  }
+  function ow2NearestCastle(maxDistance=130){
+    if(!openWorld.enabled||openWorld.inside||!player)return null;
+    const x=player.x+player.w/2;let best=null,dBest=maxDistance;
+    for(const c of openWorld.castles){const d=Math.abs(x-(c.doorX||c.x+c.w/2));if(d<dBest){dBest=d;best=c;}}
+    return best?{...best,kind:'castle',x:best.doorX||best.x+best.w/2,distance:dBest}:null;
+  }
+  function ow2NearestNPC(maxDistance=120){
+    if(!player)return null;const npcs=game.regions[game.currentZone]?.npcs||[];const px=player.x+player.w/2;let best=null,dBest=maxDistance;
+    for(const n of npcs){const d=Math.abs(px-n.x);if(d<dBest){dBest=d;best=n;}}
+    return best?{...best,kind:'openNpc',distance:dBest}:null;
+  }
+  function ow2ShowDialogue(npc){
+    const role=npc.npcRole||npc.kind||'pilgrim';
+    const first=(npc.lines&&npc.lines[0])||'Yollar konuşur, fakat onları dinlemek gerekir.';
+    const askLore=()=>{addClue('gezgin anlatısı',`${npc.id||npc.name}:cult-clue`);showAdvancedPanel(npc.name.toLocaleUpperCase('tr-TR'),`<p>${(npc.lines&&npc.lines[1])||'Tarikat, kulelerin gölgesinde iz bırakıyor.'}</p><p class="small">Bu konuşma örgüt hakkında bir ipucu bıraktı. Yeni açılan hedefi Tarikat menüsünden takip edebilirsin.</p>`,[cardButton('TARİKAT AVLARINI AÇ',openCultHunt),cardButton('GERİ',()=>ow2ShowDialogue(npc)),cardButton('AYRIL',closeAdvPanel)]);};
+    const markRoute=()=>{const next=openWorld.castles.filter(c=>c.x>player.x+80).sort((a,b)=>a.x-b.x)[0]||openWorld.castles[0];if(next){openWorld.compassTarget=next.id;saveOpenWorld();bannerText(`PUSULA · ${next.name}`,1.8);}closeAdvPanel();};
+    const provisions=()=>{if(player.ashes<25){bannerText('ERZAK İÇİN 25 KÜL GEREKİYOR',1.5);return;}player.ashes-=25;player.hp=Math.min(player.maxHp,player.hp+30);player.stamina=Math.min(player.maxStamina,player.stamina+35);bannerText('ERZAK ALINDI · CAN VE DAYANIKLILIK TAZELENDİ',1.8);saveSafe();closeAdvPanel();};
+    const buttons=[cardButton('TARİKAT HAKKINDA SOR',askLore),cardButton('BİR KALEYE GİDEN YOLU SOR',markRoute),cardButton('ERZAK AL · 25 KÜL',provisions)];
+    if(role==='merchant'||role==='merchantNetwork')buttons.unshift(cardButton('TİCARETİ AÇ',()=>game.openShop()));
+    if(role==='knight'||role==='keeper')buttons.push(cardButton('KALEYİ / GÖREVİ KONUŞ',()=>showAdvancedPanel(npc.name.toLocaleUpperCase('tr-TR'),`<p>${(npc.lines&&npc.lines[2])||'Her kapının kendine göre bir anahtarı var.'}</p>`,[cardButton('TARİKAT İPUCU AL',askLore),cardButton('GERİ',()=>ow2ShowDialogue(npc))])));
+    buttons.push(cardButton('VEDA ET',closeAdvPanel));
+    showAdvancedPanel(npc.name.toLocaleUpperCase('tr-TR'),`<p>${first}</p><p class="small">Ne sormak istersin? Seçimin bir rota, ipucu veya erzak işlemi başlatır.</p>`,buttons);
+  }
+  const ow2OldAdvancedCult=openCultHunt;
+  openCultHunt=function(){
+    if(!openWorld.enabled){ow2OldAdvancedCult();return;}
+    const a=adv();let body='<div class="adv-cult-hero"><span>SONSUZ SINIRLAR · ÖRGÜT ŞEMASI</span><p>İşaretleme ışınlama yapmaz. Hedefin yönü ve mesafesi üst pusulada gösterilir. Bazı hedeflerin kimliği için önce ipucu toplaman gerekir.</p></div><div class="adv-pyramid"><h3>ANA LİDER</h3><div class="adv-target-row master-row">';
+    const master=CULT.find(t=>t.rank==='ANA LİDER');
+    if(master){const known=a.revealedCult.includes(master.id)||a.cultKilled.includes(master.id);body+=`<article class="adv-target ${known?'':'unknown'} ${a.cultKilled.includes(master.id)?'dead':''}"><div class="target-sigil">♛</div><b>${known?master.name:'??? · ANA LİDER'}</b><small>${known?'ANA LİDER':'İPUCU GEREKLİ'}</small><button data-ow2-cult="${master.id}" ${!known||a.cultKilled.includes(master.id)?'disabled':''}>PUSULAYA İŞARETLE</button></article>`;}body+='</div><h3>BÖLGE LİDERLERİ</h3><div class="adv-target-row">';
+    for(const t of CULT.filter(t=>t.rank==='BÖLGE LİDERİ')){const known=a.revealedCult.includes(t.id)||a.cultKilled.includes(t.id);body+=`<article class="adv-target ${known?'':'unknown'} ${a.cultKilled.includes(t.id)?'dead':''}"><div class="target-sigil">♜</div><b>${known?t.name:'??? · BÖLGE LİDERİ'}</b><small>${known?`Kale · ${ow2CultSite(t).chunk*1500} m`:'İPUCU GEREKLİ'}</small><button data-ow2-cult="${t.id}" ${!known||a.cultKilled.includes(t.id)?'disabled':''}>${openWorld.compassTarget===t.id?'İŞARETLİ':'PUSULAYA İŞARETLE'}</button></article>`;}body+='</div><h3>ALT ÜYELER</h3><div class="adv-target-row">';
+    for(const t of CULT.filter(t=>t.rank==='ALT ÜYE')){const known=a.revealedCult.includes(t.id)||a.cultKilled.includes(t.id);body+=`<article class="adv-target ${known?'':'unknown'} ${a.cultKilled.includes(t.id)?'dead':''}"><div class="target-sigil">♟</div><b>${known?t.name:'??? · ALT ÜYE'}</b><small>${known?`${t.guards} koruma · ${Math.abs(ow2CultSite(t).chunk-openWorld.chunk)*1500} m`:'İpucu topla'}</small><button data-ow2-cult="${t.id}" ${!known||a.cultKilled.includes(t.id)?'disabled':''}>${openWorld.compassTarget===t.id?'İŞARETLİ':'PUSULAYA İŞARETLE'}</button></article>`;}body+='</div></div>';
+    showAdvancedPanel('ÖRGÜT AVI · AÇIK DÜNYA',body,[cardButton('HARİTA',openAdvancedMap),cardButton('DÜNYA MENÜSÜ',openWorldModeMenu),cardButton('KAPAT',closeAdvPanel)]);
+    document.querySelectorAll('[data-ow2-cult]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.ow2Cult;const t=CULT.find(x=>x.id===id);if(!t)return;const site=ow2CultSite(t);openWorld.compassTarget=id;openWorld._compassX=site.x;saveOpenWorld();closeAdvPanel();bannerText(`PUSULA · ${t.name.toLocaleUpperCase('tr-TR')}`,2);}));
+  };
+  const ow2OldMap=openAdvancedMap;
+  openAdvancedMap=function(){
+    if(!openWorld.enabled){ow2OldMap();return;}
+    const chunk=openWorld.chunk, a=adv();let body=`<div class="adv-cult-hero"><span>SONSUZ SINIRLAR · HARİTA</span><p>Mevcut mevki: ${chunk} · Kale seçmek seni ışınlamaz, yalnızca pusulana yön ve mesafe ekler.</p></div><div class="adv-region-list">`;
+    for(let n=Math.max(0,chunk-3);n<=chunk+6;n++){const c=castleForChunk(n);const d=Math.abs((c.doorX||c.x+c.w/2)-(player.x+player.w/2));body+=`<div class="adv-region-card"><div><b>${c.name}</b><small>${Math.round(d)} m · ${c.guardCount} muhafız · ${n===chunk?'YAKINDA':'KEŞFEDİLEBİLİR'}</small></div><button data-ow2-keep="${n}">${openWorld.compassTarget===c.id?'İŞARETLİ':'PUSULAYA İŞARETLE'}</button></div>`;}
+    body+='</div>';showAdvancedPanel('AÇIK DÜNYA HARİTASI',body,[cardButton('TARİKAT AVI',openCultHunt),cardButton('DÜNYA MODU',openWorldModeMenu),cardButton('KAPAT',closeAdvPanel)]);
+    document.querySelectorAll('[data-ow2-keep]').forEach(btn=>btn.addEventListener('click',()=>{const c=castleForChunk(Number(btn.dataset.ow2Keep));openWorld.compassTarget=c.id;openWorld._compassX=c.doorX||c.x+c.w/2;saveOpenWorld();closeAdvPanel();bannerText(`PUSULA · ${c.name.toLocaleUpperCase('tr-TR')}`,1.8);}));
+  };
+  function openWorldModeMenu(){
+    if(openWorld.inside){showAdvancedPanel('KALE İÇİNDE',`<div class="adv-cult-hero"><span>${openWorld.inside.castle?.name||'İÇ KALE'}</span><p>Her kalede iki farklı efendi bulunur. İlk bossu yenince ikinci boss uyanır. Sol çıkış kemerinden veya etkileşim menüsünden dış dünyaya dönebilirsin.</p></div>`,[cardButton('KALEDEN ÇIK',leaveCastle),cardButton('KAPAT',closeAdvPanel)]);return;}
+    showAdvancedPanel('DÜNYA MODU',`<div class="adv-cult-hero"><span>İKİ AYRI YOLCULUK</span><p><b>Klasik Hikâye:</b> hikâye bölgeleri ve görev zinciri; sıradan düşmanlar sana saldırmaz, ancak kendi bölgelerinde devriye gezerler.</p><p><b>Açık Dünya:</b> arazi ve kaleler yol aldıkça üretilir. Her kale ayrı iç bölgeye açılır ve iki farklı boss barındırır. Tarikat hedefleri haritada işaretlenir, doğrudan ışınlanma yoktur.</p></div>`,[cardButton('AÇIK DÜNYAYA GİR',enterOpenWorld),cardButton('KLASİK HİKÂYEYE DÖN',exitOpenWorld),cardButton('KAPAT',closeAdvPanel)]);
+  }
+  game.openWorldModeMenu=openWorldModeMenu;game.enterOpenWorld=enterOpenWorld;game.exitOpenWorld=exitOpenWorld;game.isOpenWorld=()=>openWorld.enabled;game.openMap=openAdvancedMap;
+
+  game.nearestInteractable=function(maxDistance=120){
+    if(openWorld.enabled&&player){
+      if(openWorld.inside){
+        if(player.x<215)return {id:'ow_keep_exit',kind:'keepExit',name:'Kale Çıkışı',x:100,y:GROUND-20,distance:Math.abs(player.x-100)};
+        const np=ow2NearestNPC(maxDistance);if(np)return np;
+        const near=ow2OldNearest(maxDistance);return near;
+      }
+      const c=ow2NearestCastle(maxDistance);const np=ow2NearestNPC(maxDistance);
+      if(c&&(!np||c.distance<=np.distance))return c;if(np)return np;
+      return null;
+    }
+    const np=ow2NearestNPC(maxDistance);if(np)return np;return ow2OldNearest(maxDistance);
+  };
+  game.interact=function(){
+    if(mode!=='playing'||!player)return;
+    if(openWorld.enabled&&openWorld.inside){if(player.x<225){leaveCastle();return;}const np=ow2NearestNPC(125);if(np){ow2ShowDialogue(np);return;}ow2OldInteract();return;}
+    if(openWorld.enabled){const c=ow2NearestCastle(132);const np=ow2NearestNPC(120);if(c&&(!np||c.distance<=np.distance)){enterCastle(c);return;}if(np){ow2ShowDialogue(np);return;}ow2OldInteract();return;}
+    const np=ow2NearestNPC(118);if(np){ow2ShowDialogue(np);return;}ow2OldInteract();
+  };
+  function ow2CompassTarget(){
+    if(!openWorld.enabled)return null;
+    if(openWorld.inside)return {x:100,name:'KALE ÇIKIŞI',exit:true};
+    const id=openWorld.compassTarget;if(!id)return null;
+    if(id.startsWith('keep_')){const n=Number(id.slice(5));if(Number.isFinite(n)){const c=castleForChunk(n);return {x:c.doorX||c.x+c.w/2,name:c.name};}}
+    const t=CULT.find(t=>t.id===id);if(t){const site=ow2CultSite(t);return {x:site.x,name:aTargetName(t)};}
+    const npc=openWorld.npcs.find(n=>n.id===id);if(npc)return {x:npc.x,name:npc.name};
+    return null;
+  }
+  function aTargetName(t){const a=adv();return a.cultKilled.includes(t.id)?`${t.name} · ELENDİ`:t.name;}
+  function ow2DrawCompass(){
+    if(mode!=='playing'||!openWorld.enabled||!player)return;
+    const target=ow2CompassTarget();const barW=300,x=(W-barW)/2,y=77;
+    ctx.save();ctx.fillStyle='#080b12e8';ctx.fillRect(x,y,barW,39);ctx.strokeStyle='#b7985c';ctx.lineWidth=1.3;ctx.strokeRect(x,y,barW,39);
+    ctx.fillStyle='#e5c87f';ctx.beginPath();ctx.arc(x+18,y+19,10,0,Math.PI*2);ctx.strokeStyle='#e5c87f';ctx.stroke();ctx.moveTo(x+18,y+11);ctx.lineTo(x+14,y+24);ctx.lineTo(x+18,y+21);ctx.lineTo(x+22,y+24);ctx.stroke();
+    if(!target){ctx.fillStyle='#bdb7aa';ctx.font='bold 10px Arial';ctx.textAlign='left';ctx.fillText('PUSULA · HEDEF SEÇİLMEDİ',x+36,y+23);ctx.restore();return;}
+    const dx=target.x-(player.x+player.w/2), direction=target.exit?(dx<0?'◀':'▶'):(Math.abs(dx)<28?'●':dx<0?'◀':'▶'),distance=Math.round(Math.abs(dx));
+    ctx.fillStyle=target.exit?'#d9d0bf': '#f0d18a';ctx.font='bold 10px Arial';ctx.textAlign='left';ctx.fillText('HEDEF',x+36,y+13);ctx.fillStyle='#f4e6ca';ctx.font='bold 12px Georgia';ctx.fillText(target.name.length>26?target.name.slice(0,24)+'…':target.name,x+36,y+28);ctx.textAlign='right';ctx.font='bold 19px Arial';ctx.fillText(direction,x+barW-60,y+25);ctx.font='bold 12px Arial';ctx.fillText(target.exit?'ÇIKIŞ':`${distance} m`,x+barW-8,y+24);ctx.restore();
+  }
+  function ow2DrawDoorPrompt(){
+    if(mode!=='playing'||!openWorld.enabled||!player)return;
+    let msg='';
+    if(openWorld.inside){if(player.x<215)msg='E · DIŞ DÜNYAYA DÖN';}
+    else {const c=ow2NearestCastle(118);if(c)msg=`E · ${c.name.toLocaleUpperCase('tr-TR')} GİRİŞİ`;else{const np=ow2NearestNPC(94);if(np)msg=`E · ${np.name.toLocaleUpperCase('tr-TR')} İLE KONUŞ`;}}
+    if(!msg)return;ctx.save();ctx.fillStyle='#080a10e8';ctx.fillRect(W/2-135,H-86,270,27);ctx.strokeStyle='#c2a66e';ctx.strokeRect(W/2-135,H-86,270,27);ctx.fillStyle='#f1dfbd';ctx.textAlign='center';ctx.font='bold 11px Arial';ctx.fillText(msg,W/2,H-68);ctx.restore();
+  }
+  function ow2DrawSettlement(){
+    if(!openWorld.enabled||openWorld.inside||!player)return;
+    const cam=camera.x||0;
+    for(const c of openWorld.castles){
+      const x=c.x-cam;if(x<-500||x>W+500)continue;
+      const y=GROUND;ctx.save();ctx.fillStyle='#05060980';ctx.beginPath();ctx.ellipse(x+c.w/2,y+2,c.w*.68,12,0,0,Math.PI*2);ctx.fill();
+      // Strong silhouette: keep body, two separated towers, battlements and a distinct gate.
+      ctx.fillStyle=c.color;ctx.fillRect(x,y-104,c.w,104);
+      ctx.fillStyle='#18191f';ctx.fillRect(x-7,y-142,48,142);ctx.fillRect(x+c.w-42,y-153,49,153);
+      ctx.fillStyle=c.glow;ctx.fillRect(x+10,y-107,c.w-20,4);
+      for(let i=0;i<6;i++){const bx=x+12+i*(c.w-30)/5;ctx.fillStyle=c.color;ctx.fillRect(bx,y-117,15,19);}
+      ctx.fillStyle='#252129';ctx.beginPath();ctx.moveTo(x-10,y-142);ctx.lineTo(x+17,y-179);ctx.lineTo(x+41,y-142);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(x+c.w-49,y-153);ctx.lineTo(x+c.w-17,y-194);ctx.lineTo(x+c.w+10,y-153);ctx.closePath();ctx.fill();
+      const door=c.doorX||c.x+c.w/2;ctx.fillStyle='#101016';ctx.beginPath();ctx.moveTo(door-cam-24,y);ctx.lineTo(door-cam-24,y-47);ctx.quadraticCurveTo(door-cam,y-80,door-cam+24,y-47);ctx.lineTo(door-cam+24,y);ctx.closePath();ctx.fill();ctx.strokeStyle=c.glow;ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle='#e8d7b9';ctx.font='bold 10px Georgia';ctx.textAlign='center';ctx.fillText(c.name,x+c.w/2,y-205);ctx.restore();
+    }
+    const first=Math.max(0,openWorld.chunk-2),last=openWorld.chunk+2;
+    for(let n=first;n<=last;n++)for(const b of ow2BuildHouseData(n)){const x=b.x-cam;if(x<-180||x>W+180)continue;ctx.save();ctx.fillStyle=b.tone;ctx.fillRect(x,GROUND-b.h,b.w,b.h);ctx.fillStyle='#26232a';ctx.beginPath();ctx.moveTo(x-7,GROUND-b.h);ctx.lineTo(x+b.w/2,GROUND-b.h-22);ctx.lineTo(x+b.w+7,GROUND-b.h);ctx.closePath();ctx.fill();ctx.fillStyle='#272731';ctx.fillRect(x+b.w*.22,GROUND-b.h*.55,13,18);ctx.fillRect(x+b.w*.65,GROUND-b.h*.55,13,18);if(b.type==='stall'){ctx.fillStyle='#a04b50';ctx.fillRect(x-3,GROUND-b.h-3,b.w+6,9);}ctx.restore();}
+  }
+  function ow2DrawInterior(){
+    if(!openWorld.enabled||!openWorld.inside)return;
+    const cam=camera.x||0;ctx.save();
+    const castle=openWorld.inside.castle||castleForChunk(openWorld.chunk);const tint=castle.color||'#55515c';
+    const grad=ctx.createLinearGradient(0,0,0,H);grad.addColorStop(0,'#11121b');grad.addColorStop(.55,'#25232a');grad.addColorStop(1,'#0f1017');ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#24222a';ctx.fillRect(0,88,W,GROUND-88);ctx.fillStyle='#3a3233';ctx.fillRect(0,GROUND-5,W,5);
+    for(let i=0;i<8;i++){const px=i*365+40-cam*.24;ctx.fillStyle='#101119';ctx.fillRect(px,118,42,GROUND-118);ctx.fillStyle=tint;ctx.fillRect(px+42,118,6,GROUND-118);ctx.beginPath();ctx.arc(px+21,118,21,Math.PI,Math.PI*2);ctx.fill();}
+    ctx.globalAlpha=.35;ctx.strokeStyle=castle.glow||'#c2a56c';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(W/2,75);ctx.lineTo(W/2,210);ctx.moveTo(W/2-65,135);ctx.lineTo(W/2+65,135);ctx.stroke();ctx.globalAlpha=1;
+    // Exit arch is visually unmistakable and always accessible.
+    ctx.fillStyle='#090a0f';ctx.fillRect(52-cam,GROUND-108,82,108);ctx.beginPath();ctx.arc(93-cam,GROUND-108,41,Math.PI,Math.PI*2);ctx.fill();ctx.strokeStyle='#d0b06f';ctx.lineWidth=3;ctx.strokeRect(52-cam,GROUND-108,82,108);ctx.fillStyle='#ead7ad';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('ÇIKIŞ',93-cam,GROUND-120);ctx.restore();
+  }
+  drawBackground=function(){
+    if(openWorld.enabled&&openWorld.inside){ow2VanillaBackground();ow2DrawInterior();return;}
+    ow2VanillaBackground();ow2DrawSettlement();
+  };
+  function ow2DrawSecondBoss(e){
+    const x=e.x-camera.x,y=e.y,w=e.w,h=e.h,color=e.keepBossColor||'#72505d',glow=e.keepBossGlow||'#edaf83',theme=e.keepBossTheme||'polar';
+    ctx.save();ctx.globalAlpha=.24+.08*Math.sin(gameTime*6);ctx.fillStyle=glow;ctx.beginPath();ctx.ellipse(x+w/2,y+h+2,w*.9,12,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+    ctx.shadowColor=glow;ctx.shadowBlur=18;ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x+w*.25,y+h*.24);ctx.lineTo(x+w*.75,y+h*.24);ctx.lineTo(x+w*.94,y+h*.82);ctx.lineTo(x+w*.52,y+h);ctx.lineTo(x+w*.06,y+h*.82);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+    ctx.fillStyle='#191820';ctx.beginPath();ctx.ellipse(x+w/2,y+h*.2,w*.29,h*.18,0,0,Math.PI*2);ctx.fill();ctx.fillStyle=glow;ctx.fillRect(x+w*.31,y+h*.19,w*.13,3);ctx.fillRect(x+w*.56,y+h*.19,w*.13,3);
+    ctx.strokeStyle=glow;ctx.lineWidth=4;ctx.lineCap='round';ctx.beginPath();
+    if(theme==='japan'){ctx.moveTo(x+w*.21,y+h*.17);ctx.lineTo(x+w*.03,y+h*.02);ctx.moveTo(x+w*.78,y+h*.17);ctx.lineTo(x+w*.96,y+h*.02);}
+    else if(theme==='ottoman'){ctx.arc(x+w*.53,y+h*.08,w*.2,Math.PI*.08,Math.PI*.95);ctx.moveTo(x+w*.62,y+h*.01);ctx.arc(x+w*.69,y+h*.08,w*.14,Math.PI*.3,Math.PI*1.5);}
+    else if(theme==='desert'){ctx.moveTo(x+w*.22,y+h*.15);ctx.lineTo(x+w*.16,y+h*.01);ctx.lineTo(x+w*.39,y+h*.13);ctx.moveTo(x+w*.78,y+h*.15);ctx.lineTo(x+w*.84,y+h*.01);ctx.lineTo(x+w*.61,y+h*.13);}
+    else if(theme==='england'){ctx.moveTo(x+w*.22,y+h*.16);ctx.lineTo(x+w*.16,y+h*.01);ctx.lineTo(x+w*.48,y+h*.1);ctx.lineTo(x+w*.56,y+h*.01);ctx.lineTo(x+w*.82,y+h*.16);}
+    else{ctx.moveTo(x+w*.23,y+h*.17);ctx.lineTo(x+w*.13,y+h*.01);ctx.lineTo(x+w*.43,y+h*.13);ctx.moveTo(x+w*.77,y+h*.17);ctx.lineTo(x+w*.87,y+h*.01);ctx.lineTo(x+w*.57,y+h*.13);}
+    ctx.stroke();
+    if(e.specialState==='warning'||e.specialState==='active'){ctx.globalAlpha=e.specialState==='warning'?.2:.34;ctx.fillStyle=glow;ctx.beginPath();ctx.ellipse(x+w/2,GROUND-2,165,16,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.strokeStyle=glow;ctx.setLineDash([7,5]);ctx.beginPath();ctx.ellipse(x+w/2,GROUND-2,165,16,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}
+    ctx.fillStyle='#f4e7d2';ctx.font='bold 11px Georgia';ctx.textAlign='center';ctx.fillText(e.keepBossName||'İKİNCİ EFENDİ',x+w/2,y-17);ctx.restore();
+  }
+  drawFighter=function(e,isPlayer=false){ow2PreviousFighterDraw(e,isPlayer);if(e&&e.isKeepBoss&&e.alive)ow2DrawSecondBoss(e);};
+  function ow2UpdateCastleBoss(dt){
+    if(!openWorld.inside||!player)return;
+    const region=game.regions[game.currentZone],meta=region?.keepMeta;if(!meta)return;
+    const rp=ow2RegionProgress(game.currentZone);
+    if(boss&&!boss.alive&&!openWorld.inside.firstBossDefeated){openWorld.inside.firstBossDefeated=true;rp.bossDefeated=true;const two=enemies.find(e=>e.id===meta.secondId);if(two&&!rp.defeated.includes(meta.secondId)){two.alive=true;two.hp=Number.isFinite(rp.bossTwoHp)?Math.min(meta.secondHp,rp.bossTwoHp):meta.secondHp;two.maxHp=meta.secondHp;two.x=2040;two.y=GROUND-two.h;two.vx=0;two.vy=0;two.home=2040;two.state='approach';two.attack=null;two.attackCd=1.1;two.specialState='idle';two.specialCooldown=2.2;two.isKeepBoss=true;two.keepBossName=meta.secondName;bannerText(`İKİNCİ BOSS UYANDI · ${meta.secondName.toLocaleUpperCase('tr-TR')}`,3);spawnParticles(two.x+two.w/2,two.y+two.h/2,two.keepBossGlow||'#f3c777',34,190);openWorld.inside.boss2Spawned=true;}saveOpenWorld();}
+    const two=enemies.find(e=>e.id===meta.secondId);
+    if(two&&two.isKeepBoss&&two.alive){
+      two.specialCooldown=Math.max(0,(two.specialCooldown||0)-dt);two.specialTimer=Math.max(0,(two.specialTimer||0)-dt);
+      if(!two.specialState||two.specialState==='idle'){if(two.specialCooldown<=0){two.specialState='warning';two.specialTimer=.85;two.specialCooldown=3.7;two.specialHit=false;bannerText(`${two.keepBossName} · ALAN SALDIRISI`,1.1);}}
+      else if(two.specialState==='warning'&&two.specialTimer<=0){two.specialState='active';two.specialTimer=.24;spawnParticles(two.x+two.w/2,GROUND-10,two.keepBossGlow||'#e7be80',30,180);if(Math.abs((player.x+player.w/2)-(two.x+two.w/2))<165&&player.grounded&&player.dodge<=0&&player.invuln<=0){hurtPlayer(22,two.x+two.w/2);two.specialHit=true;}}
+      else if(two.specialState==='active'&&two.specialTimer<=0){two.specialState='idle';}
+      rp.bossTwoHp=two.hp;
+    }
+    if(two&&two.isKeepBoss&&!two.alive&&!openWorld.inside.boss2Defeated&&rp.defeated.includes(meta.secondId)){
+      openWorld.inside.boss2Defeated=true;rp.bossTwoHp=0;awardXP(170,'İkinci kale bossu');bannerText(`${two.keepBossName} YENİLDİ · KALE TEMİZLENDİ`,3);saveSafe();saveOpenWorld();
+    }
+  }
+  function ow2MoveNPCs(dt){
+    const npcs=game.regions[game.currentZone]?.npcs||[];
+    for(const n of npcs){
+      if(!Number.isFinite(n.homeX))n.homeX=n.x;
+      n.anim=(n.anim||0)+dt*3;
+      const range=n.patrolRange||24,speed=n.walkSpeed||11;
+      if(n.x>=n.homeX+range)n.direction=-1;if(n.x<=n.homeX-range)n.direction=1;
+      n.x+= (n.direction||1)*speed*dt;
+      n.x=Math.max(n.homeX-range,Math.min(n.homeX+range,n.x));
+    }
+  }
+  updateEnemies=function(dt){
+    if(openWorld.enabled){ow2CoreEnemyUpdate(dt);return;}
+    // Classic story guards patrol and can be fought, but do not aggro or attack unprovoked.
+    for(const e of enemies){if(!e.alive)continue;e.anim=(e.anim||0)+dt*4;e.flash=Math.max(0,(e.flash||0)-dt);e.stun=Math.max(0,(e.stun||0)-dt);
+      e.home=Number.isFinite(e.home)?e.home:e.x;e.patrolDir=e.patrolDir||1;const range=65;
+      if(e.x>e.home+range)e.patrolDir=-1;if(e.x<e.home-range)e.patrolDir=1;
+      e.vx=e.patrolDir*(e.speed||35)*.28;e.face=e.patrolDir;e.attack=null;if(e.state!=='stunned')e.state=Math.abs(e.vx)>4?'patrol':'idle';
+      physics(e,dt);
+    }
+  };
+  update=function(dt){
+    if(openWorld.enabled&&mode==='playing'&&player&&!openWorld.inside){ensureChunks();enemies.splice(0,enemies.length,...openWorld.enemies);}
+    ow2CoreUpdatePipeline(dt);
+    if(mode!=='playing'||!player)return;
+    ow2MoveNPCs(dt);
+    if(openWorld.enabled){
+      if(openWorld.inside){ow2UpdateCastleBoss(dt);if(player.x<18)leaveCastle();}
+      else {ensureChunks();const info=ow2CompassTarget();if(info)openWorld._compassX=info.x;else openWorld._compassX=null;}
+    }
+  };
+  drawBackground=drawBackground;
+  render=function(){ow2PreviousRender();ow2DrawCompass();ow2DrawDoorPrompt();};
+  // Make NPC interaction a true choice menu in classic regions too, while keeping shop/quest consequences.
+  game.saveOpenWorld=saveOpenWorld;
+  // A direct startup setup ensures dynamically named interiors exist before a saved game is loaded.
+  ow2WorldRegion();
+  if(openWorld.inside?.castle){const re=ow2KeepRegion(openWorld.inside.castle);}
+  const ow2OriginalContinue=game.continueGame;
+  game.continueGame=function(){
+    try{
+      const raw=localStorage.getItem('blade-of-the-fallen-save-v1');const data=raw?JSON.parse(raw):null;const zone=data?.state?.currentZone;
+      if(zone===OW2_WORLD_ZONE){openWorld.enabled=true;openWorld.inside=null;ow2WorldRegion();}
+      else if(typeof zone==='string'&&zone.startsWith('open_keep_')){openWorld.enabled=true;if(openWorld.inside?.castle){const re=ow2KeepRegion(openWorld.inside.castle);}else{const c=castleForChunk(openWorld.chunk||0);openWorld.inside={castleId:c.id,castle:c,regionId:zone,returnX:c.doorX||c.x+c.w/2,boss2Spawned:false,boss2Defeated:false};ow2KeepRegion(c);}}
+    }catch(_){}
+    const result=ow2OriginalContinue();
+    if(openWorld.enabled){if(openWorld.inside){const d=ow2RegisterKeepFromSaved();ow2SetupKeepAfterLoad(d);}else{ensureChunks();enemies.splice(0,enemies.length,...openWorld.enemies);}}
+    return result;
+  };
+  // Fix AI collision: exterior guards were being spawned behind the castle's decorative wall strips,
+  // so their own horizontal collision reset their X coordinate every frame. In streamed world areas,
+  // actors collide with floors/platforms but not with the player's portal-only doorway blocker.
+  const ow2PreviousPhysics=physics;
+  physics=function(entity,dt){
+    if(openWorld.enabled&&entity&&entity!==player){
+      entity.x=Math.max(0,Math.min(WORLD-entity.w,entity.x+(entity.vx||0)*dt));
+      const oldBottom=entity.y+entity.h;entity.vy=(entity.vy||0)+1500*dt;entity.y+=entity.vy*dt;entity.grounded=false;
+      const solids=[{x:0,y:GROUND,w:WORLD,h:H-GROUND+100},...platforms];
+      for(const p of solids){if(entity.vy>=0&&oldBottom<=p.y+3&&entity.y+entity.h>=p.y&&entity.x+entity.w>p.x&&entity.x<p.x+p.w){entity.y=p.y-entity.h;entity.vy=0;entity.grounded=true;}}
+      if(entity.y>H+250){entity.y=GROUND-entity.h;entity.vy=0;}
+      return;
+    }
+    ow2PreviousPhysics(entity,dt);
+  };
+  // Native E and touch-interact both route through the same API above. Show an unmistakable exit hint.
+  const ow2OriginalOpenWorldMenu=openWorldModeMenu;
+  game.debugOpenWorld=()=>({enabled:openWorld.enabled,inside:openWorld.inside?.regionId||null,chunk:openWorld.chunk,castleCount:openWorld.castles.length,worldWidth:WORLD,enemyCount:enemies.filter(e=>e.alive).length,npcCount:(game.regions[game.currentZone]?.npcs||[]).length,bossOne:boss?.name||null,bossTwo:enemies.find(e=>e.isKeepBoss)?.keepBossName||null,compassTarget:openWorld.compassTarget});
+  saveOpenWorld();
+
+  // Expose a safe diagnostics panel for test automation, not a required external dependency.
+  game.debugAdvanced=()=>({zone:game.currentZone,skills:adv().skillRanks,xp:adv().xp,skillPoints:adv().skillPoints,collectibles:COLLECTIBLES.length,cultTargets:CULT.length,bosses:Object.keys(BOSSES).length,towers:Object.keys(towers).length,outfits:Object.keys(OUTFITS).length,regionBosses:zoneIds.filter(id=>regionDefs[id].boss).length});
+  ensureAdvanced(false);updateUnlocks();syncPlayControls();
 })();
 
 requestAnimationFrame(loop);
