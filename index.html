@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BLADE OF THE FALLEN · Açık Dünya RPG</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#08090e;color:#e8e0d0;font-family:Georgia,serif}main{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:8px}#frame{width:min(100%,1100px);position:relative;border:1px solid #51443c;box-shadow:0 0 55px #000;overflow:hidden;background:#0b0d16}canvas{display:block;width:100%;height:auto;aspect-ratio:16/9}#overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,6,12,.86);padding:18px;overflow:auto}#overlay.hidden{display:none}.panel{width:min(560px,100%);max-height:100%;overflow:auto;text-align:center;border:1px solid #806345;background:linear-gradient(145deg,#171720,#090b12);padding:clamp(16px,4vw,34px);box-shadow:0 0 45px #000}h1{font-size:clamp(25px,5vw,43px);letter-spacing:3px;color:#d8b47a;margin:0 0 8px}h2{color:#d8b47a;letter-spacing:2px;font-size:18px}p{line-height:1.5;color:#d0c9bd;margin:10px 0}button{font:inherit;color:#f0dfc0;background:#282019;border:1px solid #a27a49;padding:11px 15px;margin:4px;cursor:pointer;transition:.15s;max-width:100%}button:hover{background:#604128;transform:translateY(-1px)}.small{font-size:12px;color:#9e9aa1}#footer{width:min(100%,1100px);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 12px;color:#9e9aa1;font:12px Arial,sans-serif}kbd{border:1px solid #82715b;border-radius:3px;padding:2px 5px;color:#e8d6b4;white-space:nowrap}#buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:3px}.panel::-webkit-scrollbar{width:7px}.panel::-webkit-scrollbar-thumb{background:#51443c}@media(max-width:600px){main{padding:0}#frame{width:100%;border-left:0;border-right:0}#footer{font-size:10px;padding:8px}.panel{padding:14px}button{padding:9px 10px;font-size:13px}#overlay{padding:8px}}
+
+#overlay{z-index:5}
+#quickShop{display:none;position:absolute;top:10px;right:10px;z-index:6;margin:0;padding:9px 12px;background:#17130fea;border-color:#d2a86a;box-shadow:0 3px 18px #0009;font: bold 12px Arial,sans-serif;letter-spacing:.7px;touch-action:manipulation}
+#touchControls{display:none;position:relative;z-index:4;left:auto;right:auto;bottom:auto;width:100%;padding:7px 9px;background:linear-gradient(180deg,#0b0d16,#111018);border-top:1px solid #51443c;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;font-family:Arial,sans-serif;touch-action:none}
+.touch-cluster{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap}
+.touch-cluster button{min-width:48px;min-height:48px;padding:8px 10px;margin:0;border-radius:12px;background:#24212aeF;border:1px solid #8e7658;font:700 12px Arial,sans-serif;box-shadow:0 3px 0 #09090e;touch-action:none;user-select:none;-webkit-user-select:none}
+.touch-cluster button:active,.touch-cluster button.held{background:#76502d;transform:translateY(2px);box-shadow:0 1px 0 #09090e}
+.utility-cluster{flex-basis:100%;justify-content:flex-end}.utility-cluster button{min-height:35px;min-width:42px;padding:6px 9px;font-size:10px;background:#191923}
+.touch-cluster .touch-attack{border-color:#c3a06d;background:#38261d}.touch-cluster .touch-heavy{border-color:#bd5c52;background:#421e27}.touch-cluster .touch-interact{border-color:#688b70}
+#frame.touch-enabled #touchControls{display:flex}
+#frame.touch-enabled{overflow:visible}
+#frame.touch-enabled canvas{touch-action:none}
+@media(max-width:700px){main{padding:0;display:flex;justify-content:flex-start}#frame{width:100%;border-left:0;border-right:0}#touchControls{gap:5px;padding:6px}.touch-cluster{gap:4px}.touch-cluster button{min-width:43px;min-height:46px;padding:7px;font-size:11px}.move-cluster{flex:1}.combat-cluster{flex:2}#quickShop{top:6px;right:6px;padding:7px 9px;font-size:10px}#footer{width:100%;padding:6px;font-size:9px}}
+@media(max-width:390px){.touch-cluster button{min-width:39px;min-height:43px;padding:5px;font-size:10px}.touch-cluster{gap:3px}#touchControls{gap:3px}}
+
+
+/* Ashen Crown visual pass */
+:root{--gold:#dfbd80;--ember:#ef805e;--violet:#a78bfa;--ice:#9de3f4}
+body{background:radial-gradient(ellipse at 50% -10%,#252231 0%,#0b0c13 48%,#050609 100%)}
+#frame{border:1px solid #6f5a46;box-shadow:0 0 0 1px #15131a,0 18px 70px #000,0 0 42px #6d3c3021;background:#080910}
+canvas{image-rendering:auto;filter:contrast(1.035) saturate(1.08)}
+#overlay{background:radial-gradient(ellipse at center,#11121bdc 0%,#030408f2 100%);backdrop-filter:blur(4px)}
+.panel{border:1px solid #8d704c;background:linear-gradient(145deg,#23202a 0%,#11121b 40%,#080910 100%);box-shadow:0 0 0 1px #d0ac5815,inset 0 0 28px #d1b0780a,0 18px 70px #000;position:relative}
+.panel:before{content:"";position:absolute;left:14px;right:14px;top:8px;height:1px;background:linear-gradient(90deg,transparent,#d9b47685,transparent);pointer-events:none}
+h1{color:#f0d29a;text-shadow:0 0 20px #e5ae6029;letter-spacing:2.5px}
+h2{color:#e0bd7e;text-shadow:0 0 12px #c58d4630}
+button{border-color:#927249;background:linear-gradient(180deg,#3a2b25,#201920);box-shadow:inset 0 1px #ffffff0b,0 3px 0 #08080b,0 5px 12px #0005;border-radius:4px}
+button:hover{background:linear-gradient(180deg,#634631,#382420);border-color:#e1bd7c;box-shadow:0 0 18px #d5a75b25;transform:translateY(-1px)}
+button:active{transform:translateY(1px);box-shadow:0 1px 0 #08080b}
+#quickShop{background:linear-gradient(135deg,#2e241eF2,#100f17F2);border:1px solid #d2ad70;color:#f4d9a8;border-radius:5px;box-shadow:0 0 0 1px #000,0 5px 20px #000a,0 0 20px #c98e4422;backdrop-filter:blur(8px)}
+#touchControls{background:linear-gradient(180deg,#0b0d16f5,#17121af7);border-top:1px solid #94734d;box-shadow:0 -10px 32px #0007}
+.touch-cluster button{background:linear-gradient(180deg,#302b35,#17161f);border-color:#74644f;box-shadow:inset 0 1px #fff1,0 3px 0 #07070a,0 5px 10px #0005}
+.touch-cluster .touch-attack{background:linear-gradient(180deg,#60402c,#2d1d1b);border-color:#d2ab6b}
+.touch-cluster .touch-heavy{background:linear-gradient(180deg,#58252d,#26141d);border-color:#b86a63}
+.touch-cluster .touch-interact{background:linear-gradient(180deg,#2c5548,#172921);border-color:#80b29a;min-width:94px}
+#panel.shop-panel{width:min(900px,100%);text-align:left;padding:clamp(12px,2.5vw,25px);display:flex;flex-direction:column;overflow:hidden;}
+#panel.shop-panel h1{flex:0 0 auto;margin-bottom:8px}
+#panel.shop-panel .shop-intro{flex:0 0 auto}
+#panel.shop-panel .shop-grid{flex:1 1 auto;min-height:0;max-height:none;align-content:start;grid-auto-rows:max-content}
+#panel.shop-panel .shop-footer{display:none}
+#panel.shop-panel #buttons{flex:0 0 auto;position:relative;padding-top:7px;background:linear-gradient(180deg,#11121b,#090a10);margin-top:7px;border-top:1px solid #514134}
+.shop-intro{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;margin:0 0 14px;border:1px solid #80664a;background:linear-gradient(90deg,#1d1a22,#12141c);border-radius:6px}
+.shop-ashes{color:#f2d18b;font:700 19px Georgia,serif;text-shadow:0 0 14px #df9c403c}
+.shop-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-height:min(57vh,610px);overflow:auto;padding:2px 5px 8px 1px;scrollbar-color:#70563d #13131b}
+.shop-section-title{grid-column:1/-1;margin:12px 0 0;color:#e0bd7e;font:700 12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;padding:8px 4px 5px;border-bottom:1px solid #72583f}
+.shop-item{min-width:0;min-height:150px;display:grid;grid-template-columns:105px minmax(0,1fr);gap:10px;padding:10px;border:1px solid #4e4140;border-radius:7px;background:linear-gradient(145deg,#201e28,#101119 70%);box-shadow:inset 0 1px #ffffff08;position:relative;overflow:hidden}
+.shop-item.legendary{border-color:#9b7b44;background:linear-gradient(145deg,#302820,#17151d 70%);box-shadow:inset 0 0 18px #dba55210,0 0 16px #d5a0560c}
+.shop-item.legendary:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 15%,#ffe4a20a 50%,transparent 80%)}
+.shop-art{width:100%;height:100px;border-radius:5px;background:radial-gradient(ellipse at center,#3a2c25 0%,#1b1822 46%,#0b0c12 100%);border:1px solid #504136;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shop-art svg{width:100%;height:100%;filter:drop-shadow(0 0 7px var(--artglow,#d1b071));}
+.shop-item-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:5px;position:relative;z-index:1}
+.shop-rarity{font:700 9px Arial,sans-serif;letter-spacing:1.6px;color:#9b969c;text-transform:uppercase}
+.legendary .shop-rarity{color:#f2cb7b}
+.shop-item-title{font:700 14px Georgia,serif;color:#eee0c5;line-height:1.25;overflow-wrap:anywhere}
+.shop-item-desc{font:11px/1.4 Arial,sans-serif;color:#aaa4a8}
+.shop-stats{font:10px Arial,sans-serif;color:#d9bd91;letter-spacing:.25px}
+.shop-buy{margin:auto 0 0;padding:7px 9px;width:100%;font:700 11px Arial,sans-serif;letter-spacing:.45px;border-radius:4px}
+.shop-buy.owned{opacity:.7;border-color:#5e7864;color:#a3d1ae;background:#17251f;cursor:default}
+.shop-buy.locked{opacity:.6;border-color:#614d49;color:#c3aca4}
+.shop-footer{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:12px;padding-top:9px;border-top:1px solid #514134}
+.shop-footer button{font-size:12px}
+.cinematic-hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:7;font:700 11px Arial,sans-serif;letter-spacing:1px;color:#ddc89f;text-shadow:0 2px 5px #000;pointer-events:none;white-space:nowrap}
+@media(max-width:650px){#panel.shop-panel{padding:10px}.shop-grid{grid-template-columns:1fr;max-height:54vh;gap:8px}.shop-item{grid-template-columns:88px minmax(0,1fr);padding:8px;gap:8px}.shop-art{height:95px}.shop-item-title{font-size:13px}.shop-item-desc{font-size:10px}.shop-section-title{margin-top:7px}}
+@media(min-width:651px) and (max-width:850px){.shop-item{grid-template-columns:80px minmax(0,1fr)}.shop-art{height:95px}}
+
+</style>
+</head>
+<body>
+<main>
+<div id="frame">
+<canvas id="game" width="960" height="540" aria-label="Blade of the Fallen oyun alanı"></canvas>
+<div id="overlay"><div class="panel" id="panel"></div></div>
+<button id="quickShop" type="button" aria-label="Kül Taciri dükkânını aç">⚒ DÜKKÂN <span style="opacity:.7">[B]</span></button>
+<div id="touchControls" aria-label="Telefon ve tablet oyun kontrolleri">
+  <div class="touch-cluster move-cluster">
+    <button type="button" data-hold="a" aria-label="Sola yürü">◀</button>
+    <button type="button" data-action="jump" aria-label="Zıpla">⬆ Zıpla</button>
+    <button type="button" data-hold="d" aria-label="Sağa yürü">▶</button>
+  </div>
+  <div class="touch-cluster combat-cluster">
+    <button type="button" class="touch-attack" data-action="light">⚔ Hızlı</button>
+    <button type="button" class="touch-heavy" data-action="heavy">💥 Ağır</button>
+    <button type="button" data-action="parry">🛡 Savuştur</button>
+    <button type="button" data-action="dodge">↗ Kaçın</button>
+    <button type="button" class="touch-interact" data-action="interact" aria-label="Yakındaki karakter, sunak veya dinlenme noktasıyla etkileşime geç">✋ ETKİLEŞİM</button>
+    <button type="button" data-action="shop">🛒 Dükkân</button>
+  </div>
+  <div class="touch-cluster utility-cluster">
+    <button type="button" data-action="inventory">🎒 Çanta</button>
+    <button type="button" data-action="journal">📜 Görev</button>
+    <button type="button" data-action="map">🗺 Harita</button>
+    <button type="button" data-action="shadow">🌑 Gölge</button>
+  </div>
+</div>
+</div>
+<div id="footer"><span>BLADE OF THE FALLEN · RPG EDITION</span><span id="footerControls"><kbd>A</kbd><kbd>D</kbd> Hareket · <kbd>W</kbd>/<kbd>Space</kbd> Zıpla · <kbd>J</kbd> Hızlı Kes · <kbd>K</kbd> Ağır Kes · <kbd>L</kbd> Savuştur · <kbd>Shift</kbd> Kaçın · <kbd>E</kbd> Etkileşim · <kbd>B</kbd> Dükkân</span></div>
+</main>
+<script>
+"use strict";
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+const overlay = document.getElementById("overlay");
+const panel = document.getElementById("panel");
+const W = canvas.width, H = canvas.height, GROUND = 470;
+let WORLD = 3500;
+const keys = new Set(), pressed = new Set(), platforms = [];
+let mode = "menu", lastTime = 0, player = null, enemies = [], boss = null, particles = [], camera = {x:0}, shake = 0;
+let gameTime = 0, banner = "", bannerTimer = 0, audioCtx = null, soundOn = true, bossUnlocked = false, bossNotice = false, kills = 0, damageFlash = 0;
+let touchModeEnabled = false;
+try { touchModeEnabled = localStorage.getItem("blade-of-the-fallen-touch") === "1"; } catch (_) {}
+const gameFrame = document.getElementById("frame");
+const touchControls = document.getElementById("touchControls");
+const quickShopButton = document.getElementById("quickShop");
+const footerControls = document.getElementById("footerControls");
+function syncPlayControls(){
+  if(gameFrame) gameFrame.classList.toggle("touch-enabled", touchModeEnabled);
+  const playingVisible = mode === "playing" && overlay.classList.contains("hidden");
+  if(touchControls) touchControls.style.display = touchModeEnabled && playingVisible ? "flex" : "none";
+  if(quickShopButton) quickShopButton.style.display = playingVisible ? "block" : "none";
+  if(footerControls) footerControls.innerHTML = touchModeEnabled
+    ? "DOKUNMATİK: YÖN · ZIPLA · HIZLI/AĞIR SALDIRI · SAVUŞTUR · KAÇIN · ETKİLEŞİM · DÜKKÂN · ÇANTA · GÖREV · HARİTA"
+    : "<kbd>A</kbd><kbd>D</kbd> Hareket · <kbd>W</kbd>/<kbd>Space</kbd> Zıpla · <kbd>J</kbd> Hızlı Kes · <kbd>K</kbd> Ağır Kes · <kbd>L</kbd> Savuştur · <kbd>Shift</kbd> Kaçın · <kbd>E</kbd> Etkileşim · <kbd>B</kbd> Dükkân · <kbd>I</kbd> Çanta · <kbd>Q</kbd> Görev · <kbd>M</kbd> Harita · <kbd>X</kbd> Gölge";
+}
+function setTouchMode(enabled){
+  touchModeEnabled = Boolean(enabled);
+  try { localStorage.setItem("blade-of-the-fallen-touch", touchModeEnabled ? "1" : "0"); } catch (_) {}
+  syncPlayControls();
+}
+const clamp = (v,a,b) => Math.max(a, Math.min(b,v));
+const rand = (a,b) => a + Math.random() * (b-a);
+const rects = (a,b) => a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y;
+
+function sound(freq=180, duration=.07, type="sawtooth", volume=.035) {
+  if (!soundOn) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+    o.type=type; o.frequency.setValueAtTime(freq,audioCtx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(Math.max(35,freq*.48),audioCtx.currentTime+duration);
+    g.gain.setValueAtTime(volume,audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);
+    o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+duration);
+  } catch (_) {}
+}
+function showPanel(title, body, buttons=[]) {
+  panel.classList.remove("shop-panel");
+  overlay.classList.remove("hidden");
+  panel.innerHTML = `<h1>${title}</h1>${body}<div id="buttons"></div>`;
+  const box=panel.querySelector("#buttons");
+  for (const b of buttons) {
+    const el=document.createElement("button"); el.textContent=b.label; el.addEventListener("click",b.action); box.appendChild(el);
+  }
+  syncPlayControls();
+}
+function hidePanel(){overlay.classList.add("hidden");syncPlayControls();}
+function bannerText(text,seconds=2.5){banner=text;bannerTimer=seconds;}
+function makePlayer(){
+  return {x:100,y:GROUND-58,w:34,h:58,vx:0,vy:0,hp:100,maxHp:100,stamina:100,maxStamina:100,ashes:0,level:1,stats:{strength:5,dexterity:5,vigor:5},face:1,grounded:false,state:"idle",stateTimer:0,attack:null,attackSerial:0,dodge:0,dodgeCd:0,parry:0,parryCd:0,stun:0,invuln:0,combo:0,comboTimer:0,anim:0,exhaustedTimer:0,staminaRegenDelay:0,jumpCount:0,wallSide:0,wallJumpTimer:0,wallJumpDir:0,shadowDashTimer:0};
+}
+function makeEnemy(x,type="soldier"){
+  const elite=type==="elite";
+  return {x,y:GROUND-(elite?70:52),w:elite?42:32,h:elite?70:52,vx:0,vy:0,face:-1,type,hp:elite?100:48,maxHp:elite?100:48,speed:elite?55:78,range:elite?72:54,state:"patrol",timer:rand(.5,1.5),attackCd:rand(.5,1.4),stun:0,flash:0,attack:null,hitThisAttack:false,alive:true,home:x,patrolDir:1,anim:0};
+}
+function makeBoss(){return {x:3100,y:GROUND-112,w:70,h:112,vx:0,vy:0,face:-1,hp:300,maxHp:300,phase:1,state:"intro",timer:1.5,attack:null,attackCd:1.2,stun:0,flash:0,alive:true,anim:0,hitThisAttack:false,phaseText:false};}
+function resetGame(){player=makePlayer();enemies=[];boss=null;particles=[];camera={x:0};shake=0;gameTime=0;kills=0;damageFlash=0;}
+function solidPlatforms(){return [{x:0,y:GROUND,w:WORLD,h:H-GROUND+100},...platforms];}
+function spawnParticles(x,y,color,count=8,power=130){
+  for(let i=0;i<count;i++){const a=rand(0,Math.PI*2),s=rand(power*.25,power);particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rand(.18,.55),maxLife:.55,size:rand(2,5),color,gravity:250});}
+}
+function updateParticles(dt){for(const p of particles){p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=p.gravity*dt;p.vx*=Math.pow(.04,dt);}particles=particles.filter(p=>p.life>0);}
+function physics(entity,dt){
+  entity.x=clamp(entity.x+entity.vx*dt,0,WORLD-entity.w);const oldBottom=entity.y+entity.h;entity.vy+=1500*dt;entity.y+=entity.vy*dt;entity.grounded=false;
+  for(const p of solidPlatforms()){if(entity.vy>=0&&oldBottom<=p.y+3&&entity.y+entity.h>=p.y&&entity.x+entity.w>p.x&&entity.x<p.x+p.w){entity.y=p.y-entity.h;entity.vy=0;entity.grounded=true;}}
+  if(entity.y>H+250){entity.y=GROUND-entity.h;entity.vy=0;}
+}
+function attackBox(entity,range,height){const x=entity.face===1?entity.x+entity.w:entity.x-range;return {x,y:entity.y+(entity.h-height)*.48,w:range,h:height};}
+function startAttack(kind){if(mode!=="playing"||player.stun>0||player.dodge>0||player.attack)return;player.attack={kind,phase:"windup",timer:kind==="light"?.1:.32,active:kind==="light"?.13:.19,recovery:kind==="light"?.22:.48,hit:new Set(),serial:++player.attackSerial};player.state="attack";sound(kind==="light"?270:130,kind==="light"?.08:.17);}
+function startParry(){if(player.parryCd>0||player.stun>0||player.dodge>0||player.attack)return;player.parry=.19;player.parryCd=.65;player.state="parry";sound(420,.045,"triangle",.02);}
+function startDodge(){if(player.dodgeCd>0||player.dodge>0||player.stun>0)return;player.dodge=.24;player.dodgeCd=.78;player.invuln=.29;player.vx=player.face*490;player.state="dodge";player.attack=null;spawnParticles(player.x+player.w/2,player.y+player.h/2,"#9cabb4",5,70);sound(100,.08,"triangle",.025);}
+function hurtPlayer(dmg,fromX){if(player.invuln>0||player.dodge>0||mode!=="playing")return;player.hp=Math.max(0,player.hp-dmg);player.invuln=.62;player.stun=.18;player.attack=null;player.vx=(player.x+player.w/2<fromX?-1:1)*175;spawnParticles(player.x+player.w/2,player.y+player.h/2,"#b94e4e",12,150);damageFlash=.12;shake=5;sound(85,.13);if(player.hp<=0)defeat();}
+function enemyHurt(e,dmg,knock=100){if(!e||!e.alive)return;e.hp=Math.max(0,e.hp-dmg);e.flash=.13;e.stun=.18;e.vx=player.face*knock;spawnParticles(e.x+e.w/2,e.y+e.h/2,"#e4b36d",9,130);sound(145,.07);if(e.hp<=0){e.alive=false;e.state="dead";kills++;spawnParticles(e.x+e.w/2,e.y+e.h/2,"#8c7970",20,180);bannerText("DÜŞMAN YENİLDİ",1.2);}}
+function bossHurt(dmg){if(!boss||!boss.alive)return;boss.hp=Math.max(0,boss.hp-dmg);boss.flash=.14;spawnParticles(boss.x+boss.w/2,boss.y+45,"#d6b57b",12,150);sound(115,.1);if(boss.phase===1&&boss.hp<=boss.maxHp*.5){boss.phase=2;boss.state="phaseChange";boss.timer=1.3;boss.attack=null;boss.vx=0;bannerText("İKİNCİ AŞAMA: TAHTIN ÖFKESİ",2.2);spawnParticles(boss.x+boss.w/2,boss.y+50,"#c33d53",35,230);shake=10;}if(boss.hp<=0){boss.hp=0;boss.alive=false;boss.state="dead";boss.attack=null;spawnParticles(boss.x+boss.w/2,boss.y+50,"#e9c47b",65,300);victory();}}
+function updatePlayer(dt){
+  const p=player;p.anim+=dt*8;p.invuln=Math.max(0,p.invuln-dt);p.stun=Math.max(0,p.stun-dt);p.dodgeCd=Math.max(0,p.dodgeCd-dt);p.parryCd=Math.max(0,p.parryCd-dt);p.comboTimer=Math.max(0,p.comboTimer-dt);if(p.parry>0)p.parry=Math.max(0,p.parry-dt);if(p.dodge>0)p.dodge=Math.max(0,p.dodge-dt);
+  if(p.stun>0){p.vx*=Math.pow(.04,dt);}else if(p.dodge>0){p.vx=p.face*490;}else{const left=keys.has("a"),right=keys.has("d");if(!p.attack){if(left!==right){p.face=left?-1:1;p.vx=p.face*230;if(p.grounded)p.state="run";}else{p.vx*=Math.pow(.0008,dt);if(p.grounded)p.state="idle";}}else p.vx*=Math.pow(.03,dt);}
+  physics(p,dt);if(p.grounded&&p.state==="jump")p.state="idle";
+  if(p.attack){const a=p.attack;a.timer-=dt;if(a.phase==="windup"&&a.timer<=0){a.phase="active";a.timer=a.active;spawnParticles(p.x+p.w/2+p.face*25,p.y+25,"#d7d0bd",5,90);}else if(a.phase==="active"){const box=attackBox(p,a.kind==="light"?63:82,a.kind==="light"?42:56);for(const e of enemies){if(e.alive&&!a.hit.has(e)&&rects(box,e)){a.hit.add(e);enemyHurt(e,a.kind==="light"?22:39,a.kind==="light"?110:180);}}if(boss&&boss.alive&&bossUnlocked&&!a.hit.has(boss)&&(rects(box,boss)||Math.abs((boss.x+boss.w/2)-(p.x+p.w/2)) < (a.kind==="light"?92:112) && Math.abs((boss.y+boss.h*.55)-(p.y+p.h*.55))<78 && p.face===((boss.x+boss.w/2)>(p.x+p.w/2)?1:-1))){a.hit.add(boss);bossHurt(a.kind==="light"?14:28);spawnParticles(boss.x+boss.w/2,boss.y+48,a.kind==="heavy"?"#ffb85b":"#d9ecff",18,a.kind==="heavy"?240:150);shake=Math.max(shake,a.kind==="heavy"?8:3);}if(a.timer<=0){a.phase="recovery";a.timer=a.recovery;}}else if(a.phase==="recovery"&&a.timer<=0){p.attack=null;p.state=p.grounded?"idle":"jump";p.comboTimer=.65;if(p.queuedAttack){const next=p.queuedAttack;p.queuedAttack=null;p.combo=(p.combo||0)+1;startAttack(next);}}}
+  if(p.hp<=0&&mode==="playing")defeat();
+}
+function enemyAttack(e){e.state="windup";e.timer=e.type==="elite"?.72:.48;e.attack={phase:"windup",timer:e.timer,hit:false};e.vx=0;}
+function updateEnemies(dt){
+  for(const e of enemies){if(!e.alive)continue;e.anim+=dt*6;e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,e.stun-dt);e.attackCd=Math.max(0,e.attackCd-dt);e.timer-=dt;if(e.stun>0){e.state="stunned";e.vx*=Math.pow(.01,dt);physics(e,dt);continue;}const dx=(player.x+player.w/2)-(e.x+e.w/2),dist=Math.abs(dx);if(dist<360)e.face=dx<0?-1:1;
+    if(e.attack){const a=e.attack;a.timer-=dt;if(a.phase==="windup"&&a.timer<=0){a.phase="active";a.timer=e.type==="elite"?.19:.15;spawnParticles(e.x+e.w/2+e.face*25,e.y+25,"#b76c55",4,70);}else if(a.phase==="active"){if(!a.hit){const box=attackBox(e,e.type==="elite"?73:57,e.type==="elite"?52:38);if(rects(box,player)){a.hit=true;hurtPlayer(e.type==="elite"?17:10,e.x+e.w/2);}}if(a.timer<=0){a.phase="recovery";a.timer=e.type==="elite"?.72:.48;}}else if(a.phase==="recovery"&&a.timer<=0){e.attack=null;e.state="approach";e.attackCd=e.type==="elite"?1.5:1.1;}physics(e,dt);continue;}
+    if(dist<430){if(dist>e.range){e.state="approach";e.vx=e.face*e.speed;}else if(e.attackCd<=0){enemyAttack(e);}else{e.state="guard";e.vx=0;}}else{e.state="patrol";if(e.x<e.home-70)e.patrolDir=1;if(e.x>e.home+70)e.patrolDir=-1;e.face=e.patrolDir;e.vx=e.patrolDir*e.speed*.35;}physics(e,dt);
+  }
+  if(!bossUnlocked && enemies.every(e=>!e.alive)){
+    bossUnlocked=true;
+    const regionalBoss=Boolean(window.BladeRPG&&window.BladeRPG.regions&&window.BladeRPG.regions[window.BladeRPG.currentZone]&&window.BladeRPG.regions[window.BladeRPG.currentZone].boss);
+    if(boss && regionalBoss && window.BladeRPG && typeof window.BladeRPG.startBossCinematic === "function") window.BladeRPG.startBossCinematic();
+    else if(boss){boss.state="intro";boss.timer=.85;}
+    bannerText(regionalBoss ? "MÜHÜR KIRILDI · KRAL UYANIYOR" : "KALENİN KAPILARI AÇILDI",3);
+  }
+}
+function bossStartAttack(kind){boss.state="windup";boss.attackCd=boss.phase===2?.85:1.25;boss.attack={kind,phase:"windup",timer:kind==="slam"?.9:kind==="charge"?.72:.62,hit:false};boss.vx=0;}
+function updateBoss(dt){const b=boss;if(!b||!b.alive)return;b.anim+=dt*4;b.flash=Math.max(0,b.flash-dt);b.stun=Math.max(0,b.stun-dt);b.attackCd=Math.max(0,b.attackCd-dt);b.timer-=dt;if(!bossUnlocked){b.state="sealed";b.vx=0;physics(b,dt);return;}if(!bossNotice){bossNotice=true;bannerText("İÇİ BOŞ KRAL",3);shake=7;}const dx=(player.x+player.w/2)-(b.x+b.w/2),dist=Math.abs(dx);b.face=dx<0?-1:1;if(b.state==="intro"){b.vx=0;if(b.timer<=0)b.state="approach";physics(b,dt);return;}if(b.state==="phaseChange"){b.vx=0;if(b.timer<=0){b.state="approach";b.attackCd=.45;}physics(b,dt);return;}if(b.stun>0){b.state="stunned";b.vx*=Math.pow(.03,dt);physics(b,dt);return;}
+  if(b.attack){const a=b.attack;a.timer-=dt;if(a.phase==="windup"&&a.timer<=0){a.phase="active";a.timer=a.kind==="slam"?.28:a.kind==="charge"?.42:.22;if(a.kind==="charge")b.vx=b.face*(b.phase===2?560:440);else if(a.kind==="slam"){spawnParticles(b.x+b.w/2,b.y+b.h,"#c33d53",22,230);shake=6;}else spawnParticles(b.x+b.w/2+b.face*45,b.y+55,"#dfb765",12,150);}else if(a.phase==="active"){if(a.kind==="charge")b.vx=b.face*(b.phase===2?560:440);else b.vx*=Math.pow(.001,dt);if(!a.hit){const box=a.kind==="slam"?{x:b.x-55,y:GROUND-42,w:b.w+110,h:45}:attackBox(b,a.kind==="charge"?100:92,a.kind==="charge"?78:65);if(rects(box,player)){a.hit=true;hurtPlayer(a.kind==="slam"?24:a.kind==="charge"?22:18,b.x+b.w/2);}}if(a.timer<=0){a.phase="recovery";a.timer=b.phase===2?.38:.65;b.vx=0;}}else if(a.phase==="recovery"&&a.timer<=0){b.attack=null;b.state="approach";}physics(b,dt);return;}
+  if(dist>125){b.state="approach";b.vx=b.face*(b.phase===2?105:75);}else{b.vx=0;if(b.attackCd<=0){const choice=b.phase===1?(Math.random()<.5?"slash":"slam"):(Math.random()<.34?"slash":Math.random()<.5?"slam":"charge");bossStartAttack(choice);}else b.state="guard";}physics(b,dt);
+}
+function update(dt){if(mode!=="playing")return;gameTime+=dt;bannerTimer=Math.max(0,bannerTimer-dt);damageFlash=Math.max(0,damageFlash-dt);shake=Math.max(0,shake-dt*22);updatePlayer(dt);if(mode!=="playing")return;updateEnemies(dt);if(mode!=="playing")return;updateBoss(dt);updateParticles(dt);const target=clamp(player.x+player.w/2-W/2,0,Math.max(0,WORLD-W));camera.x+=(target-camera.x)*Math.min(1,dt*5);}
+function drawBackground(){const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#090d1b");g.addColorStop(.55,"#252334");g.addColorStop(1,"#101017");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.globalAlpha=.15;ctx.fillStyle="#c4b6a0";ctx.beginPath();ctx.arc(755-camera.x*.04,105,48,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;for(let layer=0;layer<2;layer++){ctx.fillStyle=layer?"#141522":"#1a1c2b";ctx.beginPath();ctx.moveTo(0,H);for(let x=-100;x<=W+100;x+=70){const wx=x+camera.x*(layer?.25:.12);ctx.lineTo(x, (layer?355:310)+Math.sin(wx*.008+layer*3)*42+Math.sin(wx*.021+5)*25);}ctx.lineTo(W,H);ctx.closePath();ctx.fill();}for(let i=0;i<12;i++){const x=((i*217-camera.x*.38)%(W+300)+W+300)%(W+300)-100,h=70+(i*37)%100;ctx.fillStyle="#10121e";ctx.fillRect(x,345-h,35,h);ctx.beginPath();ctx.moveTo(x-8,345-h);ctx.lineTo(x+17,320-h);ctx.lineTo(x+43,345-h);ctx.fill();}}
+function drawGround(){ctx.fillStyle="#29252a";ctx.fillRect(0,GROUND,W,H-GROUND);ctx.fillStyle="#484047";ctx.fillRect(0,GROUND,W,5);for(let x=Math.floor(camera.x/70)*70-camera.x;x<W;x+=70){ctx.strokeStyle="#39343a";ctx.beginPath();ctx.moveTo(x,GROUND+8);ctx.lineTo(x-12,GROUND+35);ctx.lineTo(x+25,GROUND+55);ctx.stroke();ctx.fillStyle="#171820";ctx.fillRect(x+8,GROUND+30,3,3);}}
+function drawPlatforms(){for(const p of platforms){const x=p.x-camera.x;if(x<-180||x>W+100)continue;ctx.fillStyle="#38333a";ctx.fillRect(x,p.y,p.w,p.h);ctx.fillStyle="#70605a";ctx.fillRect(x,p.y,p.w,4);ctx.fillStyle="#191922";for(let bx=x+18;bx<x+p.w;bx+=35)ctx.fillRect(bx,p.y+8,14,3);}}
+function drawHealthBar(x,y,w,h,hp,max,color){ctx.fillStyle="#08090d";ctx.fillRect(x-2,y-2,w+4,h+4);ctx.fillStyle="#30272a";ctx.fillRect(x,y,w,h);ctx.fillStyle=color;ctx.fillRect(x,y,w*clamp(hp/max,0,1),h);ctx.fillStyle="#ffffff18";ctx.fillRect(x,y,w*clamp(hp/max,0,1),Math.max(1,h*.22));}
+function drawFighter(e,isPlayer=false){
+  if(!e||(!e.alive&&!isPlayer))return;
+  const x=e.x-camera.x,y=e.y,w=e.w,h=e.h;
+  if(x<-160||x>W+160)return;
+  const moving=(Math.abs(e.vx||0)>12)&&((e.state==="run")||(e.state==="approach")||(e.state==="patrol")||isPlayer);
+  const run=Math.sin((e.anim||0)*1.7);
+  const breath=Math.sin((e.anim||0)*2.2)*1.2;
+  const dodging=isPlayer&&(e.dodge||0)>0;
+  const attack=e.attack;
+  const phase=attack?attack.phase:"";
+  const isHeavy=attack&&attack.kind==="heavy";
+  const face=e.face||1;
+  const flicker=isPlayer&&e.invuln>0&&Math.floor(gameTime*24)%2===0;
+  const alpha=flicker?.42:(dodging?.68:1);
+
+  // Shadow remains on the floor, even while jumping.
+  ctx.save();
+  ctx.globalAlpha=.28;
+  ctx.fillStyle="#020308";
+  ctx.beginPath();
+  const air=clamp((GROUND-(y+h))/125,0,1);
+  ctx.ellipse(x+w/2,GROUND+3,w*(.78-air*.28),7*(1-air*.35),0,0,Math.PI*2);
+  ctx.fill();ctx.restore();
+
+  ctx.save();
+  ctx.globalAlpha=alpha;
+  if(e.flash>0){ctx.globalAlpha*=.62+Math.sin(e.flash*85)*.3;}
+  // Draw in local coordinates. The whole figure mirrors to face left or right.
+  ctx.translate(x+w/2,y);
+  ctx.scale(face,1);
+  const lean=phase==="windup"?-.10:(phase==="active"?(isHeavy?.16:.11):0);
+  const crouch=dodging?h*.12:0;
+  const capeWave=Math.sin((e.anim||0)*3.5)*(moving?5:2)+(e.vx||0)*-.006;
+
+  // Ragged cloak, pulled backward by movement.
+  ctx.fillStyle=isPlayer?"#572631":(e.type==="elite"?"#222431":"#382832");
+  ctx.beginPath();
+  ctx.moveTo(-w*.18,h*.24);
+  ctx.quadraticCurveTo(-w*.7,h*.43,-w*.48+capeWave,h*.79+crouch*.15);
+  ctx.lineTo(-w*.07,h*.70);
+  ctx.lineTo(w*.15,h*.28);
+  ctx.closePath();ctx.fill();
+  ctx.strokeStyle=isPlayer?"#96505a":"#5b4446";ctx.lineWidth=1.3;
+  ctx.beginPath();ctx.moveTo(-w*.16,h*.31);ctx.lineTo(-w*.34+capeWave*.5,h*.69);ctx.stroke();
+
+  // Legs with a pronounced run cycle, a tucked dodge and an airborne pose.
+  const legY=h*.65-crouch*.35;
+  const stride=moving?run*6:0;
+  const airborne=!e.grounded&&((e.vy||0)<-40);
+  ctx.lineCap="round";ctx.lineJoin="round";
+  ctx.strokeStyle="#24242d";ctx.lineWidth=Math.max(5,w*.19);
+  ctx.beginPath();
+  ctx.moveTo(-w*.17,legY);ctx.lineTo(-w*.23-stride*.55, h-5-crouch+ (airborne?2:0));
+  ctx.moveTo(w*.13,legY);ctx.lineTo(w*.24+stride*.55, h-3-crouch-(airborne?3:0));
+  ctx.stroke();
+  ctx.strokeStyle="#77777c";ctx.lineWidth=Math.max(2,w*.055);
+  ctx.beginPath();ctx.moveTo(-w*.17,legY+2);ctx.lineTo(-w*.23-stride*.55,h-8-crouch);
+  ctx.moveTo(w*.13,legY+2);ctx.lineTo(w*.24+stride*.55,h-6-crouch);ctx.stroke();
+  ctx.fillStyle="#17171e";
+  ctx.beginPath();ctx.moveTo(-w*.34-stride*.55,h-6-crouch);ctx.lineTo(-w*.12-stride*.55,h-6-crouch);ctx.lineTo(-w*.08-stride*.55,h-1-crouch);ctx.lineTo(-w*.35-stride*.55,h-1-crouch);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.moveTo(w*.12+stride*.55,h-4-crouch);ctx.lineTo(w*.35+stride*.55,h-4-crouch);ctx.lineTo(w*.39+stride*.55,h-1-crouch);ctx.lineTo(w*.13+stride*.55,h-1-crouch);ctx.closePath();ctx.fill();
+
+  // Torso lean is animated independently from the head and weapon arm.
+  ctx.save();ctx.translate(lean*w,0);ctx.rotate(lean*.22);
+  ctx.fillStyle=isPlayer?"#6a7079":(e.type==="elite"?"#5c606c":"#574e51");
+  ctx.beginPath();ctx.moveTo(-w*.31,h*.28+breath);ctx.lineTo(w*.28,h*.28+breath);
+  ctx.lineTo(w*.37,h*.66-crouch);ctx.lineTo(-w*.31,h*.66-crouch);ctx.closePath();ctx.fill();
+  ctx.fillStyle=isPlayer?"#8b929a":"#77747a";
+  ctx.beginPath();ctx.moveTo(-w*.28,h*.31+breath);ctx.lineTo(w*.2,h*.31+breath);ctx.lineTo(w*.12,h*.43);ctx.lineTo(-w*.18,h*.43);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="#b8aa93";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(0,h*.32);ctx.lineTo(0,h*.61-crouch);ctx.stroke();
+  // Shoulder plates and rivets.
+  ctx.fillStyle=isPlayer?"#9a8a7d":"#8c8278";
+  ctx.beginPath();ctx.ellipse(-w*.25,h*.33,w*.14,h*.085,-.18,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(w*.24,h*.33,w*.15,h*.09,.12,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle="#e0c69a";ctx.fillRect(-w*.26,h*.31,2,2);ctx.fillRect(w*.22,h*.31,2,2);
+  ctx.restore();
+
+  // Neck and helmeted head. Head tracks the weight of the attack.
+  ctx.fillStyle="#8f796c";ctx.fillRect(-w*.09,h*.20, w*.18,h*.11);
+  const headY=h*.18+breath*.35+(phase==="active"?2:0);
+  ctx.fillStyle=isPlayer?"#b5a28d":"#9a9187";
+  ctx.beginPath();ctx.ellipse(0,headY,w*.255,h*.105,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle=isPlayer?"#4b4c57":"#30303a";
+  ctx.beginPath();ctx.moveTo(-w*.25,headY);ctx.lineTo(-w*.18,headY-h*.09);ctx.lineTo(w*.19,headY-h*.08);ctx.lineTo(w*.27,headY+h*.015);ctx.lineTo(w*.18,headY+h*.07);ctx.lineTo(-w*.19,headY+h*.06);ctx.closePath();ctx.fill();
+  ctx.fillStyle=isPlayer?"#d2b58a":(e.type==="elite"?"#e6bb68":"#c45150");
+  ctx.fillRect(w*.045,headY-1,Math.max(4,w*.2),2.6);
+  if(e.type==="elite"&&!isPlayer){ctx.strokeStyle="#8f303d";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-w*.22,headY-h*.075);ctx.lineTo(0,headY-h*.17);ctx.lineTo(w*.22,headY-h*.075);ctx.stroke();}
+
+  // Back arm first, then the weapon arm so it reads clearly in front of the torso.
+  ctx.strokeStyle="#464852";ctx.lineWidth=Math.max(5,w*.17);ctx.lineCap="round";
+  ctx.beginPath();ctx.moveTo(-w*.23,h*.36);ctx.lineTo(-w*.34,h*.50+run*1.5);ctx.stroke();
+  const pivotX=w*.22, pivotY=h*.405+breath*.4;
+  ctx.strokeStyle="#8c7a70";ctx.lineWidth=Math.max(5,w*.16);
+  ctx.beginPath();ctx.moveTo(w*.18,h*.35);ctx.lineTo(pivotX,pivotY);ctx.stroke();
+  ctx.fillStyle="#c0a78d";ctx.beginPath();ctx.arc(pivotX,pivotY,Math.max(3,w*.075),0,Math.PI*2);ctx.fill();
+
+  // Weapon angle follows a wind-up -> active sweep -> recovery animation.
+  let angle=.12;
+  if(attack){
+    if(phase==="windup") angle=isHeavy?-1.72:-1.38;
+    else if(phase==="active"){
+      const duration=Math.max(.01,attack.active||(isHeavy?.22:.18));
+      const t=clamp(1-(attack.timer||0)/duration,0,1);
+      const eased=1-Math.pow(1-t,2);
+      angle=(isHeavy?-1.62:-1.30)+eased*(isHeavy?2.75:2.12);
+    } else if(phase==="recovery") angle=isHeavy?1.05:.76;
+  } else if(e.state==="parry"||(e.parry||0)>0) angle=-.92;
+  else if(e.state==="guard") angle=-.22;
+  else if(moving) angle=.08+run*.12;
+  const swordLen=isPlayer?54:(e.type==="elite"?53:42);
+  ctx.save();ctx.translate(pivotX,pivotY);ctx.rotate(angle);
+  if(phase==="active"){
+    const heavyColor=(attack&&attack.specialColor)|| (isHeavy?"#efbd70":"#e6efff");
+    ctx.save();ctx.globalAlpha=.62;ctx.lineCap="round";ctx.strokeStyle=heavyColor;ctx.lineWidth=isHeavy?5:3;
+    ctx.shadowColor=heavyColor;ctx.shadowBlur=isHeavy?18:12;
+    ctx.beginPath();ctx.arc(0,0,swordLen*.83,angle<0?-.45:-.95,angle<0?.92:1.15);ctx.stroke();ctx.restore();
+  }
+  // Wrapped grip, crossguard and layered steel blade.
+  ctx.fillStyle="#4e352d";ctx.fillRect(-5,-2.8,20,5.6);
+  ctx.fillStyle="#c2a16e";ctx.fillRect(12,-5.5,4,11);
+  const weaponId = isPlayer && window.BladeRPG ? window.BladeRPG.state.equipment.weapon : "wornSword";
+  const skinId = isPlayer && window.BladeRPG ? window.BladeRPG.state.equipment.skin : "default";
+  let bladeColor = "#c7ccd4", edgeColor = "#f6ead0";
+  if (isPlayer && window.BladeRPG) {
+    const cosmetic = { ember: ["#ff8b4d", "#ffd1a3"], moon: ["#d7efff", "#ffffff"], void: ["#c7a0ff", "#f1dfff"] }[skinId];
+    if (cosmetic) { bladeColor = cosmetic[0]; edgeColor = cosmetic[1]; }
+    const legendary = {sunfang:["#ffb83f","#fff0a5"],voidreaver:["#9c62fa","#ead4ff"],stormKusarigama:["#62caff","#e3f8ff"]}[weaponId];
+    if (legendary) { bladeColor = legendary[0]; edgeColor = legendary[1]; }
+  }
+  const isKusarigama = isPlayer && (weaponId === "kusarigama" || weaponId === "stormKusarigama");
+  if (isKusarigama) {
+    const sway = Math.sin((gameTime||0)*15)*9, tipY = Math.cos((gameTime||0)*15)*12;
+    ctx.strokeStyle = bladeColor; ctx.lineWidth = weaponId === "stormKusarigama" ? 3.2 : 2.5;
+    ctx.shadowColor = bladeColor; ctx.shadowBlur = weaponId === "stormKusarigama" ? 18 : 7;
+    ctx.beginPath(); ctx.moveTo(14,0); ctx.quadraticCurveTo(swordLen*.55,sway,swordLen+3,tipY); ctx.stroke();
+    ctx.save(); ctx.translate(swordLen+3,tipY); ctx.rotate(.5 + Math.sin((gameTime||0)*15)*.2);
+    ctx.fillStyle = bladeColor; ctx.beginPath(); ctx.moveTo(-3,-7); ctx.quadraticCurveTo(13,-10,10,3); ctx.quadraticCurveTo(2,0,0,8); ctx.lineTo(-2,2); ctx.closePath(); ctx.fill(); ctx.restore();
+    if (weaponId === "stormKusarigama") {
+      ctx.strokeStyle = edgeColor; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(13,4); ctx.quadraticCurveTo(swordLen*.48,-sway,swordLen-1,-tipY-9); ctx.stroke();
+      ctx.save(); ctx.translate(swordLen-1,-tipY-9); ctx.rotate(-.4); ctx.fillStyle=edgeColor; ctx.beginPath(); ctx.moveTo(-4,-6); ctx.lineTo(10,-3); ctx.lineTo(8,5); ctx.lineTo(0,8); ctx.lineTo(-5,2); ctx.closePath(); ctx.fill(); ctx.restore();
+    }
+    ctx.shadowBlur = 0;
+  } else {
+  const legendGlow = isPlayer && ({sunfang:"#ffb83f",voidreaver:"#a36aff"}[weaponId]);
+  if (legendGlow) { ctx.shadowColor=legendGlow; ctx.shadowBlur=20; }
+  ctx.fillStyle=bladeColor;ctx.beginPath();ctx.moveTo(15,-3.7);ctx.lineTo(swordLen-2,-2.3);ctx.lineTo(swordLen,0);ctx.lineTo(swordLen-2,2.3);ctx.lineTo(15,3.7);ctx.closePath();ctx.fill();
+  ctx.fillStyle=edgeColor;ctx.beginPath();ctx.moveTo(20,-1);ctx.lineTo(swordLen-4,-.65);ctx.lineTo(swordLen-2,0);ctx.lineTo(20,.65);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+  }
+  if(phase==="active"){
+    ctx.shadowColor=isHeavy?"#eebf75":"#e7f1ff";ctx.shadowBlur=14;ctx.fillStyle=isHeavy?"#f8d39a":"#ffffff";ctx.fillRect(swordLen-5,-2.2,5,4.4);
+  }
+  ctx.restore();
+  if(isPlayer&&phase==="active"){
+    // A separate arc makes every swing readable even when it misses an enemy.
+    const activeSkin = isPlayer && window.BladeRPG ? window.BladeRPG.state.equipment.skin : "default";
+    const activeWeapon = isPlayer && window.BladeRPG ? window.BladeRPG.state.equipment.weapon : "wornSword";
+    const legendaryTrail = {sunfang:"#ffba42",voidreaver:"#b786ff",stormKusarigama:"#7bd7ff"}[activeWeapon];
+    const trailColor = (e.attack && e.attack.specialColor) || legendaryTrail || (activeSkin === "ember" ? "#ff8b4d" : activeSkin === "moon" ? "#8ad7ff" : activeSkin === "void" ? "#9a55ff" : (isHeavy?"#e3a957":"#d9e8ff"));
+    ctx.save();ctx.globalAlpha=.55;ctx.strokeStyle=trailColor;ctx.lineWidth=isHeavy?3.5:2.2;ctx.lineCap="round";ctx.shadowColor=trailColor;ctx.shadowBlur=15;
+    ctx.beginPath();ctx.arc(pivotX,pivotY,swordLen*.9,angle-.62,angle+.2);ctx.stroke();ctx.restore();
+  }
+  if(isPlayer&&e.parry>0){ctx.strokeStyle="#f8d58d";ctx.lineWidth=2;ctx.globalAlpha=.8;ctx.beginPath();ctx.arc(0,h*.4,27,-1.2,.65);ctx.stroke();ctx.globalAlpha=1;}
+  ctx.restore();
+  if(!isPlayer)drawHealthBar(x-5,y-13,w+10,5,e.hp,e.maxHp,e.type==="elite"?"#b58b4f":"#a74b4b");
+}
+function drawBoss(){const b=boss;if(!b||!b.alive)return;const x=b.x-camera.x,y=b.y;if(x<-180||x>W+180)return;ctx.save();if(b.flash>0)ctx.globalAlpha=.55+Math.sin(b.flash*70)*.45;ctx.fillStyle="#030308";ctx.globalAlpha*=.8;ctx.beginPath();ctx.ellipse(x+b.w/2,GROUND+3,65,11,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=b.flash>0?.6:1;ctx.fillStyle=b.phase===2?"#a6384b":"#71604d";ctx.beginPath();ctx.moveTo(x+8,y+24);ctx.lineTo(x+2,y-5);ctx.lineTo(x+22,y+9);ctx.lineTo(x+35,y-14);ctx.lineTo(x+49,y+9);ctx.lineTo(x+69,y-5);ctx.lineTo(x+64,y+24);ctx.closePath();ctx.fill();ctx.fillStyle=b.phase===2?"#551b2b":"#282733";ctx.beginPath();ctx.moveTo(x+15,y+23);ctx.lineTo(x-13,y+52);ctx.lineTo(x+3,y+103);ctx.lineTo(x+67,y+103);ctx.lineTo(x+83,y+52);ctx.lineTo(x+55,y+23);ctx.closePath();ctx.fill();ctx.fillStyle=b.phase===2?"#772d3b":"#55505a";ctx.beginPath();ctx.moveTo(x+18,y+23);ctx.lineTo(x+54,y+23);ctx.lineTo(x+64,y+87);ctx.lineTo(x+10,y+87);ctx.closePath();ctx.fill();ctx.strokeStyle="#b59b78";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+35,y+30);ctx.lineTo(x+35,y+83);ctx.stroke();ctx.fillStyle=b.phase===2?"#ff344f":"#d5a94d";ctx.fillRect(x+17,y+29,12,5);ctx.fillRect(x+42,y+29,12,5);ctx.save();ctx.translate(x+b.w/2,y+68);let ang=b.face===1?-.45:Math.PI+.45;if(b.attack&&b.attack.phase==="windup")ang=b.face===1?-1.45:Math.PI+1.45;if(b.attack&&b.attack.phase==="active"){const total=Math.max(.01,b.attack.kind==="slam"?.28:b.attack.kind==="charge"?.42:.22);const t=clamp(1-b.attack.timer/total,0,1);ang=b.face===1?(-1.45+t*2.35):(Math.PI+1.45-t*2.35);}ctx.rotate(ang);ctx.fillStyle="#8e6946";ctx.fillRect(0,-5,29,10);ctx.fillStyle="#b9bdc3";ctx.fillRect(27,-6,75,12);ctx.fillStyle="#f1dfb8";ctx.fillRect(35,-2,59,3);ctx.restore();ctx.restore();}
+function drawParticles(){for(const p of particles){ctx.globalAlpha=clamp(p.life/p.maxLife,0,1);ctx.fillStyle=p.color;ctx.fillRect(p.x-camera.x,p.y,p.size,p.size);}ctx.globalAlpha=1;}
+function drawHUD(){if(!player)return;ctx.fillStyle="#090b12d9";ctx.fillRect(18,16,255,83);ctx.strokeStyle="#6f5a44";ctx.strokeRect(18,16,255,83);ctx.fillStyle="#e1d3bd";ctx.font="bold 15px Georgia";ctx.fillText("SON SAVAŞÇI",30,38);drawHealthBar(30,48,220,14,player.hp,player.maxHp,"#a83d4c");ctx.fillStyle="#d4c8b6";ctx.font="12px Arial";ctx.fillText(`CAN ${Math.ceil(player.hp)} / ${player.maxHp}`,30,81);ctx.fillStyle="#8e898d";ctx.fillText(`KAÇINMA ${player.dodgeCd<=0?"HAZIR":"DOLUYOR"} · SAVUŞTURMA ${player.parryCd<=0?"HAZIR":"DOLUYOR"}`,30,91);if(bossUnlocked&&boss&&boss.alive){const bw=440,bx=(W-bw)/2;ctx.fillStyle="#090910dd";ctx.fillRect(bx-12,17,bw+24,50);ctx.fillStyle="#e0c59c";ctx.textAlign="center";ctx.font="bold 16px Georgia";ctx.fillText("İÇİ BOŞ KRAL",W/2,34);drawHealthBar(bx,43,bw,12,boss.hp,boss.maxHp,boss.phase===2?"#df304c":"#9b3542");ctx.font="11px Arial";ctx.fillStyle="#d9c9b6";ctx.fillText(boss.phase===2?"AŞAMA II · TAHTIN ÖFKESİ":"AŞAMA I · UNUTULMUŞ TAHT",W/2,65);ctx.textAlign="left";}ctx.fillStyle="#c0b5a6";ctx.font="12px Arial";const alive=enemies.filter(e=>e.alive).length;ctx.fillText(bossUnlocked?"BOSS ARENASI":`KALAN DÜŞMAN: ${alive}`,W-210,29);if(player.attack&&player.attack.phase==="active"){ctx.fillStyle="#f1d5a0";ctx.font="bold 14px Georgia";ctx.fillText(player.attack.kind==="heavy"?"AĞIR DARBE!":"KESİCİ DARBE!",W-180,55);}if(bannerTimer>0){ctx.globalAlpha=Math.min(1,bannerTimer*2);ctx.fillStyle="#08090dbb";ctx.fillRect(W/2-245,H*.22,490,43);ctx.strokeStyle="#a08055";ctx.strokeRect(W/2-245,H*.22,490,43);ctx.fillStyle="#e5d2b2";ctx.font="bold 18px Georgia";ctx.textAlign="center";ctx.fillText(banner,W/2,H*.22+27);ctx.textAlign="left";ctx.globalAlpha=1;}ctx.fillStyle="#d0c6b5a8";ctx.font="12px Arial";ctx.fillText("J HIZLI · K AĞIR · L SAVUŞTUR · SHIFT KAÇIN",W/2-145,H-14);}
+function render(){ctx.save();if(shake>0)ctx.translate(rand(-shake,shake),rand(-shake,shake));drawBackground();drawGround();drawPlatforms();if(player){for(const e of enemies)drawFighter(e,false);drawBoss();drawFighter(player,true);drawParticles();drawHUD();}if(damageFlash>0){ctx.fillStyle=`rgba(160,20,35,${damageFlash*1.8})`;ctx.fillRect(0,0,W,H);}ctx.restore();}
+function loop(timestamp){const dt=Math.min(.033,(timestamp-lastTime)/1000||0);lastTime=timestamp;if(mode==="playing")update(dt);else updateParticles(dt);render();requestAnimationFrame(loop);}
+function keyName(e){if(e.code==="Space")return "space";if(e.code==="ShiftLeft"||e.code==="ShiftRight")return "shift";if(e.code==="Escape")return "escape";if(e.code==="KeyJ")return "j";if(e.code==="KeyK")return "k";if(e.code==="KeyL")return "l";return e.key.toLowerCase();}
+function pauseGame(){if(mode!=="playing")return;mode="paused";showPanel("DURAKLATILDI","<p>Kılıcını indir. Bir nefes al.</p>",[{label:"DEVAM ET",action:()=>{mode="playing";hidePanel();}},{label:"YENİDEN BAŞLA",action:startGame},{label:soundOn?"SESLER: AÇIK":"SESLER: KAPALI",action:()=>{soundOn=!soundOn;pauseGame();}}]);}
+function startGame(){resetGame();mode="controls";showPanel("SAVAŞÇI, HAZIRLAN",`<p>Krallık düştü. Kale hâlâ nefes alıyor.</p><p><kbd>A</kbd> <kbd>D</kbd> hareket · <kbd>W</kbd> / <kbd>Space</kbd> zıpla</p><p><kbd>J</kbd> hızlı saldırı · <kbd>K</kbd> ağır saldırı</p><p><kbd>L</kbd> zamanlamalı savuşturma · <kbd>Shift</kbd> kaçınma</p><p><kbd>E</kbd> etkileşim · <kbd>I</kbd> envanter · <kbd>Q</kbd> görevler · <kbd>M</kbd> harita</p><p><kbd>Esc</kbd> duraklat</p><p class="small">Savuşturmayı düşman darbesi gelmeden hemen önce kullan.</p>`,[{label:"KALEYE GİR",action:()=>{mode="playing";hidePanel();bannerText("İLERLE. GERİYE BAKMA.",2.5);}}]);}
+function mainMenu(){mode="menu";const buttons=[{label:"OYUNA BAŞLA",action:startGame},{label:"KONTROLLER",action:()=>showPanel("KONTROLLER","<p>A/D hareket · W/Space zıpla · J/K saldırı · L savuşturma · Shift kaçınma · E etkileşim · I envanter · Q görev · M harita · X gölge hamlesi</p>",[{label:"GERİ",action:mainMenu}])},{label:soundOn?"SESLERİ KAPAT":"SESLERİ AÇ",action:()=>{soundOn=!soundOn;mainMenu();}}];showPanel("BLADE OF THE FALLEN",`<p style="letter-spacing:3px;color:#9d8a76">KÜLLERİN İÇİNDEN BİR KILIÇ YÜKSELİR</p><p>Yıkılmış bir krallık. Unutulmuş bir taht. İçi boş bir hükümdar.</p>`,buttons);}
+function defeat(){mode="defeat";showPanel("DÜŞTÜN",`<p>İçi Boş Kral hâlâ tahtında.</p><p>Yenilen düşman: ${kills}</p>`,[{label:"YENİDEN DENE",action:startGame},{label:"ANA MENÜ",action:mainMenu}]);}
+function victory(){mode="victory";showPanel("KRAL DÜŞTÜ",`<p>İçi Boş Kral'ın tacı taş zemine çarptı.</p><p>Krallığın sessizliği ilk kez huzura benziyor.</p><p class="small">Düşman yenilgisi: ${kills+1}</p>`,[{label:"YENİDEN OYNA",action:startGame},{label:"ANA MENÜ",action:mainMenu}]);}
+window.addEventListener("keydown",e=>{const k=keyName(e);if(["space","shift","arrowup","arrowleft","arrowright"].includes(k))e.preventDefault();if(!keys.has(k))pressed.add(k);keys.add(k);if(k==="escape"){if(mode==="playing")pauseGame();else if(mode==="paused"){mode="playing";hidePanel();}return;}if(mode!=="playing")return;if(k==="j")startAttack("light");if(k==="k")startAttack("heavy");if(k==="l")startParry();if(k==="shift")startDodge();});
+window.addEventListener("keyup",e=>keys.delete(keyName(e)));window.addEventListener("blur",()=>{keys.clear();if(mode==="playing")pauseGame();});document.addEventListener("visibilitychange",()=>{if(document.hidden&&mode==="playing")pauseGame();});
+
+/* ===== RPG SİSTEMLERİ: TEK HTML DOSYASINA GÖMÜLÜ ===== */
+/*
+ * BLADE OF THE FALLEN - modular RPG expansion
+ * Integration target: the original single-file Canvas game supplied by the user.
+ * Add this script AFTER the original game <script>, and apply the small patches
+ * listed in BLADE_RPG_INTEGRATION.md.
+ */
+(function () {
+  "use strict";
+
+  const SAVE_KEY = "blade-of-the-fallen-save-v1";
+  const BASE = { hp: 100, stamina: 100, strength: 5, dexterity: 5, vigor: 5 };
+  const ABILITIES = {
+    doubleJump: { name: "Çift Zıplama", description: "Havadayken bir kez daha zıplarsın." },
+    wallJump: { name: "Duvar Sıçrayışı", description: "Bir duvara tutunup ters yöne sıçrarsın." },
+    shadowDash: { name: "Gölge Kaçınması", description: "Gölge geçitlerini kısa süreliğine aşarsın." }
+  };
+
+  const ITEMS = {
+    weapons: {
+      wornSword: { name: "Yıpranmış Kılıç", cost: 0, damage: 0, reach: 0, stamina: 0, slot: "weapon", description: "Dengeli ve güvenilir." },
+      greatsword: { name: "Ağır Kılıç", cost: 180, damage: 12, reach: 8, stamina: 8, slot: "weapon", description: "Yüksek hasar, yüksek dayanıklılık maliyeti." },
+      spear: { name: "Nöbetçi Mızrağı", cost: 150, damage: 3, reach: 28, stamina: 2, slot: "weapon", description: "Uzağa erişir; ağır darbesi kontrollüdür." },
+      twinDaggers: { name: "Çift Bıçak", cost: 210, damage: 6, reach: -7, stamina: -4, slot: "weapon", description: "Hızlı darbeler için hafif bir takım." },
+      kusarigama: { name: "Kusarigama", cost: 290, damage: 8, reach: 42, stamina: 3, slot: "weapon", description: "Zincirli orak. Çok geniş erişim ve özel zincir animasyonu." },
+      sunfang: { name: "GÜNEŞYARAN · Efsanevi", cost: 480, damage: 20, reach: 16, stamina: 1, slot: "weapon", legendary: true, description: "Altın ışıklı kılıç. Üçüncü kombosu Süpernova darbesine dönüşür." },
+      voidreaver: { name: "BOŞLUKYARAN · Efsanevi", cost: 560, damage: 18, reach: 25, stamina: 2, slot: "weapon", legendary: true, description: "Mor gölge çeliği. Final kombosu geniş bir hiçlik yarığı açar." },
+      stormKusarigama: { name: "FIRTINA ZİNCİRİ · Efsanevi", cost: 720, damage: 22, reach: 58, stamina: 4, slot: "weapon", legendary: true, description: "İki oraklı yıldırım zinciri. Geniş menzil ve yıkıcı dairesel final." }
+    },
+    armor: {
+      tattered: { name: "Yırtık Pelerin", cost: 0, defense: 0, slot: "armor", description: "Neredeyse hiç koruma sağlamaz." },
+      guardArmor: { name: "Kül Nöbetçisi Zırhı", cost: 160, defense: 4, slot: "armor", description: "Gelen hasarı bir miktar azaltır." },
+      kingsArmor: { name: "Çatlak Taht Zırhı", cost: 320, defense: 8, slot: "armor", description: "Ağırdır ama sağlamdır." }
+    },
+    skins: {
+      ember: { name: "Kor Çeliği", cost: 90, color: "#ff8b4d", glow: "#ff552e", description: "Turuncu kor ışığı bırakan kılıç görünümü." },
+      moon: { name: "Ay Gümüşü", cost: 120, color: "#d7efff", glow: "#8ad7ff", description: "Soğuk mavi parıltılı kılıç görünümü." },
+      void: { name: "Boşluk Moru", cost: 180, color: "#c7a0ff", glow: "#9a55ff", description: "Mor gölge izi bırakan nadir görünüm." }
+    },
+    rings: {
+      none: { name: "Tılsım Yok", cost: 0, regen: 0, defense: 0, slot: "ring", description: "Boş tılsım yuvası." },
+      cinderCharm: { name: "Köz Tılsımı", cost: 130, regen: 9, defense: 0, slot: "ring", description: "Dayanıklılık yenilenmesini hızlandırır." },
+      wardCharm: { name: "Nöbetçi Mührü", cost: 190, regen: 0, defense: 2, slot: "ring", description: "Gelen hasarı az miktarda düşürür." }
+    }
+  };
+
+  const makeRegionProgress = () => ({ defeated: [], bossDefeated: false, bossHp: null, bossPhase: 1 });
+  const freshState = () => ({
+    version: 1,
+    currentZone: "dark_castle",
+    checkpoint: { zone: "dark_castle", x: 145 },
+    visitedZones: ["dark_castle"],
+    flags: { scholarMet: false, ashMerchantMet: false, lostWatchQuest: false, lostWatchDone: false, bossDefeated: false },
+    counters: { soldiersDefeated: 0 },
+    abilities: { doubleJump: false, wallJump: false, shadowDash: false },
+    inventory: { weapons: ["wornSword"], armor: ["tattered"], rings: [], skins: [] },
+    equipment: { weapon: "wornSword", armor: "tattered", ring: "none", skin: "default" },
+    regionProgress: {
+      dark_castle: makeRegionProgress(),
+      ash_valley: makeRegionProgress(),
+      forgotten_crypts: makeRegionProgress(),
+      throne_room: makeRegionProgress()
+    },
+    loreRead: {},
+    deathSpot: null
+  });
+
+  /* Each zone owns only its definitions. Live enemies are created only for the loaded zone. */
+  const REGIONS = {
+    dark_castle: {
+      name: "Karanlık Kale", width: 2600, spawnX: 105,
+      platforms: [
+        { x: 340, y: 385, w: 145, h: 18 }, { x: 710, y: 350, w: 135, h: 18 },
+        { x: 1040, y: 395, w: 150, h: 18 }, { x: 1480, y: 340, w: 140, h: 18 },
+        { x: 1880, y: 382, w: 150, h: 18 }, { x: 2210, y: 350, w: 140, h: 18 }
+      ],
+      enemies: [
+        { id: "castle_guard_01", x: 520, type: "soldier", ashes: 22 },
+        { id: "castle_guard_02", x: 920, type: "soldier", ashes: 22 },
+        { id: "castle_guard_03", x: 1580, type: "soldier", ashes: 24 },
+        { id: "castle_elite_01", x: 2020, type: "elite", ashes: 55 }
+      ],
+      boss: null,
+      fires: [{ id: "castle_fire_01", x: 145, name: "Yıkık Avlu Lütfu" }, { id: "castle_fire_02", x: 1760, name: "Kuzey Siperindeki Lütuf" }],
+      npcs: [{ id: "last_scholar", x: 285, name: "Son Kâtip", kind: "scholar", lines: [
+        "Krallığın adı taşlardan silindi. Adı silinen şeyler ölmez, yalnızca bekler.",
+        "Mahzen kapısında eski bir mühür var. Havada ikinci kez sıçrayabilenler o mührün dilini anlar.",
+        "Kül bir para değildir. İnsanların geride bıraktığı son sözlerin ağırlığıdır."
+      ] }],
+      lore: [{ id: "castle_inscription", x: 670, title: "Kırık Anıt", text: "TAÇ, BAŞI KORUMAK İÇİN DEĞİL, BOYUN EĞDİRMEK İÇİN DÖVÜLDÜ. Son kral bunu unuttu; taşlar unutmadı." }],
+      shrines: [{ id: "wind_altar", x: 830, ability: "doubleJump", title: "Rüzgâr Sunağı", text: "Taşın içinde bir nefes kıpırdadı. Ağırlığını bıraktın; gökyüzü sana ikinci bir adım borçlandı." }],
+      doors: [
+        { id: "castle_to_ash", x: 2508, y: 365, w: 70, h: 110, to: "ash_valley", toX: 95, label: "Kül Vadisi" },
+        { id: "castle_to_crypts", x: 1260, y: 365, w: 54, h: 110, to: "forgotten_crypts", toX: 90, requires: "doubleJump", label: "Unutulmuş Mahzenler" }
+      ],
+      walls: [{ x: 1710, y: 395, w: 24, h: 75 }],
+      gates: []
+    },
+    ash_valley: {
+      name: "Kül Vadisi", width: 3000, spawnX: 95,
+      platforms: [
+        { x: 280, y: 390, w: 140, h: 18 }, { x: 600, y: 345, w: 150, h: 18 },
+        { x: 990, y: 380, w: 150, h: 18 }, { x: 1350, y: 330, w: 160, h: 18 },
+        { x: 1740, y: 380, w: 145, h: 18 }, { x: 2120, y: 345, w: 145, h: 18 },
+        { x: 2500, y: 390, w: 160, h: 18 }
+      ],
+      enemies: [
+        { id: "valley_hollow_01", x: 460, type: "soldier", ashes: 24 },
+        { id: "valley_hollow_02", x: 820, type: "soldier", ashes: 24 },
+        { id: "valley_elite_01", x: 1450, type: "elite", ashes: 60 },
+        { id: "valley_hollow_03", x: 1940, type: "soldier", ashes: 25 },
+        { id: "valley_elite_02", x: 2380, type: "elite", ashes: 60 }
+      ],
+      boss: null,
+      fires: [{ id: "valley_fire_01", x: 170, name: "Solgun Kül Ocağı" }, { id: "valley_fire_02", x: 1640, name: "Sessiz Kervan Ocağı" }],
+      npcs: [
+        { id: "ash_merchant", x: 360, name: "Kül Taciri", kind: "merchant", lines: ["Ben geleceği satmam. Sadece geçmişinin ağırlığını hafifletecek şeyleri." ] },
+        { id: "watcher", x: 1830, name: "Peçeli Gezgin", kind: "watcher", lines: [
+          "Karanlık kapıyı açan şey ışık değildir. Bazen yalnızca gölgenin doğru zamanda hareket etmesidir.",
+          "Kralın kılıcıyla gölgesi birbirinden ayrıldı. İkisi de hâlâ savaşmayı sürdürüyor."
+        ] }
+      ],
+      lore: [{ id: "valley_letter", x: 1110, title: "Islak Mektup", text: "BİRİNCİ NÖBETÇİ DÖNDÜ. İKİNCİSİ ADINI UNUTTU. ÜÇÜNCÜSÜ İSE KAPIYI İÇERİDEN KİLİTLEDİ. Hangisinin yaşadığını artık kimse bilmiyor." }],
+      shrines: [{ id: "shadow_altar", x: 2050, ability: "shadowDash", title: "Gölge Sunağı", text: "Alev sönmedi. Yalnızca ışığın ulaşamadığı yere taşındı. Gölge bir yol açtı; o yolun bedeli dayanıklılıktır." }],
+      doors: [
+        { id: "ash_to_castle", x: 0, y: 365, w: 52, h: 110, to: "dark_castle", toX: 2460, label: "Karanlık Kale", fromRight: true },
+        { id: "ash_to_throne", x: 2915, y: 365, w: 70, h: 110, to: "throne_room", toX: 95, requires: "shadowDash", label: "Taht Odası" },
+        { id: "ash_to_crypts", x: 1410, y: 365, w: 54, h: 110, to: "forgotten_crypts", toX: 2050, requires: "doubleJump", label: "Mahzen Arka Geçidi" }
+      ],
+      walls: [{ x: 1240, y: 395, w: 24, h: 75 }],
+      gates: [{ id: "valley_shadow_gate", x: 2660, y: 330, w: 28, h: 140, requires: "shadowDash", label: "Gölge Mührü", kind: "gate" }]
+    },
+    forgotten_crypts: {
+      name: "Unutulmuş Mahzenler", width: 2300, spawnX: 90,
+      platforms: [
+        { x: 220, y: 405, w: 135, h: 18 }, { x: 510, y: 355, w: 130, h: 18 },
+        { x: 820, y: 305, w: 130, h: 18 }, { x: 1110, y: 365, w: 150, h: 18 },
+        { x: 1450, y: 320, w: 145, h: 18 }, { x: 1770, y: 375, w: 145, h: 18 },
+        { x: 2050, y: 340, w: 130, h: 18 }
+      ],
+      enemies: [
+        { id: "crypt_guard_01", x: 430, type: "soldier", ashes: 28 },
+        { id: "crypt_guard_02", x: 920, type: "soldier", ashes: 28 },
+        { id: "crypt_elite_01", x: 1310, type: "elite", ashes: 68 },
+        { id: "crypt_guard_03", x: 1810, type: "soldier", ashes: 30 }
+      ],
+      boss: null,
+      fires: [{ id: "crypt_fire_01", x: 145, name: "Mühürlü Lahit" }],
+      npcs: [{ id: "lost_watch_knight", x: 1120, name: "Adsız Nöbetçi", kind: "knight", lines: [
+        "Bize kapıyı korumamız emredildi. Kapının ardında ne olduğunu sormamız yasaktı.",
+        "Üç nöbetçi kayboldu. Biri küle, biri taşa, biri de kralın gölgesine dönüştü.",
+        "Bana kayıp nöbetçileri hatırlattın. Belki hâlâ bir şeyleri düzeltebiliriz."
+      ] }],
+      lore: [{ id: "crypt_epitaph", x: 720, title: "Mezar Yazısı", text: "BURADA YATANLARIN ADLARI SİLİNDİ. BÖYLECE KRAL ONLARI BİR KEZ DAHA ÖLDÜREMEYECEK. Mezarın kapağı içeriden çizilmiş." }],
+      shrines: [{ id: "wall_altar", x: 620, ability: "wallJump", title: "Taşın Nabzı", text: "Avuçların soğuk taşa değdi. Duvar artık bir son değil, ayağını basabileceğin geçici bir dünya." }],
+      doors: [
+        { id: "crypts_to_castle", x: 0, y: 365, w: 52, h: 110, to: "dark_castle", toX: 1330, requires: "doubleJump", label: "Karanlık Kale", fromRight: true },
+        { id: "crypts_to_throne", x: 2220, y: 365, w: 70, h: 110, to: "throne_room", toX: 165, requires: "wallJump", label: "Taht Odası" }
+      ],
+      walls: [{ x: 1060, y: 360, w: 26, h: 110 }, { x: 1640, y: 360, w: 26, h: 110 }],
+      gates: [{ id: "crypt_wall_gate", x: 1930, y: 335, w: 28, h: 135, requires: "wallJump", label: "Duvar Mührü", kind: "gate" }]
+    },
+    throne_room: {
+      name: "Taht Odası", width: 1700, spawnX: 95,
+      platforms: [
+        { x: 300, y: 390, w: 140, h: 18 }, { x: 640, y: 350, w: 135, h: 18 },
+        { x: 1000, y: 385, w: 150, h: 18 }, { x: 1370, y: 350, w: 130, h: 18 }
+      ],
+      enemies: [
+        { id: "throne_sentinel_01", x: 500, type: "soldier", ashes: 35 },
+        { id: "throne_sentinel_02", x: 780, type: "elite", ashes: 80 }
+      ],
+      boss: { x: 1330 },
+      fires: [{ id: "throne_fire_01", x: 150, name: "Son Taht Lütfu" }],
+      npcs: [],
+      lore: [{ id: "throne_last_words", x: 1110, title: "Tahtın Son Sözü", text: "BİR KRALIN İÇİ BOŞALDIĞINDA TAHT DOLU KALIR. BİR TAHT BOŞALDIĞINDA İSE HERKES KRAL OLMAK İSTER." }],
+      shrines: [],
+      doors: [
+        { id: "throne_to_ash", x: 0, y: 365, w: 52, h: 110, to: "ash_valley", toX: 2850, label: "Kül Vadisi", fromRight: true },
+        { id: "throne_to_crypts", x: 850, y: 365, w: 54, h: 110, to: "forgotten_crypts", toX: 2180, requires: "wallJump", label: "Mahzen Arka Kapısı" }
+      ],
+      walls: [],
+      gates: []
+    }
+  };
+
+  let state = freshState();
+  let current = REGIONS.dark_castle;
+  let nearestHint = "";
+
+  function safeStorageGet() {
+    try { return localStorage.getItem(SAVE_KEY); } catch (_) { return null; }
+  }
+  function safeStorageSet(value) {
+    try { localStorage.setItem(SAVE_KEY, value); return true; } catch (_) { return false; }
+  }
+  function progressFor(zoneId) {
+    if (!state.regionProgress[zoneId]) state.regionProgress[zoneId] = makeRegionProgress();
+    return state.regionProgress[zoneId];
+  }
+  function hasAbility(id) { return Boolean(state.abilities[id]); }
+  function owned(slot, id) { return state.inventory[slot].includes(id); }
+  function currentItem(slot) {
+    const id = state.equipment[slot];
+    return (ITEMS[slot === "weapon" ? "weapons" : slot === "armor" ? "armor" : "rings"][id]) || null;
+  }
+  function flag(name, value = true) { state.flags[name] = value; }
+  function setMode(name) { mode = name; }
+  function showModal(modeName, title, body, buttons) {
+    setMode(modeName);
+    showPanel(title, body, buttons);
+  }
+  function closeModal() { setMode("playing"); hidePanel(); }
+  function syncDerivedStats() {
+    if (!player) return;
+    player.stats = player.stats || { strength: BASE.strength, dexterity: BASE.dexterity, vigor: BASE.vigor };
+    player.stats.strength = Math.max(1, Number(player.stats.strength) || BASE.strength);
+    player.stats.dexterity = Math.max(1, Number(player.stats.dexterity) || BASE.dexterity);
+    player.stats.vigor = Math.max(1, Number(player.stats.vigor) || BASE.vigor);
+    player.level = Math.max(1, Number(player.level) || 1);
+    player.ashes = Math.max(0, Number(player.ashes) || 0);
+    player.maxHp = BASE.hp + (player.stats.vigor - BASE.vigor) * 12;
+    player.maxStamina = BASE.stamina + (player.stats.dexterity - BASE.dexterity) * 5;
+    player.hp = clamp(Number(player.hp ?? player.maxHp), 0, player.maxHp);
+    player.stamina = clamp(Number(player.stamina ?? player.maxStamina), 0, player.maxStamina);
+    player.exhaustedTimer = Math.max(0, player.exhaustedTimer || 0);
+    player.staminaRegenDelay = Math.max(0, player.staminaRegenDelay || 0);
+    player.shadowDashTimer = Math.max(0, player.shadowDashTimer || 0);
+    player.jumpCount = Math.max(0, player.jumpCount || 0);
+    player.wallSide = player.wallSide || 0;
+    player.wallJumpTimer = Math.max(0, player.wallJumpTimer || 0);
+    player.wallJumpDir = player.wallJumpDir || 0;
+  }
+  function findRegionInteractables() {
+    const items = [];
+    current.fires.forEach(x => items.push({ ...x, kind: "fire", y: GROUND - 20 }));
+    current.npcs.forEach(x => items.push({ ...x, kind: "npc", y: GROUND - 35 }));
+    current.lore.forEach(x => items.push({ ...x, kind: "lore", y: GROUND - 20 }));
+    current.shrines.forEach(x => items.push({ ...x, kind: "shrine", y: GROUND - 30 }));
+    return items;
+  }
+  function nearestInteractable(maxDistance = 120) {
+    if (!player) return null;
+    const px = player.x + player.w / 2;
+    let best = null, bestDist = maxDistance;
+    for (const item of findRegionInteractables()) {
+      const d = Math.abs(px - item.x);
+      if (d < bestDist) { best = { ...item, distance: d }; bestDist = d; }
+    }
+    const spot = state.deathSpot;
+    if (spot && spot.zone === state.currentZone) {
+      const d = Math.abs(px - spot.x);
+      if (d < Math.min(74, maxDistance) && d < bestDist) { best = { kind: "deathSpot", x: spot.x, y: spot.y, distance: d }; bestDist = d; }
+    }
+    return best;
+  }
+  function lockedReason(requirement) {
+    if (!requirement) return "";
+    const names = { doubleJump: "Çift Zıplama", wallJump: "Duvar Sıçrayışı", shadowDash: "Gölge Kaçınması" };
+    return `Bu mühür ${names[requirement] || requirement} yeteneği olmadan açılmıyor.`;
+  }
+
+  function loadZone(zoneId, spawnX, options = {}) {
+    if (!REGIONS[zoneId]) return false;
+    current = REGIONS[zoneId];
+    state.currentZone = zoneId;
+    if (!state.visitedZones.includes(zoneId)) state.visitedZones.push(zoneId);
+    WORLD = current.width;
+    platforms.splice(0, platforms.length, ...current.platforms.map(p => ({ ...p })));
+
+    enemies = current.enemies
+      .filter(def => !progressFor(zoneId).defeated.includes(def.id))
+      .map(def => {
+        const enemy = makeEnemy(def.x, def.type);
+        enemy.id = def.id;
+        enemy.ashReward = def.ashes;
+        enemy.x = def.x;
+        enemy.home = def.x;
+        return enemy;
+      });
+
+    boss = null;
+    if (current.boss && !progressFor(zoneId).bossDefeated) {
+      boss = makeBoss();
+      boss.x = current.boss.x;
+      boss.y = GROUND - boss.h;
+      const bp = progressFor(zoneId);
+      if (Number.isFinite(bp.bossHp)) boss.hp = clamp(bp.bossHp, 1, boss.maxHp);
+      boss.phase = bp.bossPhase || 1;
+    }
+    bossUnlocked = !boss || enemies.every(e => !e.alive);
+    bossNotice = false;
+    if (player) {
+      player.x = clamp(Number(spawnX ?? current.spawnX), 0, WORLD - player.w);
+      player.y = GROUND - player.h;
+      player.vx = 0; player.vy = 0; player.grounded = false;
+      player.attack = null; player.dodge = 0; player.parry = 0;
+      player.shadowDashTimer = 0; player.jumpCount = 0; player.wallSide = 0;
+    }
+    camera = { x: player ? clamp(player.x + player.w / 2 - W / 2, 0, Math.max(0, WORLD - W)) : 0 };
+    if (!options.quiet) bannerText(current.name.toLocaleUpperCase("tr-TR"), 2.3);
+    return true;
+  }
+
+  function newGame() {
+    if (typeof bossCinematicPlayed !== "undefined") bossCinematicPlayed.clear();
+    if (typeof bossCinematicTimer !== "undefined") bossCinematicTimer = 0;
+    state = freshState();
+    player = makePlayer();
+    player.stamina = BASE.stamina;
+    player.ashes = 0;
+    player.level = 1;
+    player.stats = { strength: BASE.strength, dexterity: BASE.dexterity, vigor: BASE.vigor };
+    player.staminaRegenDelay = 0;
+    player.exhaustedTimer = 0;
+    player.shadowDashTimer = 0;
+    player.jumpCount = 0;
+    player.wallSide = 0;
+    enemies = [];
+    boss = null;
+    particles = [];
+    camera = { x: 0 };
+    shake = 0; gameTime = 0; kills = 0; damageFlash = 0;
+    syncDerivedStats();
+    loadZone("dark_castle", 105, { quiet: true });
+    state.checkpoint = { zone: "dark_castle", x: 145 };
+    banner = "KARANLIK KALE"; bannerTimer = 2.5;
+  }
+
+  function saveGame() {
+    syncDerivedStats();
+    const payload = {
+      state,
+      player: {
+        hp: player.hp, stamina: player.stamina, ashes: player.ashes,
+        level: player.level, stats: { ...player.stats },
+        face: player.face
+      }
+    };
+    return safeStorageSet(JSON.stringify(payload));
+  }
+  function hasSave() { return Boolean(safeStorageGet()); }
+  function continueGame() {
+    const raw = safeStorageGet();
+    if (!raw) { startGame(); return; }
+    try {
+      const data = JSON.parse(raw);
+      state = Object.assign(freshState(), data.state || {});
+      state.regionProgress = Object.assign(freshState().regionProgress, state.regionProgress || {});
+      state.flags = Object.assign(freshState().flags, state.flags || {});
+      state.abilities = Object.assign(freshState().abilities, state.abilities || {});
+      state.inventory = Object.assign(freshState().inventory, state.inventory || {});
+      for (const slot of ["weapons", "armor", "rings", "skins"]) if (!Array.isArray(state.inventory[slot])) state.inventory[slot] = [];
+      state.equipment = Object.assign(freshState().equipment, state.equipment || {});
+      player = makePlayer();
+      Object.assign(player, data.player || {});
+      player.stats = Object.assign({ ...BASE }, data.player?.stats || {});
+      syncDerivedStats();
+      const cp = state.checkpoint || { zone: "dark_castle", x: 145 };
+      loadZone(REGIONS[cp.zone] ? cp.zone : "dark_castle", cp.x, { quiet: true });
+      player.hp = player.maxHp;
+      player.stamina = player.maxStamina;
+      mode = "controls";
+      showPanel("YOLCULUK SÜRÜYOR", `<p>${current.name} bölgesindeki son dinlenme noktasına döndün.</p><p class="small">Seviye ${player.level} · ${player.ashes} Kül · Kayıt yüklendi.</p>`, [
+        { label: "YOLCULUĞA DEVAM ET", action: () => { mode = "playing"; hidePanel(); bannerText("KÜLLERİN İZİ", 2); } },
+        { label: "ANA MENÜ", action: mainMenu }
+      ]);
+    } catch (err) {
+      console.warn("Kayıt okunamadı:", err);
+      state = freshState();
+      startGame();
+    }
+  }
+
+  function updatePlayerTimers(dt) {
+    if (!player) return;
+    player.shadowDashTimer = Math.max(0, (player.shadowDashTimer || 0) - dt);
+    player.exhaustedTimer = Math.max(0, (player.exhaustedTimer || 0) - dt);
+    player.staminaRegenDelay = Math.max(0, (player.staminaRegenDelay || 0) - dt);
+    if (player.staminaRegenDelay <= 0 && player.attack === null && player.dodge <= 0 && player.parry <= 0 && player.shadowDashTimer <= 0 && player.stun <= 0) {
+      const ring = ITEMS.rings[state.equipment.ring] || ITEMS.rings.none;
+      const regen = 23 + (player.stats.dexterity - BASE.dexterity) * 1.2 + ring.regen;
+      player.stamina = Math.min(player.maxStamina, player.stamina + regen * dt);
+    }
+  }
+  function spendStamina(amount) {
+    if (!player || player.exhaustedTimer > 0) return false;
+    if (player.stamina < amount) {
+      player.stamina = 0;
+      player.exhaustedTimer = 1.05;
+      player.stun = Math.max(player.stun || 0, 0.38);
+      player.staminaRegenDelay = 1.0;
+      bannerText("DAYANIKLILIK TÜKENDİ", 1.15);
+      sound(70, 0.12, "triangle", 0.035);
+      return false;
+    }
+    player.stamina -= amount;
+    player.staminaRegenDelay = 0.78;
+    if (player.stamina <= 0.001) {
+      player.stamina = 0;
+      player.exhaustedTimer = 0.8;
+      player.stun = Math.max(player.stun || 0, 0.28);
+      return false;
+    }
+    return true;
+  }
+  function attackCost(kind) {
+    const weapon = ITEMS.weapons[state.equipment.weapon] || ITEMS.weapons.wornSword;
+    return Math.max(8, (kind === "light" ? 16 : 30) + weapon.stamina);
+  }
+  function attackRange(kind) {
+    const weapon = ITEMS.weapons[state.equipment.weapon] || ITEMS.weapons.wornSword;
+    return Math.max(42, (kind === "light" ? 63 : 82) + weapon.reach);
+  }
+  function attackDamage(kind) {
+    const weapon = ITEMS.weapons[state.equipment.weapon] || ITEMS.weapons.wornSword;
+    const strength = player.stats.strength - BASE.strength;
+    const dex = player.stats.dexterity - BASE.dexterity;
+    return Math.max(1, Math.floor((kind === "light" ? 22 : 39) + strength * (kind === "light" ? 1.5 : 2.0) + (kind === "light" ? dex * 0.6 : 0) + weapon.damage));
+  }
+  function bossDamage(kind) {
+    const weapon = ITEMS.weapons[state.equipment.weapon] || ITEMS.weapons.wornSword;
+    return Math.max(1, Math.floor((kind === "light" ? 14 : 28) + (player.stats.strength - BASE.strength) * 1.2 + weapon.damage * 0.45));
+  }
+  function defenseValue() {
+    const armor = ITEMS.armor[state.equipment.armor] || ITEMS.armor.tattered;
+    const ring = ITEMS.rings[state.equipment.ring] || ITEMS.rings.none;
+    return armor.defense + ring.defense;
+  }
+
+  function onEnemyKilled(enemy) {
+    const rp = progressFor(state.currentZone);
+    if (enemy.id && !rp.defeated.includes(enemy.id)) rp.defeated.push(enemy.id);
+    player.ashes += Math.max(0, enemy.ashReward || (enemy.type === "elite" ? 50 : 20));
+    if (enemy.type !== "elite") state.counters.soldiersDefeated++;
+    if (!state.flags.lostWatchDone && state.flags.lostWatchQuest && state.counters.soldiersDefeated >= 3) {
+      state.flags.lostWatchDone = true;
+      player.ashes += 90;
+      bannerText("YAN GÖREV TAMAMLANDI · KAYIP NÖBETÇİLER", 2.6);
+    }
+  }
+  function onBossKilled() {
+    if (!current.boss) return;
+    const rp = progressFor(state.currentZone);
+    rp.bossDefeated = true; rp.bossHp = 0;
+    state.flags.bossDefeated = true;
+    player.ashes += 350;
+    if (!owned("weapons", "voidreaver")) {
+      state.inventory.weapons.push("voidreaver");
+      bannerText("KRALIN MİRASI · EFSANEVİ BOŞLUKYARAN KAZANILDI", 3.2);
+    } else bannerText("ANA GÖREV TAMAMLANDI · KIRIK TAÇ", 3);
+    saveGame();
+  }
+  function persistBoss() {
+    if (boss && current.boss && boss.alive) {
+      const rp = progressFor(state.currentZone);
+      rp.bossHp = boss.hp;
+      rp.bossPhase = boss.phase;
+    }
+  }
+  function dropAshesOnDeath() {
+    if (state.deathSpot && player.ashes <= 0) {
+      // Dying again before retrieval permanently erases the previous pile.
+      state.deathSpot = null;
+    } else if (player.ashes > 0) {
+      state.deathSpot = { zone: state.currentZone, x: player.x + player.w / 2, y: player.y + player.h / 2, ashes: player.ashes };
+    }
+    player.ashes = 0;
+    player.attack = null; player.vx = 0; player.vy = 0;
+    saveGame(); // Kül yığını ve öldürdüğün düşmanlar yeniden yüklemede kaybolmasın.
+    mode = "dead";
+    const lost = state.deathSpot && state.deathSpot.zone === state.currentZone ? state.deathSpot.ashes : 0;
+    showPanel("KÜLLERİN İÇİNDE", `<p>Son savaşçı yere düştü. Karanlık kale seni son lütfunun yakınında bekliyor.</p><p>${lost > 0 ? `${lost} Kül düştüğün yerde kaldı.` : "Taşların üzerinde geri alınacak kül kalmadı."}</p><p class="small">Düşmeden önceki düşman ilerlemen korunur. Dinlenme noktasında yeniden doğacaksın.</p>`, [
+      { label: "SON LÜTFUNDA UYAN", action: respawnAtCheckpoint },
+      { label: "ANA MENÜ", action: mainMenu }
+    ]);
+  }
+  function respawnAtCheckpoint() {
+    const cp = state.checkpoint || { zone: "dark_castle", x: 145 };
+    loadZone(cp.zone, cp.x, { quiet: true });
+    player.hp = player.maxHp; player.stamina = player.maxStamina;
+    player.invuln = 1.0; player.stun = 0; player.exhaustedTimer = 0;
+    mode = "playing"; hidePanel(); bannerText("YENİDEN AYAĞA KALK", 1.8);
+  }
+
+  function openRestMenu(fire) {
+    showModal("rest", "DİNLENME NOKTASI", `<p><strong>${fire.name}</strong></p><p>Canın ve dayanıklılığın dolar. Harita ve ilerlemen kaydedilir. Normal düşmanlar yeniden doğar.</p><p>Kül: <strong>${player.ashes}</strong> · Seviye: ${player.level}</p>`, [
+      { label: "DİNLEN VE KAYDET", action: () => restAt(fire) },
+      { label: "SEVİYE ATLA", action: openLevelMenu },
+      { label: "ENVANTER", action: openInventory },
+      { label: "GÖREVLER", action: openQuestLog },
+      { label: "DEVAM ET", action: closeModal }
+    ]);
+  }
+  function restAt(fire) {
+    player.hp = player.maxHp; player.stamina = player.maxStamina;
+    player.stun = 0; player.exhaustedTimer = 0; player.invuln = 0.5;
+    for (const zoneId of Object.keys(REGIONS)) progressFor(zoneId).defeated = [];
+    state.checkpoint = { zone: state.currentZone, x: fire.x };
+    loadZone(state.currentZone, fire.x, { quiet: true });
+    player.hp = player.maxHp; player.stamina = player.maxStamina;
+    const saved = saveGame();
+    mode = "playing"; hidePanel();
+    bannerText(saved ? "LÜTUF KAYDEDİLDİ · DÜŞMANLAR GERİ DÖNDÜ" : "LÜTUF YENİLENDİ · KAYIT KULLANILAMIYOR", 2.8);
+  }
+
+  function levelCost() { return Math.floor(90 + Math.pow(player.level, 1.45) * 48); }
+  function levelStat(stat) {
+    const cost = levelCost();
+    if (player.ashes < cost) { bannerText("YETERLİ KÜL YOK", 1.2); openLevelMenu(); return; }
+    player.ashes -= cost;
+    player.level++;
+    player.stats[stat]++;
+    const oldHp = player.hp, oldStamina = player.stamina;
+    syncDerivedStats();
+    if (stat === "vigor") player.hp = Math.min(player.maxHp, oldHp + 12);
+    else player.hp = Math.min(player.maxHp, oldHp);
+    if (stat === "dexterity") player.stamina = Math.min(player.maxStamina, oldStamina + 5);
+    else player.stamina = Math.min(player.maxStamina, oldStamina);
+    bannerText("SEVİYE YÜKSELDİ", 1.4);
+    openLevelMenu();
+  }
+  function openLevelMenu() {
+    const cost = levelCost();
+    showModal("levelup", "KÜLLE GÜÇLEN", `<p>Kül: <strong>${player.ashes}</strong> · Sonraki seviye maliyeti: <strong>${cost}</strong></p><p>Seviye ${player.level} · Güç ${player.stats.strength} · Çeviklik ${player.stats.dexterity} · Bünye ${player.stats.vigor}</p><p class="small">Güç saldırı hasarını, çeviklik dayanıklılığı ve yenilenmeyi, bünye azami canı artırır.</p>`, [
+      { label: `GÜÇ +1 (${cost} Kül)`, action: () => levelStat("strength") },
+      { label: `ÇEVİKLİK +1 (${cost} Kül)`, action: () => levelStat("dexterity") },
+      { label: `BÜNYE +1 (${cost} Kül)`, action: () => levelStat("vigor") },
+      { label: "DİNLENME MENÜSÜ", action: () => openRestMenu({ name: "Dinlenme Noktası", x: player.x }) }
+    ]);
+  }
+
+  function equip(slot, id) {
+    const bucket = slot === "weapon" ? "weapons" : slot === "armor" ? "armor" : slot === "skin" ? "skins" : "rings";
+    if (slot === "skin" && id === "default") { state.equipment.skin = "default"; bannerText("YIPRANMIŞ ÇELİK KUŞANILDI", 1.2); openInventory(); return; }
+    if (!owned(bucket, id) && !(slot === "ring" && id === "none")) return;
+    state.equipment[slot] = id;
+    bannerText(`${ITEMS[bucket][id].name.toLocaleUpperCase("tr-TR")} KUŞANILDI`, 1.2);
+    syncDerivedStats();
+    openInventory();
+  }
+  function openInventory() {
+    const sections = [
+      ["weapon", "Silahlar", "weapons"], ["armor", "Zırhlar", "armor"], ["ring", "Tılsımlar", "rings"], ["skin", "Kılıç Görünümleri", "skins"]
+    ];
+    const lines = [`<p>Seviye ${player.level} · Kül ${player.ashes}</p>`, `<p class="small">Güç ${player.stats.strength} · Çeviklik ${player.stats.dexterity} · Bünye ${player.stats.vigor}</p>`];
+    const buttons = [];
+    for (const [slot, label, bucket] of sections) {
+      lines.push(`<h2>${label}</h2>`);
+      let ids = state.inventory[bucket].slice();
+      if (slot === "ring" && !ids.includes("none")) ids.unshift("none");
+      if (slot === "skin") ids.unshift("default");
+      if (!ids.length) lines.push(`<p class="small">Henüz eşyan yok.</p>`);
+      for (const id of ids) {
+        const item = id === "default" ? { name: "Yıpranmış Çelik", description: "Varsayılan görünüm." } : ITEMS[bucket][id];
+        const selected = (state.equipment[slot] || (slot === "skin" ? "default" : "")) === id;
+        lines.push(`<p>${selected ? "◆ " : "◇ "}<strong>${item.name}</strong> · ${item.description}</p>`);
+        if (!selected) buttons.push({ label: `${item.name} KUŞAN`, action: () => equip(slot, id) });
+      }
+    }
+    buttons.push({ label: "KAPAT", action: closeModal });
+    showModal("inventory", "ENVANTER VE TEÇHİZAT", lines.join(""), buttons);
+  }
+
+  function shopItemVisual(bucket, id, item) {
+    const glow = item.glow || (id === "sunfang" ? "#ffba55" : id === "voidreaver" ? "#b58bff" : id === "stormKusarigama" ? "#8bdbff" : bucket === "armor" ? "#b9ad9b" : bucket === "rings" ? "#f1ce8a" : "#d8c3a0");
+    let art = "";
+    if (bucket === "weapons" || bucket === "skins") {
+      if (id === "spear") art = `<path d="M72 9 L82 31 L77 65 L72 78 L67 65 L62 31 Z" fill="#d6d7d9" stroke="#6b7782"/><path d="M72 80 L72 93" stroke="#a87942" stroke-width="5"/><path d="M64 77 L80 77" stroke="#ba965d" stroke-width="3"/>`;
+      else if (id === "twinDaggers") art = `<g transform="rotate(-23 48 48)"><path d="M45 15 L55 43 L48 64 L41 43 Z" fill="#e2e8ee"/><path d="M48 62 L48 82" stroke="#c49b63" stroke-width="5"/></g><g transform="translate(52 0) rotate(23 48 48)"><path d="M45 15 L55 43 L48 64 L41 43 Z" fill="#d9dbe6"/><path d="M48 62 L48 82" stroke="#c49b63" stroke-width="5"/></g>`;
+      else if (id === "kusarigama" || id === "stormKusarigama") art = `<path d="M26 23 Q44 33 58 50 T91 71" fill="none" stroke="${glow}" stroke-width="2.6" stroke-dasharray="3 3"/><path d="M91 70 Q108 40 88 28 Q93 50 76 53 Q87 67 91 70Z" fill="#bfc8d0" stroke="${glow}" stroke-width="2"/><path d="M20 18 Q7 35 20 48 Q17 29 35 29Z" fill="#c2c6cf" stroke="${glow}" stroke-width="2"/><path d="M25 20 L43 40 L58 50" stroke="#a2a2ad" stroke-width="4" fill="none"/>`;
+      else if (id === "voidreaver") art = `<path d="M74 8 L85 32 L79 50 L72 42 L67 67 L62 48 L66 31 Z" fill="#bfa0ff" stroke="#e3d4ff" stroke-width="1.4"/><path d="M71 46 L77 67 L72 76 L67 67Z" fill="#573c85"/><path d="M72 72 L72 93" stroke="#a77bff" stroke-width="5"/><path d="M58 71 L86 71" stroke="#d5c7f1" stroke-width="3"/>`;
+      else art = `<path d="M72 7 L87 33 L79 62 L72 52 L65 62 L57 33 Z" fill="${id === "sunfang" ? "#ffe0a0" : id === "stormKusarigama" ? "#bcefff" : (item.color || "#ddd4bf")}" stroke="${glow}" stroke-width="2"/><path d="M72 18 L77 36 L72 44 L67 36Z" fill="${glow}"/><path d="M72 61 L72 91" stroke="#bf955c" stroke-width="6"/><path d="M57 66 L87 66" stroke="#f3d49c" stroke-width="4"/><circle cx="72" cy="18" r="17" fill="none" stroke="${glow}" stroke-opacity=".4"/>`;
+    } else if (bucket === "armor") {
+      art = `<path d="M42 20 L57 13 L72 21 L87 13 L102 22 L95 45 L88 56 L87 85 L57 85 L56 56 L47 45Z" fill="${id === "kingsArmor" ? "#6c5963" : "#777982"}" stroke="#d1b98c" stroke-width="2"/><path d="M57 22 L72 33 L87 22 L83 50 L72 64 L61 50Z" fill="#252833" stroke="${glow}" stroke-width="1.5"/><path d="M72 34 L72 74" stroke="${glow}" stroke-width="3"/><circle cx="72" cy="43" r="6" fill="${glow}" fill-opacity=".75"/>`;
+    } else if (bucket === "rings") {
+      art = `<circle cx="72" cy="48" r="25" fill="none" stroke="#a57d49" stroke-width="10"/><circle cx="72" cy="48" r="18" fill="none" stroke="#f0d392" stroke-width="3"/><path d="M60 26 L72 10 L84 26 L72 35Z" fill="${glow}" stroke="#f3dfae" stroke-width="1.5"/><circle cx="72" cy="48" r="7" fill="${glow}"/>`;
+    }
+    return `<div class="shop-art" style="--artglow:${glow}"><svg viewBox="0 0 144 100" role="img" aria-label="${item.name}" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="shopGlow-${id}" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="${glow}" stop-opacity=".22"/><stop offset="1" stop-color="${glow}" stop-opacity="0"/></radialGradient></defs><rect width="144" height="100" fill="url(#shopGlow-${id})"/><path d="M8 89 H136" stroke="#b9a17a" stroke-opacity=".23"/><path d="M15 11 L27 11 M117 11 L129 11 M15 89 L27 89 M117 89 L129 89" stroke="#d2b57c" stroke-opacity=".36"/>${art}</svg></div>`;
+  }
+
+  function openShop(npc = { name: "Kül Taciri" }) {
+    const offers = [
+      ["weapons", "greatsword"], ["weapons", "spear"], ["weapons", "twinDaggers"], ["weapons", "kusarigama"],
+      ["weapons", "sunfang"], ["weapons", "voidreaver"], ["weapons", "stormKusarigama"],
+      ["armor", "guardArmor"], ["armor", "kingsArmor"], ["rings", "cinderCharm"], ["rings", "wardCharm"],
+      ["skins", "ember"], ["skins", "moon"], ["skins", "void"]
+    ];
+    const groups = { weapons: "EFSANEVİ VE SIRADAN SİLAHLAR", armor: "ZIRHLAR", rings: "TILSIMLAR", skins: "SİLAH GÖRÜNÜMLERİ" };
+    const cards = offers.map(([bucket, id]) => {
+      const item = ITEMS[bucket][id];
+      const already = state.inventory[bucket].includes(id);
+      const legendary = item.legendary;
+      const rarity = legendary ? "EFSANEVİ" : (bucket === "skins" ? "GÖRÜNÜM" : bucket === "armor" ? "ZIRH" : bucket === "rings" ? "TILSIM" : "SİLAH");
+      const stats = bucket === "weapons" ? `HASAR +${item.damage || 0} · MENZİL ${item.reach >= 0 ? "+" : ""}${item.reach || 0}` : bucket === "armor" ? `SAVUNMA +${item.defense || 0}` : bucket === "rings" ? `SAVUNMA +${item.defense || 0} · YENİLENME +${item.regen || 0}` : `ÖZEL IŞIK · SİLAH İZİ`;
+      return `<article class="shop-item ${legendary ? "legendary" : ""}" style="--artglow:${item.glow || (id === "sunfang" ? "#ffba55" : id === "voidreaver" ? "#b58bff" : id === "stormKusarigama" ? "#8bdbff" : "#c7a36d")}">${shopItemVisual(bucket,id,item)}<div class="shop-item-copy"><div class="shop-rarity">${rarity}</div><div class="shop-item-title">${item.name}</div><div class="shop-item-desc">${item.description}</div><div class="shop-stats">${stats}</div><button type="button" class="shop-buy ${already ? "owned" : player.ashes < item.cost ? "locked" : ""}" data-buy-item="${bucket}:${id}" ${already ? "disabled" : ""}>${already ? "✓ ENVANTERDE" : `◆ ${item.cost} KÜL · SATIN AL`}</button></div></article>`;
+    });
+    let previous = "";
+    const orderedCards = offers.map(([bucket,id], i) => {
+      const idx = offers.slice(0,i).filter(([b]) => b !== bucket).length;
+      return cards[i];
+    });
+    let gallery = "";
+    for (const bucket of ["weapons","armor","rings","skins"]) {
+      gallery += `<div class="shop-section-title">${groups[bucket]}</div>`;
+      for (let i=0;i<offers.length;i++) if (offers[i][0] === bucket) gallery += cards[i];
+    }
+    const body = `<div class="shop-intro"><div><div style="font:700 10px Arial,sans-serif;letter-spacing:2px;color:#a59a92">KÜL TACİRİ · KUZEY PAZARI</div><div style="font:italic 14px Georgia;color:#d9c9b6;margin-top:5px">“Külün konuşsun. Ben yalnızca fiyatını söylerim.”</div></div><div class="shop-ashes">✦ <span id="shopAshCount">${player.ashes}</span> KÜL</div></div><div class="shop-grid">${gallery}</div><div class="shop-footer"><span style="margin:auto auto auto 0;font:10px Arial;color:#969098">Her eşyanın görünüşünü ve özelliklerini incele.</span></div>`;
+    showModal("merchant", "KÜL TACİRİ", body, [
+      { label: "ENVANTER", action: openInventory },
+      { label: "KAPAT", action: () => { mode = "playing"; hidePanel(); } }
+    ]);
+    panel.classList.add("shop-panel");
+    panel.querySelectorAll("[data-buy-item]").forEach(button => {
+      button.addEventListener("click", () => {
+        const [bucket,id] = button.dataset.buyItem.split(":");
+        const item = ITEMS[bucket] && ITEMS[bucket][id];
+        if (!item) return;
+        if (state.inventory[bucket].includes(id)) { bannerText("BU EŞYA ZATEN ENVANTERİNDE",1.3); openShop(npc); return; }
+        if (player.ashes < item.cost) { bannerText("YETERLİ KÜL YOK",1.2); return; }
+        player.ashes -= item.cost;
+        state.inventory[bucket].push(id);
+        if (id === "sunfang" || id === "voidreaver" || id === "stormKusarigama") {
+          bannerText(`${item.name} KUŞANILMAYA HAZIR`,1.8);
+          sound(680,.15,"triangle",.04);
+        } else { bannerText(`${item.name} SATIN ALINDI`,1.45); sound(480,.09,"triangle",.03); }
+        saveGame();
+        openShop(npc);
+      });
+    });
+  }
+
+  function openDialogue(npc, index = 0) {
+    const lines = npc.lines || ["Yabancı, bu topraklarda sözler bile eskiyor."];
+    const safeIndex = Math.min(index, lines.length - 1);
+    const buttons = [];
+    if (safeIndex < lines.length - 1) {
+      buttons.push({ label: "DEVAM", action: () => openDialogue(npc, safeIndex + 1) });
+    } else {
+      buttons.push({ label: "DİYALOĞU BİTİR", action: () => {
+        if (npc.kind === "scholar") flag("scholarMet", true);
+        if (npc.kind === "merchant") flag("ashMerchantMet", true);
+        if (npc.kind === "knight" && !state.flags.lostWatchQuest) {
+          flag("lostWatchQuest", true);
+          if (state.counters.soldiersDefeated >= 3) {
+            flag("lostWatchDone", true);
+            player.ashes += 90;
+            bannerText("YAN GÖREV TAMAMLANDI · +90 KÜL", 2.4);
+          } else {
+            bannerText("YAN GÖREV ALINDI · KAYIP NÖBETÇİLER", 2.3);
+          }
+        }
+        closeModal();
+      } });
+    }
+    if (npc.kind === "merchant") buttons.push({ label: "TİCARET", action: () => openShop(npc) });
+    if (npc.kind === "knight" && state.flags.lostWatchDone) {
+      // Kept as a separate button so the reward remains legible in the journal.
+      buttons.push({ label: "GÖREV ÖDÜLÜ ALINDI", action: closeModal });
+    }
+    showModal("dialogue", npc.name.toLocaleUpperCase("tr-TR"), `<p>${lines[safeIndex]}</p><p class="small">${safeIndex + 1} / ${lines.length}</p>`, buttons);
+  }
+
+  function readLore(item) {
+    state.loreRead[item.id] = true;
+    if (item.id === "castle_inscription") flag("readCastleInscription", true);
+    showModal("lore", item.title.toLocaleUpperCase("tr-TR"), `<p style="letter-spacing:1px">${item.text}</p>`, [
+      { label: "SÖZÜ HATIRLA", action: closeModal }
+    ]);
+  }
+  function awakenShrine(shrine) {
+    if (hasAbility(shrine.ability)) {
+      showModal("shrine", shrine.title.toLocaleUpperCase("tr-TR"), `<p>${shrine.text}</p><p class="small">Bu yetenek zaten uyanmış durumda.</p>`, [{ label: "GERİ", action: closeModal }]);
+      return;
+    }
+    state.abilities[shrine.ability] = true;
+    showModal("shrine", `${shrine.title.toLocaleUpperCase("tr-TR")} · YETENEK AÇILDI`, `<p>${shrine.text}</p><p><strong>${ABILITIES[shrine.ability].name}</strong></p><p class="small">${ABILITIES[shrine.ability].description}</p>`, [
+      { label: "YETENEĞİ KABUL ET", action: () => { closeModal(); bannerText(`${ABILITIES[shrine.ability].name.toLocaleUpperCase("tr-TR")} AÇILDI`, 2); } }
+    ]);
+  }
+  function interact() {
+    if (mode !== "playing" || !player) return;
+    const item = nearestInteractable(120);
+    if (!item) { bannerText("ETKİLEŞİM İÇİN BİRAZ DAHA YAKLAŞ", 1.0); return; }
+    if (item.kind === "deathSpot") {
+      const pile = state.deathSpot;
+      if (pile && pile.zone === state.currentZone) {
+        player.ashes += pile.ashes;
+        state.deathSpot = null;
+        bannerText("KAYIP KÜLLER GERİ ALINDI", 1.8);
+        sound(510, .1, "triangle", .035);
+      }
+      return;
+    }
+    if (item.kind === "fire") { openRestMenu(item); return; }
+    if (item.kind === "npc") { openDialogue(item); return; }
+    if (item.kind === "lore") { readLore(item); return; }
+    if (item.kind === "shrine") { awakenShrine(item); return; }
+  }
+
+  function openQuestLog() {
+    const main = state.flags.bossDefeated
+      ? "<strong>KIRIK TAÇ:</strong> İçi Boş Kral yenildi. Tahtın hikâyesi sona erdi, ama taşlar hâlâ konuşuyor."
+      : !hasAbility("doubleJump")
+        ? "<strong>KIRIK TAÇ:</strong> Son Kâtip ile konuş ve Karanlık Kale'deki Rüzgâr Sunağı'nda Çift Zıplama yeteneğini uyandır."
+        : !hasAbility("shadowDash") && !hasAbility("wallJump")
+          ? "<strong>KIRIK TAÇ:</strong> Kül Vadisi'ne ilerle veya Mahzenler'e dön. Eski mühürleri aşacak bir yetenek bul."
+          : "<strong>KIRIK TAÇ:</strong> Taht Odası'na ulaş ve İçi Boş Kral'ın hükmüne son ver.";
+    const side = !state.flags.lostWatchQuest
+      ? "<strong>KAYIP NÖBETÇİLER:</strong> Unutulmuş Mahzenler'deki Adsız Nöbetçi ile konuş."
+      : !state.flags.lostWatchDone
+        ? `<strong>KAYIP NÖBETÇİLER:</strong> ${Math.min(3, state.counters.soldiersDefeated)} / 3 normal nöbetçi yenildi.`
+        : "<strong>KAYIP NÖBETÇİLER:</strong> Tamamlandı. 90 Kül ödülü alındı.";
+    const chapters = [
+      ["BÖLÜM I · KÜLLERİN UYANIŞI", state.flags.scholarMet ? "Tamamlandı: Son Kâtip'in sözlerini dinledin." : "Aktif: Karanlık Kale'de Son Kâtip'i bul ve krallığın düşüşünü öğren."],
+      ["BÖLÜM II · ÜÇ MÜHÜR", hasAbility("doubleJump") ? "Çift Zıplama uyandı." : "Hedef: Rüzgâr Sunağı'nda Çift Zıplama'yı uyandır.",],
+      ["BÖLÜM III · GÖLGE VE TAŞ", hasAbility("shadowDash") && hasAbility("wallJump") ? "İki kadim yetenek de uyandı." : "Hedef: Kül Vadisi'nde Gölge Kaçınması'nı, Mahzenler'de Duvar Sıçrayışı'nı bul."],
+      ["BÖLÜM IV · İÇİ BOŞ KRAL", state.flags.bossDefeated ? "Tamamlandı: Kral yenildi." : "Hedef: Taht Odası'na ulaş, muhafızları yen ve İçi Boş Kral'ı iki aşamada alt et."]
+    ].map(([title, text]) => `<p><strong>${title}</strong><br>${text}</p>`).join("");
+    showModal("journal", "ANA HİKÂYE · GÖREV DEFTERİ", `<h2>ANA HİKÂYE</h2>${chapters}<h2>YAN GÖREV</h2><p>${side}</p><h2>HATIRALAR</h2><p>Okunan lore: ${Object.values(state.loreRead).filter(Boolean).length}</p>`, [
+      { label: "HARİTA", action: openMap }, { label: "KAPAT", action: closeModal }
+    ]);
+  }
+  function openMap() {
+    const links = {
+      dark_castle: "Kül Vadisi (ana geçit), Unutulmuş Mahzenler (Çift Zıplama mührü)",
+      ash_valley: "Karanlık Kale (batı), Taht Odası (Gölge Kaçınması), Mahzenler (Çift Zıplama)",
+      forgotten_crypts: "Karanlık Kale (Çift Zıplama), Taht Odası (Duvar Sıçrayışı)",
+      throne_room: "Kül Vadisi (batı), Unutulmuş Mahzenler (Duvar Sıçrayışı)"
+    };
+    const visited = state.visitedZones.map(id => `<p>◆ ${REGIONS[id].name}${id === state.currentZone ? " · <strong>BURADASIN</strong>" : " · keşfedildi"}</p>`).join("");
+    const abilities = Object.entries(ABILITIES).map(([id, a]) => `<p>${state.abilities[id] ? "◆" : "◇"} ${a.name}</p>`).join("");
+    showModal("map", "BÖLGE HARİTASI", `<h2>${current.name}</h2><p><strong>Bağlantılar:</strong> ${links[state.currentZone]}</p><h2>KEŞFEDİLEN BÖLGELER</h2>${visited}<h2>YETENEKLER</h2>${abilities}`, [
+      { label: "GÖREVLER", action: openQuestLog }, { label: "KAPAT", action: closeModal }
+    ]);
+  }
+
+  function checkDoors() {
+    for (const door of current.doors) {
+      const d = { x: door.x, y: door.y, w: door.w, h: door.h };
+      if (!rects(player, d)) continue;
+      if (door.requires && !hasAbility(door.requires)) {
+        if (door.fromRight) player.x = door.x + door.w + 1;
+        else player.x = door.x - player.w - 1;
+        player.vx = 0;
+        if (nearestHint !== door.id) bannerText(lockedReason(door.requires), 1.65);
+        nearestHint = door.id;
+        return;
+      }
+      nearestHint = "";
+      loadZone(door.to, door.toX);
+      return;
+    }
+    nearestHint = "";
+  }
+
+  function resolveHorizontalCollision(entity, oldX) {
+    if (!current || !entity) return;
+    if (entity === player) entity.wallSide = 0;
+    const obstacles = [
+      ...(current.walls || []).map(o => ({ ...o, kind: "wall" })),
+      ...(current.gates || []).map(o => ({ ...o, kind: "gate" })),
+      ...(current.doors || []).filter(d => d.requires && !hasAbility(d.requires)).map(d => ({
+        ...d, y: GROUND - 220, h: 220, kind: "lockedDoor"
+      }))
+    ];
+    for (const obstacle of obstacles) {
+      if (entity.x + entity.w <= obstacle.x || entity.x >= obstacle.x + obstacle.w ||
+          entity.y + entity.h <= obstacle.y || entity.y >= obstacle.y + obstacle.h) continue;
+      let canPass = false;
+      if (entity === player && obstacle.kind === "gate") {
+        if (obstacle.requires === "shadowDash") canPass = hasAbility("shadowDash") && player.shadowDashTimer > 0;
+        else if (obstacle.requires) canPass = hasAbility(obstacle.requires);
+      }
+      if (canPass) continue;
+      if (entity === player && obstacle.kind === "lockedDoor" && bannerTimer <= 0) {
+        bannerText(lockedReason(obstacle.requires), 1.65);
+      }
+      if (oldX + entity.w <= obstacle.x + 4) {
+        entity.x = obstacle.x - entity.w;
+        if (entity === player) entity.wallSide = 1;
+      } else if (oldX >= obstacle.x + obstacle.w - 4) {
+        entity.x = obstacle.x + obstacle.w;
+        if (entity === player) entity.wallSide = -1;
+      } else {
+        entity.x = oldX;
+      }
+      entity.vx = 0;
+    }
+  }
+  function tryWallJump() {
+    if (!player || player.grounded || player.stun > 0 || !hasAbility("wallJump") || !player.wallSide) return false;
+    const jumpDir = -player.wallSide;
+    player.vy = -570;
+    player.vx = jumpDir * 315;
+    player.face = jumpDir;
+    player.grounded = false;
+    player.wallSide = 0;
+    player.wallJumpDir = jumpDir;
+    player.wallJumpTimer = .17;
+    player.jumpCount = 1;
+    player.state = "jump";
+    sound(235, .075, "triangle", .028);
+    spawnParticles(player.x + player.w / 2, player.y + player.h / 2, "#aab5c9", 7, 95);
+    return true;
+  }
+  function shadowDash() {
+    if (!hasAbility("shadowDash")) { bannerText("GÖLGE KAÇINMASI HENÜZ AÇILMADI", 1.5); return; }
+    if (player.dodgeCd > 0 || player.dodge > 0 || player.stun > 0 || player.attack || !spendStamina(28)) return;
+    player.shadowDashTimer = .26;
+    player.dodge = .26;
+    player.dodgeCd = .82;
+    player.invuln = .29;
+    player.vx = player.face * 490;
+    player.attack = null;
+    player.state = "dodge";
+    spawnParticles(player.x + player.w / 2, player.y + player.h / 2, "#6c7db7", 12, 125);
+    sound(125, .1, "triangle", .03);
+  }
+  function updateWorld() {
+    if (mode !== "playing" || !player) return;
+    if (boss && boss.alive && enemies.every(e => !e.alive) && !bossUnlocked) {
+      bossUnlocked = true; boss.state = "intro"; boss.timer = 0.85;
+      bannerText("MÜHÜR KIRILDI · İÇİ BOŞ KRAL UYANIYOR", 3.2); shake = Math.max(shake, 7);
+    }
+    checkDoors();
+    persistBoss();
+  }
+
+  function renderScene(context) {
+    if (!current || !player) return;
+    const cam = camera ? camera.x : 0;
+    context.save();
+    // Vertical gates and doors are visual landmarks; physics is resolved separately.
+    for (const gate of current.gates || []) {
+      const x = gate.x - cam;
+      if (x < -80 || x > W + 80) continue;
+      const gateReady = gate.requires === "shadowDash"
+        ? hasAbility("shadowDash") && player.shadowDashTimer > 0
+        : hasAbility(gate.requires);
+      context.fillStyle = gateReady ? "#253c39" : "#351923";
+      context.fillRect(x, gate.y, gate.w, gate.h);
+      context.strokeStyle = gateReady ? "#79b29a" : "#b24b5c";
+      context.lineWidth = 2; context.strokeRect(x - 4, gate.y, gate.w + 8, gate.h);
+      context.fillStyle = "#e0cba8"; context.font = "10px Arial";
+      context.fillText(gate.label || "MÜHÜR", x - 21, gate.y - 8);
+    }
+    for (const door of current.doors) {
+      const x = door.x - cam;
+      if (x < -100 || x > W + 100) continue;
+      const open = !door.requires || hasAbility(door.requires);
+      context.fillStyle = open ? "#6b5b43" : "#39202b";
+      context.fillRect(x, door.y, door.w, door.h);
+      context.strokeStyle = open ? "#c5a56f" : "#9e4453";
+      context.lineWidth = 3; context.strokeRect(x + 3, door.y + 3, door.w - 6, door.h - 3);
+      context.fillStyle = "#ded0b5"; context.font = "11px Georgia";
+      context.fillText(door.label, x - 12, door.y - 9);
+    }
+    for (const fire of current.fires) {
+      const x = fire.x - cam;
+      if (x < -60 || x > W + 60) continue;
+      const flicker = Math.sin((gameTime || 0) * 9 + fire.x) * 3;
+      context.fillStyle = "#25242a"; context.fillRect(x - 13, GROUND - 8, 26, 9);
+      context.fillStyle = "#d18b44"; context.beginPath(); context.moveTo(x, GROUND - 10); context.lineTo(x - 8, GROUND - 25 - flicker); context.lineTo(x, GROUND - 39 - flicker); context.lineTo(x + 8, GROUND - 24); context.closePath(); context.fill();
+      context.fillStyle = "#f4d98a"; context.beginPath(); context.moveTo(x, GROUND - 12); context.lineTo(x - 3, GROUND - 25 - flicker); context.lineTo(x + 3, GROUND - 21); context.closePath(); context.fill();
+      context.fillStyle = "#bca889"; context.font = "11px Arial"; context.fillText("LÜTUF", x - 17, GROUND - 47);
+    }
+    for (const npc of current.npcs) {
+      const x = npc.x - cam;
+      if (x < -70 || x > W + 70) continue;
+      context.fillStyle = npc.kind === "merchant" ? "#6d704a" : npc.kind === "knight" ? "#53616c" : "#3d3744";
+      context.beginPath(); context.arc(x, GROUND - 46, 10, 0, Math.PI * 2); context.fill();
+      context.fillRect(x - 9, GROUND - 36, 18, 31);
+      context.strokeStyle = "#b9a98f"; context.lineWidth = 2; context.beginPath(); context.moveTo(x + 6, GROUND - 27); context.lineTo(x + 17, GROUND - 9); context.stroke();
+      context.fillStyle = "#d7c8ad"; context.font = "11px Georgia"; context.fillText(npc.name, x - 30, GROUND - 63);
+    }
+    for (const lore of current.lore) {
+      const x = lore.x - cam;
+      if (x < -50 || x > W + 50) continue;
+      const glow = .55 + Math.sin((gameTime || 0) * 3 + lore.x) * .15;
+      context.globalAlpha = glow; context.fillStyle = state.loreRead[lore.id] ? "#7e837e" : "#d5c18e";
+      context.fillRect(x - 7, GROUND - 28, 14, 21); context.globalAlpha = 1;
+      context.strokeStyle = "#6d6250"; context.strokeRect(x - 7, GROUND - 28, 14, 21);
+    }
+    for (const shrine of current.shrines) {
+      const x = shrine.x - cam;
+      if (x < -60 || x > W + 60) continue;
+      context.fillStyle = hasAbility(shrine.ability) ? "#45665f" : "#5d4e74";
+      context.beginPath(); context.moveTo(x, GROUND - 65); context.lineTo(x - 18, GROUND - 15); context.lineTo(x + 18, GROUND - 15); context.closePath(); context.fill();
+      context.strokeStyle = hasAbility(shrine.ability) ? "#91d1a6" : "#bca5ee"; context.stroke();
+    }
+    const spot = state.deathSpot;
+    if (spot && spot.zone === state.currentZone) {
+      const x = spot.x - cam, y = Math.min(GROUND - 12, spot.y);
+      const pulse = 8 + Math.sin((gameTime || 0) * 7) * 3;
+      context.globalAlpha = .28; context.fillStyle = "#d7b3ff"; context.beginPath(); context.arc(x, y, pulse + 7, 0, Math.PI * 2); context.fill();
+      context.globalAlpha = 1; context.fillStyle = "#b9a5e8"; context.beginPath(); context.arc(x, y, pulse / 2, 0, Math.PI * 2); context.fill();
+    }
+    const near = nearestInteractable();
+    if (near) {
+      const label = near.kind === "fire" ? "E · DİNLEN" : near.kind === "npc" ? "E · KONUŞ" : near.kind === "lore" ? "E · OKU" : near.kind === "shrine" ? "E · UYANDIR" : "E · KÜLLERİ AL";
+      context.fillStyle = "#08090ddd"; context.fillRect(W / 2 - 80, H - 57, 160, 25);
+      context.strokeStyle = "#8e775b"; context.strokeRect(W / 2 - 80, H - 57, 160, 25);
+      context.fillStyle = "#e6d4b5"; context.font = "12px Arial"; context.textAlign = "center"; context.fillText(label, W / 2, H - 40); context.textAlign = "left";
+    }
+    context.restore();
+  }
+  function renderHUD(context) {
+    if (!player) return;
+    context.save();
+    context.fillStyle = "#090b12ee"; context.fillRect(18, 103, 255, 20);
+    context.strokeStyle = "#6f5a44"; context.strokeRect(18, 103, 255, 20);
+    context.fillStyle = "#1a2821"; context.fillRect(30, 109, 220, 7);
+    context.fillStyle = "#58a76d"; context.fillRect(30, 109, 220 * clamp(player.stamina / player.maxStamina, 0, 1), 7);
+    context.fillStyle = "#d2e6d0"; context.font = "10px Arial"; context.fillText(`DAYANIKLILIK ${Math.ceil(player.stamina)} / ${player.maxStamina}`, 30, 106);
+    context.fillStyle = "#dcc69c"; context.font = "bold 13px Georgia"; context.fillText(`KÜL: ${player.ashes}`, W - 138, 49);
+    context.fillStyle = "#a8a1a0"; context.font = "11px Arial"; context.fillText(`${current.name} · SV. ${player.level}`, W - 205, 66);
+    context.restore();
+  }
+
+  function openMainMenu() {
+    mode = "menu";
+    const buttons = [{ label: "YENİ OYUNA BAŞLA", action: startGame }];
+    if (hasSave()) buttons.push({ label: "KAYITLI OYUNA DEVAM ET", action: continueGame });
+    buttons.push(
+      { label: "KONTROLLER", action: () => showPanel("KONTROLLER", `<p><kbd>A</kbd> / <kbd>D</kbd> Hareket</p><p><kbd>W</kbd> / <kbd>Space</kbd> Zıplama ve açılmışsa Çift Zıplama</p><p><kbd>J</kbd> Hızlı saldırı · <kbd>K</kbd> Ağır saldırı</p><p><kbd>L</kbd> Savuşturma · <kbd>Shift</kbd> Kaçınma · <kbd>X</kbd> Gölge Kaçınması</p><p><kbd>E</kbd> Etkileşim · <kbd>I</kbd> Envanter · <kbd>Q</kbd> Görevler · <kbd>M</kbd> Harita · <kbd>Esc</kbd> Duraklat</p>`, [{ label: "GERİ", action: openMainMenu }]) },
+      { label: `TELEFON / TABLET MODU: ${touchModeEnabled ? "AÇIK" : "KAPALI"}`, action: () => { setTouchMode(!touchModeEnabled); openMainMenu(); } },
+      { label: soundOn ? "SESLERİ KAPAT" : "SESLERİ AÇ", action: () => { soundOn = !soundOn; openMainMenu(); } }
+    );
+    showPanel("BLADE OF THE FALLEN", `<p style="letter-spacing:3px;color:#9d8a76">KÜLLERİN İÇİNDEN BİR KILIÇ YÜKSELİR</p><p>Yıkılmış bir krallık. Unutulmuş bir taht. İçi boş bir hükümdar.</p><p class="small">Dört bağlantılı bölge · dinlenme noktaları · Kül ekonomisi · yetenek kilitleri</p><p class="small">Oyun içinde <kbd>B</kbd> ile dükkânı her yerden aç. Telefon/tablet modunda ETKİLEŞİM tuşu yakındaki NPC, sunak veya dinlenme noktasına otomatik yaklaşır.</p>`, buttons);
+  }
+
+  /* Replace the original combat hooks while preserving its drawing/physics core. */
+  resetGame = function () { newGame(); };
+
+  startAttack = function (kind) {
+    if (mode !== "playing" || !player || player.stun > 0 || player.dodge > 0 || player.exhaustedTimer > 0) return;
+    // Queue one follow-up during the swing's active/recovery frames for responsive combos.
+    if (player.attack) {
+      if ((player.attack.phase === "active" || player.attack.phase === "recovery") && !player.queuedAttack) player.queuedAttack = kind;
+      return;
+    }
+    const reach = attackRange(kind) + 25;
+    let nearest = null, nearestDist = Infinity;
+    for (const target of [...enemies.filter(e => e.alive), ...((boss && boss.alive && bossUnlocked) ? [boss] : [])]) {
+      const delta = (target.x + target.w / 2) - (player.x + player.w / 2);
+      const d = Math.abs(delta);
+      if (d < reach && d < nearestDist) { nearest = target; nearestDist = d; }
+    }
+    if (nearest) player.face = (nearest.x + nearest.w / 2) < (player.x + player.w / 2) ? -1 : 1;
+    if (!spendStamina(attackCost(kind))) return;
+    if (kind === "heavy" && player.comboTimer > 0) player.combo = 0;
+    const windup = kind === "light" ? .075 : .23;
+    player.attack = {
+      kind, phase: "windup", timer: windup, windup,
+      active: kind === "light" ? .19 : .25,
+      recovery: kind === "light" ? .18 : .39,
+      hit: new Set(), serial: ++player.attackSerial, chain: player.combo || 0
+    };
+    player.state = "attack"; player.stateTimer = 0;
+    // Slash flash at the weapon hand gives immediate feedback on button press.
+    spawnParticles(player.x + player.w / 2 + player.face * 22, player.y + player.h * .42,
+      kind === "heavy" ? "#e8b568" : "#d8e8fa", kind === "heavy" ? 7 : 4, kind === "heavy" ? 115 : 80);
+    sound(kind === "light" ? 305 : 145, kind === "light" ? .085 : .15, kind === "light" ? "triangle" : "sawtooth", .035);
+  };
+  startParry = function () {
+    if (player.parryCd > 0 || player.stun > 0 || player.dodge > 0 || player.attack || player.exhaustedTimer > 0) return;
+    if (!spendStamina(13)) return;
+    player.parry = .19; player.parryCd = .65; player.state = "parry"; player.stateTimer = 0;
+    sound(420, .045, "triangle", .02);
+  };
+  startDodge = function () {
+    if (player.dodgeCd > 0 || player.dodge > 0 || player.stun > 0 || player.exhaustedTimer > 0) return;
+    if (!spendStamina(23)) return;
+    player.dodge = .24; player.dodgeCd = .78; player.invuln = .29;
+    player.vx = player.face * 490; player.state = "dodge"; player.attack = null;
+    spawnParticles(player.x + player.w / 2, player.y + player.h / 2, "#9cabb4", 5, 70);
+    sound(100, .08, "triangle", .025);
+  };
+
+  hurtPlayer = function (dmg, fromX) {
+    if (player.invuln > 0 || player.dodge > 0 || mode !== "playing") return;
+    if (player.parry > 0) {
+      player.parry = 0; player.parryCd = .42;
+      spawnParticles(player.x + player.w / 2, player.y + 25, "#ffdc85", 18, 200);
+      sound(650, .13, "triangle", .05); bannerText("MÜKEMMEL SAVUŞTURMA!", 1.1);
+      if (boss && boss.alive && Math.abs((boss.x + boss.w / 2) - (player.x + player.w / 2)) < 145) {
+        boss.stun = Math.max(boss.stun, .85); bossHurt(12);
+      }
+      for (const e of enemies) {
+        if (e.alive && Math.abs((e.x + e.w / 2) - (player.x + player.w / 2)) < 105) {
+          enemyHurt(e, 8, 0);
+          if (e.alive) e.stun = Math.max(e.stun, .9);
+        }
+      }
+      return;
+    }
+    const finalDamage = Math.max(1, dmg - defenseValue());
+    player.hp = Math.max(0, player.hp - finalDamage);
+    player.invuln = .62; player.stun = .18; player.attack = null;
+    player.vx = (player.x + player.w / 2 < fromX ? -1 : 1) * 175;
+    spawnParticles(player.x + player.w / 2, player.y + player.h / 2, "#b94e4e", 12, 150);
+    damageFlash = .12; shake = 5; sound(85, .13);
+    if (player.hp <= 0) dropAshesOnDeath();
+  };
+
+  enemyHurt = function (e, dmg, knock = 100) {
+    if (!e || !e.alive) return;
+    if (player.attack && (player.attack.kind === "light" || player.attack.kind === "heavy")) dmg = attackDamage(player.attack.kind);
+    e.hp = Math.max(0, e.hp - dmg); e.flash = .13; e.stun = .18;
+    e.vx = player.face * knock;
+    spawnParticles(e.x + e.w / 2, e.y + e.h / 2, "#e4b36d", 9, 130); sound(145, .07);
+    if (e.hp <= 0) {
+      e.alive = false; e.state = "dead"; kills++;
+      onEnemyKilled(e);
+      spawnParticles(e.x + e.w / 2, e.y + e.h / 2, "#8c7970", 20, 180);
+      bannerText(`${e.type === "elite" ? "SEÇKİN ŞÖVALYE" : "DÜŞMAN"} DÜŞTÜ · +${e.ashReward || 20} KÜL`, 1.45);
+    }
+  };
+  const oldBossHurt = bossHurt;
+  bossHurt = function (dmg) {
+    if (!boss || !boss.alive) return;
+    if (player.attack && (player.attack.kind === "light" || player.attack.kind === "heavy")) dmg = bossDamage(player.attack.kind);
+    oldBossHurt(dmg);
+    if (boss && !boss.alive) onBossKilled();
+    else persistBoss();
+  };
+
+  /* Add stamina timers to the original player update without replacing its combat animation logic. */
+  const oldUpdatePlayer = updatePlayer;
+  updatePlayer = function (dt) {
+    let blockDirection = false;
+    let hadA = false, hadD = false;
+    if (player && player.wallJumpTimer > 0) {
+      blockDirection = true;
+      hadA = keys.has("a"); hadD = keys.has("d");
+      keys.delete("a"); keys.delete("d");
+    }
+    oldUpdatePlayer(dt);
+    if (player) {
+      if (blockDirection) {
+        if (hadA) keys.add("a"); if (hadD) keys.add("d");
+        player.wallJumpTimer = Math.max(0, player.wallJumpTimer - dt);
+        if (player.wallJumpTimer > 0) player.vx = player.wallJumpDir * 315;
+      }
+      updatePlayerTimers(dt);
+      if (player.grounded) { player.jumpCount = 0; player.wallSide = 0; player.wallJumpTimer = 0; }
+    }
+  };
+
+  /* Region transitions run after the original physics/combat update. */
+  const oldUpdate = update;
+  update = function (dt) {
+    oldUpdate(dt);
+    if (mode === "playing") updateWorld(dt);
+  };
+  const oldAttackBox = attackBox;
+  attackBox = function (entity, range, height) {
+    if (entity === player && player.attack && (player.attack.kind === "light" || player.attack.kind === "heavy")) {
+      range = attackRange(player.attack.kind);
+    }
+    return oldAttackBox(entity, range, height);
+  };
+
+  const oldDrawPlatforms = drawPlatforms;
+  drawPlatforms = function () { oldDrawPlatforms(); renderScene(ctx); };
+  const oldDrawHUD = drawHUD;
+  drawHUD = function () { oldDrawHUD(); renderHUD(ctx); };
+
+  /* The current physics function needs one horizontal collision hook. See integration guide. */
+  physics = function (entity, dt) {
+    const oldX = entity.x;
+    entity.x += entity.vx * dt;
+    entity.x = clamp(entity.x, 0, WORLD - entity.w);
+    resolveHorizontalCollision(entity, oldX);
+    const oldBottom = entity.y + entity.h;
+    entity.vy += 1500 * dt;
+    entity.y += entity.vy * dt;
+    entity.grounded = false;
+    for (const p of solidPlatforms()) {
+      if (entity.vy >= 0 && oldBottom <= p.y + 3 && entity.y + entity.h >= p.y && entity.x + entity.w > p.x && entity.x < p.x + p.w) {
+        entity.y = p.y - entity.h; entity.vy = 0; entity.grounded = true;
+      }
+    }
+    if (entity.y > H + 250) { entity.y = GROUND - entity.h; entity.vy = 0; }
+  };
+
+  /* Capture interaction/menu keys before the original listener, and handle all jump types here. */
+  window.addEventListener("keydown", function (e) {
+    const k = typeof keyName === "function" ? keyName(e) : e.key.toLowerCase();
+    const modalModes = ["dialogue", "merchant", "lore", "shrine", "rest", "levelup", "inventory", "journal", "map"];
+    if (k === "escape" && modalModes.includes(mode)) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      closeModal(); return;
+    }
+    if (mode !== "playing") return;
+    if (bossCinematicTimer > 0) { e.preventDefault(); e.stopImmediatePropagation(); return; }
+    // Combat input is handled here (capture phase), not left to the older bubble listener.
+    // e.code is layout-independent, so J/K/L work on both Turkish and US keyboard layouts.
+    const combatKey = e.code === "KeyJ" ? "j" : e.code === "KeyK" ? "k" : e.code === "KeyL" ? "l" :
+      (e.code === "ShiftLeft" || e.code === "ShiftRight") ? "shift" : k;
+    if (["j", "k", "l", "shift"].includes(combatKey)) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (e.repeat) return;
+      if (combatKey === "j") startAttack("light");
+      else if (combatKey === "k") startAttack("heavy");
+      else if (combatKey === "l") startParry();
+      else startDodge();
+      return;
+    }
+    if (k === "w" || k === "space") {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (e.repeat || player.stun > 0 || player.dodge > 0 || player.exhaustedTimer > 0) return;
+      if (player.grounded) {
+        player.vy = -570; player.grounded = false; player.state = "jump"; player.jumpCount = 1;
+        sound(190, .08, "triangle", .025); return;
+      }
+      if (tryWallJump()) return;
+      if (hasAbility("doubleJump") && player.jumpCount < 2) {
+        player.vy = -535; player.jumpCount = 2; player.state = "jump";
+        spawnParticles(player.x + player.w / 2, player.y + player.h, "#d2dce5", 8, 100);
+        sound(260, .075, "triangle", .025); return;
+      }
+      return;
+    }
+    if (["e", "i", "q", "m", "x", "b"].includes(k)) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (k === "e") interact();
+      if (k === "i") openInventory();
+      if (k === "q") openQuestLog();
+      if (k === "m") openMap();
+      if (k === "x") shadowDash();
+      if (k === "b") openAnyShop();
+    }
+  }, true);
+
+  // Silaha özel üç aşamalı kombolar: her zincirin menzili, hasarı, izi ve vuruş hissi farklıdır.
+  const comboBook = {
+    wornSword: [{n:"Çelik Kesiği",m:1,r:0,c:"#d9e8ff"},{n:"Çapraz Yarma",m:1.15,r:5,c:"#e5d6bc"},{n:"Son Hüküm",m:1.5,r:13,c:"#fff1c7"}],
+    greatsword: [{n:"Ağır Savuruş",m:1.08,r:0,c:"#d6d5d1"},{n:"Tahtkıran",m:1.24,r:8,c:"#e5b56a"},{n:"Yere Çakış",m:1.62,r:18,c:"#ffd17a"}],
+    spear: [{n:"Mızrak Ucu",m:1,r:0,c:"#d8e6ea"},{n:"Uzun Delici",m:1.18,r:16,c:"#a8e4f2"},{n:"Ejderha İğnesi",m:1.5,r:25,c:"#e2fbff"}],
+    twinDaggers: [{n:"İkili Yağmur",m:1.03,r:0,c:"#dae4ee"},{n:"Çapraz Biçiş",m:1.22,r:8,c:"#e8e8ff"},{n:"Fırtına Dansı",m:1.53,r:15,c:"#fff0c6"}],
+    kusarigama: [{n:"Zincir Savuruşu",m:1.05,r:0,c:"#d5dbe1"},{n:"Orak Kancası",m:1.25,r:16,c:"#ffc47f"},{n:"Dairesel Hasat",m:1.58,r:31,c:"#ffe2a3"}],
+    sunfang: [{n:"Şafak Yarması",m:1.12,r:2,c:"#ffbf4d"},{n:"Güneş Patlaması",m:1.35,r:12,c:"#ff8f38"},{n:"SÜPERNOVA",m:1.9,r:23,c:"#fff0a3"}],
+    voidreaver: [{n:"Boşluk Kesisi",m:1.12,r:2,c:"#bf91ff"},{n:"Gölge Adımı",m:1.38,r:15,c:"#925cff"},{n:"HİÇLİK YARIĞI",m:1.95,r:30,c:"#e4c5ff"}],
+    stormKusarigama: [{n:"Fırtına Zinciri",m:1.15,r:3,c:"#9cddff"},{n:"Gök Gürültüsü",m:1.4,r:21,c:"#58baff"},{n:"YILDIRIM ÇEMBERİ",m:2.0,r:38,c:"#e2f7ff"}]
+  };
+  const weaponGlow = {sunfang:"#ffbb4c",voidreaver:"#aa78ff",stormKusarigama:"#7bd7ff"};
+  const baseStartAttack = startAttack;
+  startAttack = function(kind) {
+    if (bossCinematicTimer > 0 || mode !== "playing") return;
+    if (player && player.attack) { baseStartAttack(kind); return; }
+    if (player && player.comboTimer <= 0) player.combo = 0;
+    baseStartAttack(kind);
+    const a = player && player.attack;
+    if (!a || a.kind !== kind) return;
+    const weaponId = state.equipment.weapon || "wornSword";
+    const book = comboBook[weaponId] || comboBook.wornSword;
+    const chainIndex = Math.abs(player.combo || 0) % book.length;
+    const move = book[chainIndex];
+    a.chainIndex = chainIndex; a.comboName = move.n; a.specialMultiplier = move.m;
+    a.specialRangeBonus = move.r; a.specialColor = move.c; a.legendary = Boolean(weaponGlow[weaponId]);
+    if (chainIndex > 0 || a.legendary) {
+      const count = chainIndex === 2 ? 20 : 9;
+      spawnParticles(player.x + player.w/2 + player.face*30, player.y+player.h*.43, move.c, count, chainIndex===2?240:125);
+      bannerText(`${move.n.toLocaleUpperCase("tr-TR")}${a.legendary ? " · EFSANEVİ" : ""}`, chainIndex===2?1.65:.95);
+      if (chainIndex === 2) shake = Math.max(shake, weaponId === "voidreaver" || weaponId === "stormKusarigama" ? 8 : 5);
+    }
+  };
+  const baseAttackRange = attackRange;
+  attackRange = function(kind) {
+    const r = baseAttackRange(kind);
+    const a = player && player.attack;
+    return r + (a && a.kind === kind ? (a.specialRangeBonus || 0) : 0);
+  };
+  const baseAttackDamage = attackDamage;
+  attackDamage = function(kind) {
+    const base = baseAttackDamage(kind);
+    const a = player && player.attack;
+    return Math.floor(base * (a && a.kind === kind ? (a.specialMultiplier || 1) : 1));
+  };
+  const baseBossDamage = bossDamage;
+  bossDamage = function(kind) {
+    const base = baseBossDamage(kind);
+    const a = player && player.attack;
+    return Math.floor(base * (a && a.kind === kind ? (a.specialMultiplier || 1) : 1));
+  };
+
+  // Cinematic intro plays once per zone entry, pauses combat, and uses the existing canvas.
+  let bossCinematicTimer = 0;
+  let bossCinematicLength = 5.6;
+  let bossCinematicPlayed = new Set();
+  function launchBossCinematic(force = false) {
+    if (!boss || !boss.alive || !current || !current.boss || !state) return false;
+    const zone = state.currentZone;
+    if (!force && bossCinematicPlayed.has(zone)) return false;
+    bossCinematicPlayed.add(zone);
+    bossCinematicTimer = bossCinematicLength;
+    boss.state = "intro"; boss.timer = bossCinematicLength; boss.vx = 0; boss.attack = null;
+    if (player) {
+      player.attack = null; player.queuedAttack = null; player.vx = 0; player.parry = 0;
+      camera.x = clamp(boss.x + boss.w/2 - W*.66, 0, Math.max(0, WORLD-W));
+    }
+    shake = Math.max(shake, 8);
+    bannerText("MÜHÜR KIRILDI · TAHT UYANIYOR", 3.4);
+    spawnParticles(boss.x+boss.w/2,boss.y+25,"#c79d5d",36,230);
+    spawnParticles(boss.x+boss.w/2,boss.y+52,"#a23751",18,145);
+    return true;
+  }
+  function drawBossCinematic() {
+    if (bossCinematicTimer <= 0) return;
+    const elapsed = bossCinematicLength - bossCinematicTimer;
+    const fadeIn = clamp(elapsed / .55, 0, 1);
+    ctx.save();
+    ctx.fillStyle = `rgba(2,3,9,${.58 * fadeIn})`; ctx.fillRect(0,0,W,H);
+    // Letterbox with ornate brass hairlines and corner cuts.
+    const bar = 82;
+    ctx.fillStyle = "rgba(0,0,0,.97)"; ctx.fillRect(0,0,W,bar); ctx.fillRect(0,H-bar,W,bar);
+    const edge = ctx.createLinearGradient(0,0,W,0); edge.addColorStop(0,"#4b3024"); edge.addColorStop(.5,"#e1bd7d"); edge.addColorStop(1,"#4b3024");
+    ctx.strokeStyle=edge; ctx.lineWidth=1; ctx.beginPath();ctx.moveTo(0,bar);ctx.lineTo(W,bar);ctx.moveTo(0,H-bar);ctx.lineTo(W,H-bar);ctx.stroke();
+    ctx.strokeStyle="#9b784d";ctx.lineWidth=1.5;
+    for(const xx of [24,W-24]){ctx.beginPath();ctx.moveTo(xx,14);ctx.lineTo(xx+Math.sign(W/2-xx)*24,14);ctx.lineTo(xx+Math.sign(W/2-xx)*24,28);ctx.stroke();ctx.beginPath();ctx.moveTo(xx,H-14);ctx.lineTo(xx+Math.sign(W/2-xx)*24,H-14);ctx.lineTo(xx+Math.sign(W/2-xx)*24,H-28);ctx.stroke();}
+    const focusX = boss ? clamp(boss.x-camera.x+boss.w/2, 90, W-90) : W*.72;
+    const glow = ctx.createRadialGradient(focusX,H*.53,6,focusX,H*.53,190);
+    glow.addColorStop(0,`rgba(174,38,62,${.27*fadeIn})`);glow.addColorStop(1,"rgba(174,38,62,0)");ctx.fillStyle=glow;ctx.fillRect(0,bar,W,H-bar*2);
+    // Engraved eclipse seal behind the king.
+    ctx.save();ctx.translate(focusX,H*.51);ctx.globalAlpha=.20*fadeIn;ctx.strokeStyle="#d2ab75";ctx.lineWidth=1.2;
+    for(let r=54;r<=92;r+=19){ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.stroke();}
+    ctx.beginPath();for(let i=0;i<12;i++){const a=i*Math.PI/6-Math.PI/2,r=i%2?68:100;const xx=Math.cos(a)*r,yy=Math.sin(a)*r;i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.closePath();ctx.stroke();ctx.restore();
+    ctx.textAlign="center";ctx.shadowColor="#b33d4d";ctx.shadowBlur=25;
+    ctx.fillStyle="#e9d5b3";ctx.font="bold 25px Georgia";ctx.fillText("İÇİ BOŞ KRAL",W/2,39);ctx.shadowBlur=0;
+    ctx.fillStyle="#a58a65";ctx.font="10px Arial";ctx.letterSpacing="3px";ctx.fillText("THE HOLLOW SOVEREIGN",W/2,59);ctx.letterSpacing="0px";
+    let line = "Taht, sahibinden daha uzun yaşar.";
+    let speaker = "ANLATICI";
+    if (elapsed > 1.15 && elapsed <= 2.75) { line = "Adını söyle, son savaşçı."; speaker = "İÇİ BOŞ KRAL"; }
+    else if (elapsed > 2.75 && elapsed <= 4.15) { line = "Bu krallığı bir zamanlar ben korudum."; speaker = "İÇİ BOŞ KRAL"; }
+    else if (elapsed > 4.15) { line = "Şimdi yalnızca tacım kaldı. Onu da almaya gel."; speaker = "İÇİ BOŞ KRAL"; }
+    ctx.fillStyle="#9e805a";ctx.font="bold 9px Arial";ctx.fillText(speaker, W/2,H-55);
+    ctx.fillStyle="#f0dfc5";ctx.font="italic 17px Georgia";ctx.fillText(line,W/2,H-31);
+    // A tiny progress glyph lets the player feel the scene is advancing.
+    ctx.fillStyle="#32271f";ctx.fillRect(W*.28,H-8,W*.44,2);ctx.fillStyle="#c9a46c";ctx.fillRect(W*.28,H-8,W*.44*clamp(elapsed/bossCinematicLength,0,1),2);
+    ctx.restore();
+  }
+  const baseBossUpdateForCinematic = updateBoss;
+  updateBoss = function(dt) {
+    if (boss && boss.alive && bossUnlocked && current && current.boss && !bossCinematicPlayed.has(state.currentZone)) {
+      launchBossCinematic();
+      return;
+    }
+    if (bossCinematicTimer > 0) { if (boss) boss.vx=0; return; }
+    baseBossUpdateForCinematic(dt);
+  };
+  const baseUpdateForCinematic = update;
+  update = function(dt) {
+    if (bossCinematicTimer > 0) {
+      bossCinematicTimer = Math.max(0,bossCinematicTimer-dt);
+      updateParticles(dt); damageFlash = Math.max(0,damageFlash-dt); shake = Math.max(0,shake-dt*22);
+      if (bossCinematicTimer <= 0) { if (boss && boss.alive) { boss.state="approach"; boss.timer=0; boss.attackCd=.6; } bannerText("İÇİ BOŞ KRAL · SAVAŞ BAŞLIYOR",2.1); }
+      return;
+    }
+    baseUpdateForCinematic(dt);
+  };
+  const baseRenderForCinematic = render;
+  render = function() { baseRenderForCinematic(); drawBossCinematic(); };
+
+  function openAnyShop() { openShop({ name: "Kül Taciri" }); }
+
+  mainMenu = openMainMenu;
+
+  const api = {
+    regions: REGIONS,
+    get state() { return state; },
+    get currentZone() { return state.currentZone; },
+    hasAbility,
+    newGame,
+    loadZone,
+    saveGame,
+    continueGame,
+    openMap,
+    openQuestLog,
+    openInventory,
+    openShop: openAnyShop,
+    interact,
+    nearestInteractable,
+    startBossCinematic: launchBossCinematic,
+    get bossCinematicActive() { return bossCinematicTimer > 0; },
+    resolveHorizontalCollision,
+    getAttackDamage: attackDamage
+  };
+  window.BladeRPG = api;
+
+  // The original script has already initialized its first menu by this point.
+  newGame();
+  openMainMenu();
+})();
+
+// Pointer controls are real hold/tap controls, not decorative mobile buttons.
+function performTouchAction(action) {
+  if (mode !== "playing") return;
+  if (window.BladeRPG && window.BladeRPG.bossCinematicActive) return;
+  if (action === "light") startAttack("light");
+  else if (action === "heavy") startAttack("heavy");
+  else if (action === "parry") startParry();
+  else if (action === "dodge") startDodge();
+  else if (action === "interact") interact();
+  else if (action === "inventory") window.BladeRPG.openInventory();
+  else if (action === "journal") window.BladeRPG.openQuestLog();
+  else if (action === "map") window.BladeRPG.openMap();
+  else if (action === "shadow") shadowDash();
+  else if (action === "shop") window.BladeRPG.openShop();
+  else if (action === "jump") {
+    if (!player || player.stun > 0 || player.dodge > 0 || player.exhaustedTimer > 0) return;
+    if (player.grounded) { player.vy=-570; player.grounded=false; player.state="jump"; player.jumpCount=1; sound(190,.08,"triangle",.025); }
+    else if (tryWallJump()) return;
+    else if (window.BladeRPG.hasAbility("doubleJump") && player.jumpCount < 2) { player.vy=-535; player.jumpCount=2; player.state="jump"; spawnParticles(player.x+player.w/2,player.y+player.h,"#d2dce5",8,100); sound(260,.075,"triangle",.025); }
+  }
+}
+if (quickShopButton) quickShopButton.addEventListener("click", () => { if (mode === "playing") window.BladeRPG.openShop(); });
+if (touchControls) {
+  const releaseTouchControl = button => { const hold=button.dataset.hold; if (hold) keys.delete(hold); button.classList.remove("held"); };
+  touchControls.querySelectorAll("button").forEach(button => {
+    button.addEventListener("contextmenu", e => e.preventDefault());
+    button.addEventListener("pointerdown", e => {
+      e.preventDefault();
+      if (mode !== "playing") return;
+      try { button.setPointerCapture(e.pointerId); } catch (_) {}
+      const hold=button.dataset.hold;
+      if (hold) { keys.add(hold); button.classList.add("held"); }
+      else performTouchAction(button.dataset.action);
+    });
+    for (const ev of ["pointerup","pointercancel","lostpointercapture","pointerleave"]) button.addEventListener(ev, () => releaseTouchControl(button));
+  });
+}
+window.addEventListener("blur", () => { keys.clear(); if (touchControls) touchControls.querySelectorAll("button").forEach(b=>b.classList.remove("held")); });
+setTouchMode(touchModeEnabled);
+syncPlayControls();
+
+/* ===== ASHEN CROWN: JUICE, ATMOSPHERE, TOUCH ASSIST ===== */
+const bladeTouchBaseAction = performTouchAction;
+let bladePendingInteraction = false;
+let bladePendingTarget = null;
+let bladeLastDust = 0;
+function bladeCancelAutoInteract(){
+  bladePendingInteraction = false; bladePendingTarget = null; keys.delete("a"); keys.delete("d");
+}
+performTouchAction = function(action){
+  if(action === "interact"){
+    if(mode !== "playing" || !player || !window.BladeRPG) return;
+    if(window.BladeRPG.bossCinematicActive){ bannerText("KRALIN GİRİŞİ BİTENE KADAR BEKLE",1); return; }
+    const target = window.BladeRPG.nearestInteractable ? window.BladeRPG.nearestInteractable(285) : null;
+    if(target){
+      const dx = target.x - (player.x + player.w/2);
+      if(Math.abs(dx) > 78){
+        bladePendingInteraction = true; bladePendingTarget = target.id || target.kind;
+        keys.delete("a"); keys.delete("d"); keys.add(dx < 0 ? "a" : "d");
+        player.face = dx < 0 ? -1 : 1;
+        bannerText("ETKİLEŞİM NOKTASINA YAKLAŞILIYOR…",1.05);
+        return;
+      }
+    }
+    bladeCancelAutoInteract();
+    window.BladeRPG.interact();
+    return;
+  }
+  bladePendingInteraction = false; bladePendingTarget = null;
+  bladeTouchBaseAction(action);
+};
+const bladeBaseUpdateForTouch = update;
+update = function(dt){
+  bladeBaseUpdateForTouch(dt);
+  if(!bladePendingInteraction) return;
+  if(mode !== "playing" || !player || (window.BladeRPG && window.BladeRPG.bossCinematicActive)){ bladeCancelAutoInteract(); return; }
+  const target = window.BladeRPG && window.BladeRPG.nearestInteractable ? window.BladeRPG.nearestInteractable(315) : null;
+  if(!target || (bladePendingTarget && target.id && target.id !== bladePendingTarget)) { bladeCancelAutoInteract(); bannerText("ETKİLEŞİM NOKTASI BULUNAMADI",1); return; }
+  const dx = target.x - (player.x + player.w/2);
+  if(Math.abs(dx) <= 70){
+    bladeCancelAutoInteract();
+    window.BladeRPG.interact();
+  }else{
+    keys.delete("a"); keys.delete("d"); keys.add(dx < 0 ? "a" : "d"); player.face = dx < 0 ? -1 : 1;
+  }
+};
+
+// Re-draw the existing fighters with softer rim light, weapon trails and dust, without changing physics.
+const bladeDrawFighterBase = drawFighter;
+drawFighter = function(entity, isPlayer = false){
+  bladeDrawFighterBase(entity,isPlayer);
+  if(!entity || (!entity.alive && !isPlayer)) return;
+  const sx=entity.x-camera.x, sy=entity.y, w=entity.w, h=entity.h;
+  if(sx<-170 || sx>W+170) return;
+  const phase=entity.attack && entity.attack.phase;
+  if(isPlayer && entity.grounded && Math.abs(entity.vx||0)>125 && gameTime-bladeLastDust>.16){
+    bladeLastDust=gameTime;
+    spawnParticles(entity.x+w/2-entity.face*11,GROUND-3,"#a9a19a",2,32);
+  }
+  ctx.save();
+  if(isPlayer){
+    const glow = entity.shadowDashTimer>0 ? "#8a9cff" : (entity.parry>0 ? "#ffe4a0" : "#c9a66d");
+    const g=ctx.createRadialGradient(sx+w/2,sy+h*.55,2,sx+w/2,sy+h*.55,42);
+    g.addColorStop(0,glow+"35");g.addColorStop(1,glow+"00");ctx.fillStyle=g;ctx.fillRect(sx-10,sy-8,w+20,h+14);
+    // Metal rim strokes catch the light around the shoulders and cloak.
+    ctx.globalAlpha=.25+.08*Math.sin(gameTime*3);
+    ctx.strokeStyle=entity.shadowDashTimer>0?"#9aabff":"#e1c99f";ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(sx+w*.25,sy+h*.29);ctx.lineTo(sx+w*.49,sy+h*.34);ctx.lineTo(sx+w*.77,sy+h*.29);ctx.stroke();
+  }
+  if(isPlayer && entity.attack && phase==="active"){
+    const a=entity.attack, duration=a.active||.2, progress=clamp(1-a.timer/duration,0,1);
+    let color=a.specialColor || (a.kind==="heavy"?"#f0b866":"#d6e8ff");
+    const legendary=(a.legendary || (a.specialMultiplier||1)>1.45);
+    ctx.translate(sx+w/2,sy+h*.42);ctx.scale(entity.face||1,1);
+    ctx.globalAlpha=.78;
+    ctx.shadowColor=color;ctx.shadowBlur=legendary?23:13;
+    const r=(a.kind==="heavy"?66:50)+(a.specialRangeBonus||0)*.6;
+    const sweep=.95+progress*1.45;
+    const grad=ctx.createLinearGradient(0,-r, r,r);grad.addColorStop(0,"#ffffff00");grad.addColorStop(.35,color);grad.addColorStop(1,"#ffffff15");
+    ctx.strokeStyle=grad;ctx.lineWidth=legendary?7:4.5;ctx.lineCap="round";
+    ctx.beginPath();ctx.arc(4,0,r,-1.32,-1.32+sweep);ctx.stroke();
+    ctx.globalAlpha=.42;ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(4,0,r+7,-1.16,-1.16+sweep*.9);ctx.stroke();
+    if(a.chainIndex===2 || a.legendary){ctx.globalAlpha=.5;ctx.lineWidth=2;ctx.beginPath();ctx.arc(4,0,r-10,-1.38,-1.38+sweep*.82);ctx.stroke();}
+  }
+  ctx.restore();
+};
+
+// A larger, hand-layered Sovereign with animated ember core, crown, ragged mantle and a cathedral blade.
+drawBoss = function(){
+  const b=boss;if(!b||!b.alive)return;
+  const x=b.x-camera.x,y=b.y,w= b.w,h=b.h;if(x<-210||x>W+210)return;
+  const phase=b.phase===2, t=gameTime, breath=Math.sin(t*2.25)*2.2, lunge=b.attack&&b.attack.phase==="active"?Math.sin(t*36)*2:0;
+  ctx.save();
+  // Ground contact, aura and phase-two afterimages.
+  ctx.globalAlpha=.34;ctx.fillStyle="#020207";ctx.beginPath();ctx.ellipse(x+w/2,GROUND+2,67,13,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+  const aura=ctx.createRadialGradient(x+w/2,y+h*.5,7,x+w/2,y+h*.5,100);
+  aura.addColorStop(0,phase?"#c2204544":"#b58c5440");aura.addColorStop(.46,phase?"#72223a20":"#75614615");aura.addColorStop(1,"#00000000");ctx.fillStyle=aura;ctx.fillRect(x-55,y-38,w+110,h+85);
+  // Souls-like readable telegraphs: a charge lane, a slam seal or a slash danger arc.
+  if(b.attack && b.attack.phase === "windup" && player){
+    const tx=player.x+player.w/2-camera.x, ty=GROUND-3, pulse=.18+.12*(.5+.5*Math.sin(t*18));
+    ctx.save();ctx.globalAlpha=pulse;ctx.strokeStyle=phase?"#ff3859":"#d8a65d";ctx.fillStyle=phase?"#ed264122":"#d7a55018";ctx.lineWidth=2;
+    if(b.attack.kind==="charge"){
+      ctx.setLineDash([9,7]);ctx.beginPath();ctx.moveTo(x+w/2,GROUND-10);ctx.lineTo(tx,ty);ctx.stroke();ctx.setLineDash([]);
+      ctx.beginPath();ctx.ellipse((x+w/2+tx)/2,GROUND-7,Math.max(20,Math.abs(tx-(x+w/2))/2),8,0,0,Math.PI*2);ctx.fill();
+    }else if(b.attack.kind==="slam"){
+      ctx.beginPath();ctx.ellipse(x+w/2,GROUND-4,82+Math.sin(t*12)*6,16,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+      for(let k=0;k<8;k++){const a=k*Math.PI/4+t*.08;ctx.beginPath();ctx.moveTo(x+w/2+Math.cos(a)*48,GROUND-4+Math.sin(a)*7);ctx.lineTo(x+w/2+Math.cos(a)*83,GROUND-4+Math.sin(a)*14);ctx.stroke();}
+    }else{
+      ctx.beginPath();ctx.ellipse(tx,ty,45,9,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+      ctx.beginPath();ctx.arc(tx,ty-9,36,Math.PI*1.08,Math.PI*1.82);ctx.stroke();
+    }
+    ctx.globalAlpha=.9;ctx.fillStyle=phase?"#ff8292":"#f2d4a2";ctx.font="bold 9px Arial";ctx.textAlign="center";ctx.fillText(b.attack.kind==="slam"?"ÇÖKÜŞ":b.attack.kind==="charge"?"HÜCUM":"KESİŞ",tx,GROUND-26);ctx.textAlign="left";ctx.restore();
+  }
+  if(phase){for(let i=0;i<3;i++){ctx.globalAlpha=.11-i*.025;ctx.fillStyle="#e52d54";ctx.beginPath();ctx.moveTo(x+10-i*6,y+24);ctx.lineTo(x-19-i*5,y+67);ctx.lineTo(x+8-i*4,y+110);ctx.lineTo(x+25-i*4,y+70);ctx.closePath();ctx.fill();}ctx.globalAlpha=1;}
+  // Mantle silhouette, torn points waving in a slow breath.
+  ctx.fillStyle=phase?"#33111f":"#171721";ctx.beginPath();ctx.moveTo(x+18,y+23);ctx.lineTo(x-13,y+58);ctx.lineTo(x-5,y+92);ctx.lineTo(x-20,y+119);ctx.lineTo(x+7,y+108);ctx.lineTo(x+21,y+136);ctx.lineTo(x+36,y+119);ctx.lineTo(x+58,y+135);ctx.lineTo(x+66,y+110);ctx.lineTo(x+86,y+121);ctx.lineTo(x+77,y+85);ctx.lineTo(x+84,y+52);ctx.lineTo(x+56,y+22);ctx.closePath();ctx.fill();
+  ctx.strokeStyle=phase?"#b93451":"#71634f";ctx.lineWidth=1.3;ctx.globalAlpha=.65;ctx.beginPath();ctx.moveTo(x+15,y+34);ctx.lineTo(x-7,y+83);ctx.lineTo(x+7,y+108);ctx.moveTo(x+60,y+30);ctx.lineTo(x+77,y+76);ctx.lineTo(x+66,y+113);ctx.stroke();ctx.globalAlpha=1;
+  // Shoulder plates and layered chest armour.
+  const metal=ctx.createLinearGradient(x,y,x+w,y+h);metal.addColorStop(0,phase?"#9a3448":"#847966");metal.addColorStop(.35,phase?"#38303b":"#4b4b53");metal.addColorStop(1,"#14141d");
+  ctx.fillStyle=metal;ctx.beginPath();ctx.moveTo(x+14,y+29);ctx.lineTo(x+6,y+43);ctx.lineTo(x-7,y+48);ctx.lineTo(x+2,y+66);ctx.lineTo(x+11,y+60);ctx.lineTo(x+13,y+101);ctx.lineTo(x+64,y+101);ctx.lineTo(x+68,y+61);ctx.lineTo(x+79,y+68);ctx.lineTo(x+87,y+47);ctx.lineTo(x+70,y+41);ctx.lineTo(x+59,y+26);ctx.closePath();ctx.fill();
+  ctx.strokeStyle=phase?"#d75a6e":"#c4ad85";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+8,y+48);ctx.lineTo(x+21,y+43);ctx.lineTo(x+33,y+55);ctx.lineTo(x+49,y+55);ctx.lineTo(x+62,y+42);ctx.lineTo(x+77,y+49);ctx.stroke();
+  ctx.fillStyle=phase?"#59182c":"#24232f";ctx.beginPath();ctx.moveTo(x+20,y+49);ctx.lineTo(x+52,y+49);ctx.lineTo(x+60,y+88);ctx.lineTo(x+35,y+100);ctx.lineTo(x+15,y+86);ctx.closePath();ctx.fill();
+  // Cracked eclipse sigil, glowing through the breastplate.
+  const core=ctx.createRadialGradient(x+36,y+68,1,x+36,y+68,21);core.addColorStop(0,phase?"#ff6a76":"#ffe0a1");core.addColorStop(.4,phase?"#d62145":"#c58e40");core.addColorStop(1,"#45151e00");ctx.fillStyle=core;ctx.beginPath();ctx.arc(x+36,y+68,21+Math.sin(t*6)*2,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle=phase?"#ff7a8a":"#efd19a";ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(x+36,y+52);ctx.lineTo(x+42,y+64);ctx.lineTo(x+35,y+70);ctx.lineTo(x+40,y+83);ctx.moveTo(x+26,y+64);ctx.lineTo(x+45,y+73);ctx.stroke();
+  // Crowned skull helm.
+  ctx.fillStyle=phase?"#5b1c2d":"#3a3741";ctx.beginPath();ctx.moveTo(x+16,y+30);ctx.lineTo(x+10,y+4);ctx.lineTo(x+27,y+20);ctx.lineTo(x+35,y-13);ctx.lineTo(x+45,y+18);ctx.lineTo(x+62,y+1);ctx.lineTo(x+57,y+33);ctx.lineTo(x+49,y+45);ctx.lineTo(x+25,y+45);ctx.closePath();ctx.fill();
+  ctx.strokeStyle=phase?"#e35169":"#b8a17d";ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(x+10,y+4);ctx.lineTo(x+27,y+20);ctx.lineTo(x+35,y-13);ctx.lineTo(x+45,y+18);ctx.lineTo(x+62,y+1);ctx.lineTo(x+57,y+33);ctx.stroke();
+  ctx.fillStyle="#0b0a12";ctx.beginPath();ctx.moveTo(x+17,y+28);ctx.lineTo(x+25,y+20);ctx.lineTo(x+48,y+20);ctx.lineTo(x+57,y+28);ctx.lineTo(x+48,y+40);ctx.lineTo(x+25,y+40);ctx.closePath();ctx.fill();
+  ctx.shadowColor=phase?"#ff244b":"#e8b85e";ctx.shadowBlur=phase?21:14;ctx.fillStyle=phase?"#ff3956":"#ffe0a0";ctx.fillRect(x+21,y+27,11,3);ctx.fillRect(x+42,y+27,11,3);ctx.shadowBlur=0;
+  // Huge execution blade, animated through windup / active swing.
+  let ang=(b.face===1?-.28:Math.PI+.28);
+  if(b.attack&&b.attack.phase==="windup")ang=b.face===1?-1.55:Math.PI+1.55;
+  else if(b.attack&&b.attack.phase==="active"){const max=b.attack.kind==="slam"?.28:b.attack.kind==="charge"?.42:.22;const q=clamp(1-b.attack.timer/Math.max(.01,max),0,1);ang=b.face===1?(-1.55+q*2.4):(Math.PI+1.55-q*2.4);}
+  ctx.save();ctx.translate(x+w/2+(b.face||1)*12,y+69+breath);ctx.rotate(ang);
+  ctx.shadowColor=phase?"#ff3158":"#d5c9b1";ctx.shadowBlur=phase?17:8;
+  const blade=ctx.createLinearGradient(15,-8,110,9);blade.addColorStop(0,"#4a3c39");blade.addColorStop(.28,phase?"#9c3046":"#c1b8a8");blade.addColorStop(.65,phase?"#e78686":"#f4ead7");blade.addColorStop(1,phase?"#6e182c":"#777b83");
+  ctx.fillStyle="#5f4533";ctx.fillRect(-2,-6,29,12);ctx.fillStyle="#d1ad70";ctx.fillRect(1,-9,4,18);
+  ctx.fillStyle=blade;ctx.beginPath();ctx.moveTo(24,-8);ctx.lineTo(91,-12);ctx.lineTo(112,0);ctx.lineTo(90,12);ctx.lineTo(24,8);ctx.closePath();ctx.fill();
+  ctx.strokeStyle=phase?"#ffb2bc":"#fff2d8";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(30,0);ctx.lineTo(97,0);ctx.stroke();ctx.restore();
+  // Floating cinders around the crown.
+  for(let i=0;i<7;i++){const a=t*(.5+i*.035)+i*2.399;const rr=42+(i%3)*13;ctx.globalAlpha=.25+.25*Math.sin(t*3+i);ctx.fillStyle=phase?"#ff506b":"#e6bd79";ctx.beginPath();ctx.arc(x+36+Math.cos(a)*rr,y+37+Math.sin(a)*rr*.75,1.1+(i%2),0,Math.PI*2);ctx.fill();}
+  ctx.globalAlpha=1;ctx.restore();
+};
+
+// Background has moon haze, distant rays, drifting ash and a cinematic edge vignette.
+const bladeDrawBackgroundBase = drawBackground;
+drawBackground = function(){
+  bladeDrawBackgroundBase();
+  ctx.save();
+  const moonX=758-camera.x*.035, moonY=102;
+  const halo=ctx.createRadialGradient(moonX,moonY,10,moonX,moonY,180);halo.addColorStop(0,"#d6c8ac24");halo.addColorStop(.42,"#9d9cb21a");halo.addColorStop(1,"#8b91af00");ctx.fillStyle=halo;ctx.fillRect(moonX-180,moonY-180,360,360);
+  ctx.globalAlpha=.12;ctx.strokeStyle="#a8a5b9";ctx.lineWidth=1;
+  for(let i=0;i<9;i++){const xx=moonX-110+i*27;ctx.beginPath();ctx.moveTo(xx,145);ctx.lineTo(xx-65,390);ctx.stroke();}
+  ctx.globalAlpha=1;
+  for(let i=0;i<42;i++){
+    const x=((i*173+Math.sin(gameTime*.7+i)*28-camera.x*(.13+(i%5)*.025))%(W+40)+W+40)%(W+40)-20;
+    const y=((i*71+gameTime*(7+(i%4)*4))%(H+30));
+    const r=.65+(i%3)*.45;ctx.globalAlpha=.14+(i%5)*.055;ctx.fillStyle=i%4===0?"#b9c8e4":"#dbb47e";ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+  }
+  ctx.globalAlpha=1;
+  ctx.restore();
+};
+const bladeDrawGroundBase = drawGround;
+drawGround = function(){
+  bladeDrawGroundBase();
+  ctx.save();
+  const floor=ctx.createLinearGradient(0,GROUND,0,H);floor.addColorStop(0,"#56505a14");floor.addColorStop(1,"#00000055");ctx.fillStyle=floor;ctx.fillRect(0,GROUND,W,H-GROUND);
+  for(let i=0;i<28;i++){
+    const x=((i*89-camera.x*.9)%(W+100)+W+100)%(W+100)-50;const y=GROUND+12+(i*19)%57;
+    ctx.globalAlpha=.12+(i%3)*.03;ctx.fillStyle=i%3===0?"#bd9f74":"#95858d";ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+12+(i%5)*3,y-1);ctx.lineTo(x+8,y+2);ctx.closePath();ctx.fill();
+  }
+  ctx.globalAlpha=1;ctx.restore();
+};
+
+// Cinematic-grade edge light and restrained grain are kept out of the letterboxed intro.
+const bladeRenderBase = render;
+render = function(){
+  bladeRenderBase();
+  if(window.BladeRPG && window.BladeRPG.bossCinematicActive) return;
+  ctx.save();
+  const v=ctx.createRadialGradient(W/2,H*.48,H*.24,W/2,H*.48,H*.78);v.addColorStop(0,"#00000000");v.addColorStop(.73,"#02030a14");v.addColorStop(1,"#0202079c");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
+  // Fine horizontal atmospheric streaks, almost invisible until the scene moves.
+  ctx.globalAlpha=.075;ctx.strokeStyle="#d4c9ad";ctx.lineWidth=1;
+  for(let i=0;i<10;i++){const yy=(i*67+gameTime*9)%(H-100);ctx.beginPath();ctx.moveTo(0,yy);ctx.lineTo(W,yy-4);ctx.stroke();}
+  ctx.restore();
+};
+
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
